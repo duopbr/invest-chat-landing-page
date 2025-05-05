@@ -23,26 +23,12 @@ const CTASection = () => {
               </div>
             </div>
             
-            <form className="space-y-4">
-              <div className="flex flex-col sm:flex-row gap-4">
-                <input 
-                  type="text" 
-                  placeholder="Seu nome" 
-                  className="px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/60 flex-1 focus:outline-none focus:ring-2 focus:ring-white/30"
-                />
-                
-                <input 
-                  type="tel" 
-                  placeholder="Seu WhatsApp com DDD" 
-                  className="px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/60 flex-1 focus:outline-none focus:ring-2 focus:ring-white/30"
-                />
-              </div>
-              
+            <a href="https://buy.stripe.com/6oE4go67w2nIgrC9AM" className="block">
               <Button className="w-full py-6 text-lg bg-invest-green hover:bg-invest-green/90 text-white">
                 <MessageCircle className="mr-2" />
                 Começar a investir melhor
               </Button>
-            </form>
+            </a>
             
             <p className="mt-4 text-sm text-white/70">
               Ao se registrar, você concorda com nossa política de privacidade e termos de uso.

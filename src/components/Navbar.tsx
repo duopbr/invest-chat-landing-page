@@ -23,7 +23,7 @@ const Navbar = () => {
               <a href="#coming-soon" className="text-gray-600 hover:text-invest-blue px-3 py-2 rounded-md text-sm font-medium">
                 Em breve
               </a>
-              <a href="#cta" className="ml-4">
+              <a href="https://buy.stripe.com/6oE4go67w2nIgrC9AM" className="ml-4">
                 <Button className="bg-invest-green hover:bg-invest-green/90 text-white">
                   Começar agora
                 </Button>
@@ -76,7 +76,7 @@ const Navbar = () => {
             Em breve
           </a>
           <a 
-            href="#cta" 
+            href="https://buy.stripe.com/6oE4go67w2nIgrC9AM" 
             className="block px-3 py-2"
             onClick={() => setIsOpen(false)}
           >

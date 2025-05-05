@@ -17,7 +17,7 @@ const HeroSection = () => {
               com um chatbot inteligente e especializado em investimentos.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-4">
-              <a href="#cta">
+              <a href="https://buy.stripe.com/6oE4go67w2nIgrC9AM">
                 <Button className="w-full sm:w-auto bg-invest-green hover:bg-invest-green/90 text-white text-lg px-8 py-6">
                   <MessageCircle className="mr-2" />
                   Começar agora
