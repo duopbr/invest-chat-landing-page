@@ -54,7 +54,8 @@ const HeroSection = () => {
             </p>
           </div>
           <div className="w-full lg:w-1/2 relative">
-            <div className="bg-white p-4 rounded-xl shadow-lg absolute -top-10 -left-10 hidden lg:block z-10 max-w-[280px] border-l-4 border-invest-green">
+            {/* Oferta por tempo limitado component moved up to avoid covering video title */}
+            <div className="bg-white p-4 rounded-xl shadow-lg absolute -top-24 -left-10 hidden lg:block z-10 max-w-[280px] border-l-4 border-invest-green">
               <div className="flex items-start gap-2">
                 <div className="bg-invest-green/20 p-2 rounded-full">
                   <Timer className="h-4 w-4 text-invest-green" />
