@@ -39,8 +39,6 @@ const HeroSection = () => {
                 </iframe>
               </div>
             </div>
-            <div className="absolute -bottom-10 -right-5 w-20 h-20 bg-invest-gold/20 rounded-full z-[-1]"></div>
-            <div className="absolute -top-5 -left-5 w-16 h-16 bg-invest-blue/10 rounded-full z-[-1]"></div>
           </div>
         </div>
       </div>
