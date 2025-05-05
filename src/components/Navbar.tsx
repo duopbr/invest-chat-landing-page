@@ -1,9 +1,23 @@
 
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isStripeLoaded, setIsStripeLoaded] = useState(false);
+
+  useEffect(() => {
+    // Check if Stripe script is already loaded
+    if (!document.querySelector('script[src="https://js.stripe.com/v3/buy-button.js"]')) {
+      const script = document.createElement("script");
+      script.src = "https://js.stripe.com/v3/buy-button.js";
+      script.async = true;
+      script.onload = () => setIsStripeLoaded(true);
+      document.body.appendChild(script);
+    } else {
+      setIsStripeLoaded(true);
+    }
+  }, []);
 
   return (
     <nav className="fixed w-full bg-white/90 backdrop-blur-sm z-50 shadow-sm">
@@ -26,11 +40,14 @@ const Navbar = () => {
               <a href="#coming-soon" className="text-gray-600 hover:text-invest-blue px-3 py-2 rounded-md text-sm font-medium">
                 Em breve
               </a>
-              <a href="https://buy.stripe.com/6oE4go67w2nIgrC9AM" className="ml-4">
-                <Button className="bg-invest-green hover:bg-invest-green/90 text-white">
-                  Começar agora
-                </Button>
-              </a>
+              <div className="ml-4 stripe-checkout-container">
+                {isStripeLoaded && (
+                  <stripe-buy-button
+                    buy-button-id="buy_btn_1PH7E1GZeF5XUH08kNV1F6Wm"
+                    publishable-key="pk_live_51OiBDyGZeF5XUH08HXRoiEzILdWnQp9SkBQrGhKXAL56KElnAGbCXvfwmCX8pXXZDMfvYctGDVU8HBT4YqhcUCPW00pOx96Qls"
+                  />
+                )}
+              </div>
             </div>
           </div>
           <div className="md:hidden">
@@ -78,15 +95,14 @@ const Navbar = () => {
           >
             Em breve
           </a>
-          <a 
-            href="https://buy.stripe.com/6oE4go67w2nIgrC9AM" 
-            className="block px-3 py-2"
-            onClick={() => setIsOpen(false)}
-          >
-            <Button className="w-full bg-invest-green hover:bg-invest-green/90 text-white">
-              Começar agora
-            </Button>
-          </a>
+          <div className="block px-3 py-2">
+            {isStripeLoaded && (
+              <stripe-buy-button
+                buy-button-id="buy_btn_1PH7E1GZeF5XUH08kNV1F6Wm"
+                publishable-key="pk_live_51OiBDyGZeF5XUH08HXRoiEzILdWnQp9SkBQrGhKXAL56KElnAGbCXvfwmCX8pXXZDMfvYctGDVU8HBT4YqhcUCPW00pOx96Qls"
+              />
+            )}
+          </div>
         </div>
       </div>
     </nav>
