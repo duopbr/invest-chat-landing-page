@@ -26,35 +26,16 @@ const HeroSection = () => {
             </div>
           </div>
           <div className="w-full lg:w-1/2 relative">
-            <div className="bg-white p-6 rounded-xl shadow-lg max-w-md mx-auto animate-fade-in">
-              <div className="flex items-center mb-4">
-                <div className="w-10 h-10 rounded-full bg-invest-green flex items-center justify-center text-white font-bold">
-                  IA
-                </div>
-                <div className="ml-3">
-                  <p className="font-medium text-gray-800">InvestChat AI</p>
-                  <p className="text-xs text-gray-500">Online agora</p>
-                </div>
-              </div>
-              
-              <div className="space-y-3">
-                <div className="chat-bubble-left">
-                  <p className="text-gray-800">Olá! Sou seu assistente de investimentos. Como posso ajudar hoje?</p>
-                </div>
-                
-                <div className="chat-bubble-right ml-auto">
-                  <p>O que você acha dos últimos resultados da Petrobras?</p>
-                </div>
-                
-                <div className="chat-bubble-left">
-                  <p className="text-gray-800">A Petrobras apresentou resultados sólidos no último trimestre, com EBITDA de R$XX bilhões, superando estimativas do mercado em Y%. Principais destaques:</p>
-                  <ul className="mt-2 ml-4 list-disc text-gray-700">
-                    <li>Aumento na produção de petróleo em 3,5%</li>
-                    <li>Redução de custos operacionais</li>
-                    <li>Dividendos atrativos anunciados</li>
-                  </ul>
-                  <p className="mt-2 text-gray-800">Quer que eu detalhe algum aspecto específico?</p>
-                </div>
+            <div className="rounded-xl shadow-lg overflow-hidden">
+              <div className="relative pb-[56.25%] h-0">
+                <iframe 
+                  className="absolute top-0 left-0 w-full h-full"
+                  src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                  title="InvestChat AI Demo" 
+                  frameBorder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowFullScreen>
+                </iframe>
               </div>
             </div>
             <div className="absolute -bottom-10 -right-5 w-20 h-20 bg-invest-gold/20 rounded-full z-[-1]"></div>
