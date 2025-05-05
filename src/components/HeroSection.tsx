@@ -61,8 +61,7 @@ const HeroSection = () => {
                   <Timer className="h-4 w-4 text-invest-green" />
                 </div>
                 <div>
-                  <p className="font-medium">Preço atual garantido</p>
-                  <p className="text-sm text-gray-600">Oferta por tempo limitado</p>
+                  <p className="font-medium">Oferta por tempo limitado</p>
                 </div>
               </div>
             </div>
