@@ -58,6 +58,7 @@ const Footer = () => {
         
         <div className="border-t border-gray-800 mt-10 pt-6 text-center text-sm">
           <p>&copy; {currentYear} Duop. Todos os direitos reservados.</p>
+          <p className="mt-2">CNPJ: 54.777.753/0001-37 | <a href="mailto:contato@duop.com.br" className="hover:text-invest-green">contato@duop.com.br</a></p>
         </div>
       </div>
     </footer>
