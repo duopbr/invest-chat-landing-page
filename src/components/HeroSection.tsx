@@ -47,7 +47,7 @@ const HeroSection = () => {
               </div>
             </div>
             <p className="text-sm text-gray-500">
-              <span className="font-medium">Últimas vagas disponíveis!</span> Acesso completo por R$34,99/mês.
+              <span className="font-medium">Oferta por tempo limitado: garanta seu acesso agora!</span> Acesso completo por R$34,99/mês.
             </p>
           </div>
           <div className="w-full lg:w-1/2 relative">
