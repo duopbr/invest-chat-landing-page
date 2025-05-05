@@ -10,9 +10,12 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <div className="flex-shrink-0">
-              <span className="text-xl font-bold text-invest-blue">InvestChat</span>
-              <span className="text-invest-green font-bold">AI</span>
+            <div className="flex-shrink-0 flex items-center">
+              <img 
+                src="public/lovable-uploads/0eeff8c3-537a-43c8-89a8-e68696b477af.png" 
+                alt="Duop Logo" 
+                className="h-10 w-auto"
+              />
             </div>
           </div>
           <div className="hidden md:block">

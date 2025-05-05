@@ -32,7 +32,7 @@ const HeroSection = () => {
                 <iframe 
                   className="absolute top-0 left-0 w-full h-full"
                   src="https://www.youtube.com/embed/wIjUHnEITeg" 
-                  title="InvestChat AI Demo" 
+                  title="Duop Demo" 
                   frameBorder="0" 
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                   allowFullScreen>
