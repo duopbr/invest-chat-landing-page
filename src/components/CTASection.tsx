@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { MessageCircle, Timer, Check } from "lucide-react";
+import { MessageCircle, Timer, Check, Bot } from "lucide-react";
 import StripeCheckout from "./StripeCheckout";
 
 const CTASection = () => {
@@ -9,15 +9,15 @@ const CTASection = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col items-center text-center">
           <div className="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full mb-6">
-            <Timer className="h-4 w-4" />
-            <span className="text-sm font-medium">Oferta por tempo limitado</span>
+            <Bot className="h-4 w-4" />
+            <span className="text-sm font-medium">Assistente de IA para investimentos</span>
           </div>
           
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Consultor de investimentos 24/7 no <span className="text-invest-green font-bold">WhatsApp</span>
+            Chatbot consultor de investimentos 24/7 no <span className="text-invest-green font-bold">WhatsApp</span>
           </h2>
           <p className="text-lg max-w-2xl mb-8 text-white/90">
-            Acesse análises, informações de mercado e tire dúvidas diretamente no WhatsApp.
+            Acesse análises, informações de mercado e tire dúvidas com um assistente de IA desenvolvido por especialistas, diretamente no WhatsApp.
           </p>
           
           <div className="bg-white/10 backdrop-blur-sm p-8 rounded-xl w-full max-w-2xl">
@@ -53,7 +53,7 @@ const CTASection = () => {
             </div>
             
             <div className="bg-white/10 p-3 rounded-lg text-center mt-6">
-              <p className="text-sm font-medium">OFERTA POR TEMPO LIMITADO</p>
+              <p className="text-sm font-medium">DESENVOLVIDO POR EQUIPE COM MAIS DE 10 ANOS DE EXPERIÊNCIA</p>
             </div>
             
             <p className="mt-4 text-sm text-white/70">

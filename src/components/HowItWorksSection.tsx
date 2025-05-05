@@ -1,5 +1,5 @@
 
-import { Check, MessageCircle, DollarSign, BadgeCheck } from "lucide-react";
+import { Check, MessageCircle, DollarSign, BadgeCheck, Bot } from "lucide-react";
 
 const HowItWorksSection = () => {
   return (
@@ -11,7 +11,7 @@ const HowItWorksSection = () => {
             Como Funciona
           </h2>
           <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-            Consultoria financeira em 3 passos
+            Consultoria financeira com IA em 3 passos simples
           </p>
         </div>
         
@@ -36,7 +36,7 @@ const HowItWorksSection = () => {
             </div>
             <h3 className="text-xl font-bold mb-3">Acesse no WhatsApp</h3>
             <p className="text-gray-600 mb-4">
-              Após o pagamento, receba o link de acesso para seu consultor no WhatsApp.
+              Após o pagamento, receba o link para acessar seu chatbot consultor de investimentos no WhatsApp.
             </p>
             <div className="flex items-center text-invest-green text-sm font-medium">
               <MessageCircle className="h-4 w-4 mr-1" />
@@ -50,7 +50,7 @@ const HowItWorksSection = () => {
             </div>
             <h3 className="text-xl font-bold mb-3">Tire dúvidas 24/7</h3>
             <p className="text-gray-600 mb-4">
-              Converse com seu assistente a qualquer hora, receba análises e tire dúvidas.
+              Converse com seu assistente de IA a qualquer hora, receba análises e tire dúvidas sobre investimentos.
             </p>
             <div className="flex items-center text-invest-green text-sm font-medium">
               <BadgeCheck className="h-4 w-4 mr-1" />
@@ -68,7 +68,7 @@ const HowItWorksSection = () => {
             </div>
             <div className="flex items-start gap-2">
               <Check className="text-invest-green h-5 w-5 mt-1 flex-shrink-0" />
-              <span>Respostas ilimitadas</span>
+              <span>Respostas ilimitadas via IA</span>
             </div>
             <div className="flex items-start gap-2">
               <Check className="text-invest-green h-5 w-5 mt-1 flex-shrink-0" />
@@ -80,12 +80,18 @@ const HowItWorksSection = () => {
             </div>
             <div className="flex items-start gap-2">
               <Check className="text-invest-green h-5 w-5 mt-1 flex-shrink-0" />
-              <span>Explicações de termos</span>
+              <span>Explicações de termos financeiros</span>
             </div>
             <div className="flex items-start gap-2">
               <Check className="text-invest-green h-5 w-5 mt-1 flex-shrink-0" />
               <span>Suporte em português 24/7</span>
             </div>
+          </div>
+          
+          <div className="mt-6 bg-invest-green/10 p-4 rounded-lg">
+            <p className="text-center font-medium">
+              Conteúdo desenvolvido por especialistas com mais de 10 anos de experiência, incluindo profissional com certificação CFA
+            </p>
           </div>
         </div>
       </div>
