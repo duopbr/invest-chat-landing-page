@@ -2,9 +2,11 @@
 import { Button } from "@/components/ui/button";
 import { MessageCircle } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const HeroSection = () => {
+  const stripeButtonRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     // Load Stripe.js script dynamically
     const script = document.createElement("script");

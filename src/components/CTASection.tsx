@@ -1,9 +1,11 @@
 
 import { Button } from "@/components/ui/button";
 import { MessageCircle } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const CTASection = () => {
+  const stripeButtonRef = useRef<HTMLDivElement>(null);
+  
   useEffect(() => {
     // Load Stripe.js script dynamically
     const script = document.createElement("script");

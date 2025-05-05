@@ -1,10 +1,11 @@
 
 import { Button } from "@/components/ui/button";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isStripeLoaded, setIsStripeLoaded] = useState(false);
+  const stripeButtonRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Check if Stripe script is already loaded
