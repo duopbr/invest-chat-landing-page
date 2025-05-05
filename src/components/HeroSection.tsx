@@ -55,7 +55,7 @@ const HeroSection = () => {
               <div className="relative" style={{ paddingBottom: "177.78%" }}>
                 <iframe 
                   className="absolute top-0 left-0 w-full h-full"
-                  src="https://www.youtube.com/embed/wIjUHnEITeg" 
+                  src="https://youtube.com/embed/Ei0y7jhNKzM" 
                   title="Duop Demo" 
                   frameBorder="0" 
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
