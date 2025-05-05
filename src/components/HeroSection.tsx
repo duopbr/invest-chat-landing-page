@@ -14,11 +14,10 @@ const HeroSection = () => {
               <Timer className="inline-block w-4 h-4 mr-1" /> Oferta por tempo limitado
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Consultoria de <span className="gradient-heading">Investimentos</span> direto no <span className="text-invest-green font-bold">WhatsApp</span>
+              Consultoria de <span className="gradient-heading">Investimentos</span> no <span className="text-invest-green font-bold">WhatsApp</span>
             </h1>
             <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl">
-              Tire dúvidas, acompanhe mercados e receba análises personalizadas 24 horas por dia, 
-              com um chatbot inteligente e especializado em investimentos.
+              Tire dúvidas, acompanhe mercados e receba análises personalizadas com um chatbot especializado.
             </p>
             
             <div className="bg-gray-50 p-4 rounded-lg mb-6 border border-gray-100">
@@ -26,15 +25,15 @@ const HeroSection = () => {
               <ul className="space-y-2">
                 <li className="flex items-start gap-2">
                   <Check className="text-invest-green h-5 w-5 mt-1 flex-shrink-0" />
-                  <span>Investidores iniciantes que querem começar com segurança</span>
+                  <span>Investidores iniciantes</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <Check className="text-invest-green h-5 w-5 mt-1 flex-shrink-0" />
-                  <span>Pessoas que já investem e querem otimizar sua carteira</span>
+                  <span>Pessoas que querem otimizar sua carteira</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <Check className="text-invest-green h-5 w-5 mt-1 flex-shrink-0" />
-                  <span>Quem busca entender o mercado de forma simples e prática</span>
+                  <span>Quem busca entender o mercado</span>
                 </li>
               </ul>
             </div>
@@ -51,7 +50,7 @@ const HeroSection = () => {
               </div>
             </div>
             <p className="text-sm text-gray-500">
-              <span className="font-medium">Últimas vagas disponíveis!</span> Acesso completo por apenas R$34,99 por mês.
+              <span className="font-medium">Últimas vagas disponíveis!</span> Acesso completo por R$34,99/mês.
             </p>
           </div>
           <div className="w-full lg:w-1/2 relative">

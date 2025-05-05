@@ -14,15 +14,15 @@ const CTASection = () => {
           </div>
           
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Pronto para ter um consultor de investimentos 24/7 no <span className="text-invest-green font-bold">WhatsApp</span>?
+            Consultor de investimentos 24/7 no <span className="text-invest-green font-bold">WhatsApp</span>
           </h2>
           <p className="text-lg max-w-2xl mb-8 text-white/90">
-            Comece agora e tenha acesso a análises personalizadas, informações de mercado e respostas para suas dúvidas de investimentos, direto no <span className="text-invest-green font-bold">WhatsApp</span>.
+            Acesse análises, informações de mercado e tire dúvidas diretamente no WhatsApp.
           </p>
           
           <div className="bg-white/10 backdrop-blur-sm p-8 rounded-xl w-full max-w-2xl">
             <div className="flex flex-col md:flex-row items-center justify-between mb-6">
-              <h3 className="text-2xl font-bold">Comece agora por apenas</h3>
+              <h3 className="text-2xl font-bold">Comece por apenas</h3>
               <div className="bg-invest-green/90 px-5 py-2 rounded-lg mt-3 md:mt-0">
                 <span className="text-3xl font-bold">R$34,99</span>
                 <span className="text-sm">/mês</span>
@@ -49,17 +49,15 @@ const CTASection = () => {
             </div>
             
             <div className="my-4 flex justify-center">
-              <StripeCheckout buttonText="Assinar agora - R$34,99/mês" />
+              <StripeCheckout buttonText="Assinar - R$34,99/mês" />
             </div>
             
             <div className="bg-white/10 p-3 rounded-lg text-center mt-6">
-              <p className="text-sm font-medium">OFERTA POR TEMPO LIMITADO!</p>
-              <p className="text-xs">Garanta o preço atual antes que seja reajustado</p>
+              <p className="text-sm font-medium">OFERTA POR TEMPO LIMITADO</p>
             </div>
             
             <p className="mt-4 text-sm text-white/70">
               Ao se registrar, você concorda com nossa política de privacidade e termos de uso.
-              Não compartilhamos seus dados com terceiros.
             </p>
           </div>
           
