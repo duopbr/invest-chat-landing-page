@@ -1,5 +1,6 @@
 
 import { Button } from "@/components/ui/button";
+import { MessageCircle } from "lucide-react";
 
 const CTASection = () => {
   return (
@@ -7,10 +8,10 @@ const CTASection = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col items-center text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Pronto para ter um consultor de investimentos 24/7?
+            Pronto para ter um consultor de investimentos 24/7 no <span className="text-invest-green font-bold">WhatsApp</span>?
           </h2>
           <p className="text-lg max-w-2xl mb-8 text-white/90">
-            Comece agora e tenha acesso a análises personalizadas, informações de mercado e respostas para suas dúvidas de investimentos, direto no WhatsApp.
+            Comece agora e tenha acesso a análises personalizadas, informações de mercado e respostas para suas dúvidas de investimentos, direto no <span className="text-invest-green font-bold">WhatsApp</span>.
           </p>
           
           <div className="bg-white/10 backdrop-blur-sm p-8 rounded-xl w-full max-w-2xl">
@@ -38,7 +39,8 @@ const CTASection = () => {
               </div>
               
               <Button className="w-full py-6 text-lg bg-invest-green hover:bg-invest-green/90 text-white">
-                Quero testar meu assistente de investimentos
+                <MessageCircle className="mr-2" />
+                Começar a investir melhor
               </Button>
             </form>
             

@@ -1,5 +1,6 @@
 
 import { Button } from "@/components/ui/button";
+import { MessageCircle } from "lucide-react";
 
 const HeroSection = () => {
   return (
@@ -8,7 +9,7 @@ const HeroSection = () => {
         <div className="flex flex-col lg:flex-row items-center">
           <div className="w-full lg:w-1/2 mb-10 lg:mb-0">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Consultoria de <span className="gradient-heading">Investimentos</span> direto no seu WhatsApp
+              Consultoria de <span className="gradient-heading">Investimentos</span> direto no <span className="text-invest-green font-bold">WhatsApp</span>
             </h1>
             <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl">
               Tire dúvidas, acompanhe mercados e receba análises personalizadas 24 horas por dia, 
@@ -17,7 +18,8 @@ const HeroSection = () => {
             <div className="flex flex-col sm:flex-row items-center gap-4">
               <a href="#cta">
                 <Button className="w-full sm:w-auto bg-invest-green hover:bg-invest-green/90 text-white text-lg px-8 py-6">
-                  Quero testar meu assistente
+                  <MessageCircle className="mr-2" />
+                  Começar agora
                 </Button>
               </a>
               <span className="text-gray-500 text-base mt-2 sm:mt-0">Apenas R$34,99/mês</span>
