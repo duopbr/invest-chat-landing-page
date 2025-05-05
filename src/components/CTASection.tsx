@@ -10,7 +10,7 @@ const CTASection = () => {
         <div className="flex flex-col items-center text-center">
           <div className="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full mb-6">
             <Timer className="h-4 w-4" />
-            <span className="text-sm font-medium">Oferta por tempo limitado - Restam apenas 7 vagas!</span>
+            <span className="text-sm font-medium">Oferta por tempo limitado</span>
           </div>
           
           <h2 className="text-3xl md:text-4xl font-bold mb-6">

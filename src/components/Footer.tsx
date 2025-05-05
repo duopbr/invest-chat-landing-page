@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-xl font-bold mb-4 text-white">InvestChatAI</h3>
+            <h3 className="text-xl font-bold mb-4 text-white">Duop</h3>
             <p className="mb-4">
               Seu assistente de investimentos 24 horas por dia, diretamente no WhatsApp.
             </p>
@@ -57,7 +57,7 @@ const Footer = () => {
         </div>
         
         <div className="border-t border-gray-800 mt-10 pt-6 text-center text-sm">
-          <p>&copy; {currentYear} InvestChatAI. Todos os direitos reservados.</p>
+          <p>&copy; {currentYear} Duop. Todos os direitos reservados.</p>
         </div>
       </div>
     </footer>
