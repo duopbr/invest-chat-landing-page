@@ -10,9 +10,6 @@ const HeroSection = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row items-center">
           <div className="w-full lg:w-1/2 mb-10 lg:mb-0">
-            <div className="inline-block bg-invest-green/20 text-invest-green font-medium px-4 py-1 rounded-full text-sm mb-4">
-              <Timer className="inline-block w-4 h-4 mr-1" /> Oferta por tempo limitado
-            </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Consultoria de <span className="gradient-heading">Investimentos</span> no <span className="text-invest-green font-bold">WhatsApp</span>
             </h1>
