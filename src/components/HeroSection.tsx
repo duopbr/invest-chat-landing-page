@@ -20,7 +20,7 @@ const HeroSection = () => {
                   Quero testar meu assistente
                 </Button>
               </a>
-              <span className="text-gray-500 text-base mt-2 sm:mt-0">É grátis começar</span>
+              <span className="text-gray-500 text-base mt-2 sm:mt-0">Apenas R$34,99/mês</span>
             </div>
           </div>
           <div className="w-full lg:w-1/2 relative">

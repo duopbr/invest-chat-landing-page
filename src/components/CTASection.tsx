@@ -14,7 +14,13 @@ const CTASection = () => {
           </p>
           
           <div className="bg-white/10 backdrop-blur-sm p-8 rounded-xl w-full max-w-2xl">
-            <h3 className="text-2xl font-bold mb-6">Comece agora. É grátis testar.</h3>
+            <div className="flex flex-col md:flex-row items-center justify-between mb-6">
+              <h3 className="text-2xl font-bold">Comece agora por apenas</h3>
+              <div className="bg-invest-green/90 px-5 py-2 rounded-lg mt-3 md:mt-0">
+                <span className="text-3xl font-bold">R$34,99</span>
+                <span className="text-sm">/mês</span>
+              </div>
+            </div>
             
             <form className="space-y-4">
               <div className="flex flex-col sm:flex-row gap-4">
@@ -42,12 +48,12 @@ const CTASection = () => {
             </p>
           </div>
           
-          <div className="mt-10 flex items-center justify-center space-x-6">
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-6">
             <div className="flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              <span>Sem cartão de crédito</span>
+              <span>7 dias de garantia</span>
             </div>
             
             <div className="flex items-center">
