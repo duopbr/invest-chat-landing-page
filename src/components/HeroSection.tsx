@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { MessageCircle } from "lucide-react";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 const HeroSection = () => {
   return (
@@ -26,7 +27,7 @@ const HeroSection = () => {
             </div>
           </div>
           <div className="w-full lg:w-1/2 relative">
-            <div className="rounded-xl shadow-lg overflow-hidden">
+            <div className="rounded-xl shadow-lg overflow-hidden max-w-md mx-auto">
               <div className="relative pb-[56.25%] h-0">
                 <iframe 
                   className="absolute top-0 left-0 w-full h-full"
