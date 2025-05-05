@@ -36,7 +36,16 @@ const HeroSection = () => {
             </div>
             
             <div className="flex flex-col sm:flex-row items-center gap-4 mb-4">
-              <StripeCheckout buttonText="Assinar por R$34,99/mês" />
+              <div className="w-full sm:w-auto">
+                <div className="mb-2 bg-red-100 text-red-600 px-3 py-1 rounded-full text-xs font-bold inline-flex items-center">
+                  <Timer className="h-3 w-3 mr-1" />
+                  50% OFF
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-gray-500 text-sm line-through">R$69,99</span>
+                  <StripeCheckout buttonText="Assinar por R$34,99/mês" />
+                </div>
+              </div>
               <div className="flex items-center gap-2">
                 <div className="bg-white px-3 py-1 rounded-full border border-gray-200 text-xs font-medium">
                   Sem fidelidade

@@ -22,7 +22,13 @@ const CTASection = () => {
           
           <div className="bg-white/10 backdrop-blur-sm p-8 rounded-xl w-full max-w-2xl">
             <div className="flex flex-col md:flex-row items-center justify-between mb-6">
-              <h3 className="text-2xl font-bold">Comece por apenas</h3>
+              <div>
+                <h3 className="text-2xl font-bold">Comece por apenas</h3>
+                <div className="flex items-center gap-2 mt-1">
+                  <span className="text-gray-300 line-through">R$69,99</span>
+                  <span className="bg-red-500/80 text-white px-2 py-0.5 rounded text-xs font-bold">50% OFF</span>
+                </div>
+              </div>
               <div className="bg-invest-green/90 px-5 py-2 rounded-lg mt-3 md:mt-0">
                 <span className="text-3xl font-bold">R$34,99</span>
                 <span className="text-sm">/mês</span>
