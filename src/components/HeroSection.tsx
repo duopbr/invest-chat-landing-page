@@ -14,7 +14,7 @@ const HeroSection = () => {
               Consultoria de <span className="gradient-heading">Investimentos</span> no <span className="text-invest-green font-bold">WhatsApp</span>
             </h1>
             <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl">
-              Um chatbot de IA que funciona como seu consultor financeiro pessoal. Tire dúvidas, acompanhe mercados e receba análises personalizadas diretamente no seu WhatsApp.
+              Tire dúvidas, acompanhe mercados e receba análises personalizadas com um chatbot especializado.
             </p>
             
             <div className="bg-gray-50 p-4 rounded-lg mb-6 border border-gray-100">
@@ -31,23 +31,6 @@ const HeroSection = () => {
                 <li className="flex items-start gap-2">
                   <Check className="text-invest-green h-5 w-5 mt-1 flex-shrink-0" />
                   <span>Quem busca entender o mercado</span>
-                </li>
-              </ul>
-            </div>
-            
-            <div className="bg-gray-50 p-4 rounded-lg mb-6 border border-gray-100">
-              <h3 className="font-bold text-lg mb-2">Equipe especializada</h3>
-              <p className="text-gray-600 mb-2">
-                O conteúdo e as análises são desenvolvidos por uma equipe de especialistas:
-              </p>
-              <ul className="space-y-1">
-                <li className="flex items-start gap-2">
-                  <Check className="text-invest-green h-5 w-5 mt-1 flex-shrink-0" />
-                  <span>Dois gestores com mais de 10 anos de experiência no mercado</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="text-invest-green h-5 w-5 mt-1 flex-shrink-0" />
-                  <span>Profissional com certificação CFA (Chartered Financial Analyst)</span>
                 </li>
               </ul>
             </div>
