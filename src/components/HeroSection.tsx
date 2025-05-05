@@ -18,19 +18,18 @@ const HeroSection = () => {
             </p>
             
             <div className="bg-gray-50 p-4 rounded-lg mb-6 border border-gray-100">
-              <h3 className="font-bold text-lg mb-2">Para quem é?</h3>
               <ul className="space-y-2">
                 <li className="flex items-start gap-2">
                   <Check className="text-invest-green h-5 w-5 mt-1 flex-shrink-0" />
-                  <span>Investidores de todos os níveis</span>
+                  <span>Orientação sem viés para investidores</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <Check className="text-invest-green h-5 w-5 mt-1 flex-shrink-0" />
-                  <span>Pessoas que querem otimizar sua carteira</span>
+                  <span>Timing de mercado para ajustes de carteira</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <Check className="text-invest-green h-5 w-5 mt-1 flex-shrink-0" />
-                  <span>Quem busca entender o mercado</span>
+                  <span>Explicações para as oscilações dos seus ativos</span>
                 </li>
               </ul>
             </div>
