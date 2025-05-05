@@ -12,7 +12,7 @@ const Navbar = () => {
           <div className="flex items-center">
             <div className="flex-shrink-0 flex items-center">
               <img 
-                src="public/lovable-uploads/0eeff8c3-537a-43c8-89a8-e68696b477af.png" 
+                src="public/lovable-uploads/54442f75-591b-4301-beb4-3793cae2203e.png" 
                 alt="Duop Logo" 
                 className="h-10 w-auto"
               />
