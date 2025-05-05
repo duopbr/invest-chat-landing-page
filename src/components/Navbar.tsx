@@ -1,24 +1,10 @@
 
 import { Button } from "@/components/ui/button";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
+import StripeCheckout from "./StripeCheckout";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isStripeLoaded, setIsStripeLoaded] = useState(false);
-  const stripeButtonRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // Check if Stripe script is already loaded
-    if (!document.querySelector('script[src="https://js.stripe.com/v3/buy-button.js"]')) {
-      const script = document.createElement("script");
-      script.src = "https://js.stripe.com/v3/buy-button.js";
-      script.async = true;
-      script.onload = () => setIsStripeLoaded(true);
-      document.body.appendChild(script);
-    } else {
-      setIsStripeLoaded(true);
-    }
-  }, []);
 
   return (
     <nav className="fixed w-full bg-white/90 backdrop-blur-sm z-50 shadow-sm">
@@ -41,13 +27,8 @@ const Navbar = () => {
               <a href="#coming-soon" className="text-gray-600 hover:text-invest-blue px-3 py-2 rounded-md text-sm font-medium">
                 Em breve
               </a>
-              <div className="ml-4 stripe-checkout-container">
-                {isStripeLoaded && (
-                  <stripe-buy-button
-                    buy-button-id="buy_btn_1PH7E1GZeF5XUH08kNV1F6Wm"
-                    publishable-key="pk_live_51OiBDyGZeF5XUH08HXRoiEzILdWnQp9SkBQrGhKXAL56KElnAGbCXvfwmCX8pXXZDMfvYctGDVU8HBT4YqhcUCPW00pOx96Qls"
-                  />
-                )}
+              <div className="ml-4">
+                <StripeCheckout buttonText="Assinar" />
               </div>
             </div>
           </div>
@@ -97,12 +78,7 @@ const Navbar = () => {
             Em breve
           </a>
           <div className="block px-3 py-2">
-            {isStripeLoaded && (
-              <stripe-buy-button
-                buy-button-id="buy_btn_1PH7E1GZeF5XUH08kNV1F6Wm"
-                publishable-key="pk_live_51OiBDyGZeF5XUH08HXRoiEzILdWnQp9SkBQrGhKXAL56KElnAGbCXvfwmCX8pXXZDMfvYctGDVU8HBT4YqhcUCPW00pOx96Qls"
-              />
-            )}
+            <StripeCheckout buttonText="Assinar" />
           </div>
         </div>
       </div>

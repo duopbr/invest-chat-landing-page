@@ -1,23 +1,9 @@
 
 import { Button } from "@/components/ui/button";
 import { MessageCircle } from "lucide-react";
-import { useEffect, useRef } from "react";
+import StripeCheckout from "./StripeCheckout";
 
 const CTASection = () => {
-  const stripeButtonRef = useRef<HTMLDivElement>(null);
-  
-  useEffect(() => {
-    // Load Stripe.js script dynamically
-    const script = document.createElement("script");
-    script.src = "https://js.stripe.com/v3/buy-button.js";
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
   return (
     <section id="cta" className="py-16 px-4 bg-gradient-to-r from-invest-blue to-invest-blue/80 text-white">
       <div className="max-w-7xl mx-auto">
@@ -38,11 +24,8 @@ const CTASection = () => {
               </div>
             </div>
             
-            <div className="stripe-checkout-container my-4 flex justify-center">
-              <stripe-buy-button
-                buy-button-id="buy_btn_1PH7E1GZeF5XUH08kNV1F6Wm"
-                publishable-key="pk_live_51OiBDyGZeF5XUH08HXRoiEzILdWnQp9SkBQrGhKXAL56KElnAGbCXvfwmCX8pXXZDMfvYctGDVU8HBT4YqhcUCPW00pOx96Qls"
-              />
+            <div className="my-4 flex justify-center">
+              <StripeCheckout buttonText="Assinar agora" />
             </div>
             
             <p className="mt-4 text-sm text-white/70">

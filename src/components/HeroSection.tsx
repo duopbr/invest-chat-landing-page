@@ -2,25 +2,9 @@
 import { Button } from "@/components/ui/button";
 import { MessageCircle } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { useEffect, useRef } from "react";
+import StripeCheckout from "./StripeCheckout";
 
 const HeroSection = () => {
-  const stripeButtonRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // Load Stripe.js script dynamically
-    const script = document.createElement("script");
-    script.src = "https://js.stripe.com/v3/buy-button.js";
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
-      }
-    };
-  }, []);
-
   return (
     <section className="pt-28 pb-12 md:pt-32 md:pb-16 px-4">
       <div className="max-w-7xl mx-auto">
@@ -34,12 +18,7 @@ const HeroSection = () => {
               com um chatbot inteligente e especializado em investimentos.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-4">
-              <div className="stripe-checkout-container">
-                <stripe-buy-button
-                  buy-button-id="buy_btn_1PH7E1GZeF5XUH08kNV1F6Wm"
-                  publishable-key="pk_live_51OiBDyGZeF5XUH08HXRoiEzILdWnQp9SkBQrGhKXAL56KElnAGbCXvfwmCX8pXXZDMfvYctGDVU8HBT4YqhcUCPW00pOx96Qls"
-                />
-              </div>
+              <StripeCheckout buttonText="Assinar por R$34,99/mês" />
               <span className="text-gray-500 text-base mt-2 sm:mt-0">Apenas R$34,99/mês</span>
             </div>
           </div>
