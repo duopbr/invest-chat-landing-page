@@ -54,17 +54,6 @@ const HeroSection = () => {
             </p>
           </div>
           <div className="w-full lg:w-1/2 relative">
-            {/* Oferta por tempo limitado component moved up to avoid covering video title */}
-            <div className="bg-white p-4 rounded-xl shadow-lg absolute -top-24 -left-10 hidden lg:block z-10 max-w-[280px] border-l-4 border-invest-green">
-              <div className="flex items-start gap-2">
-                <div className="bg-invest-green/20 p-2 rounded-full">
-                  <Timer className="h-4 w-4 text-invest-green" />
-                </div>
-                <div>
-                  <p className="font-medium">Oferta por tempo limitado</p>
-                </div>
-              </div>
-            </div>
             <div className="rounded-xl shadow-lg overflow-hidden max-w-[320px] mx-auto">
               <div className="relative" style={{ paddingBottom: "177.78%" }}>
                 <iframe 
