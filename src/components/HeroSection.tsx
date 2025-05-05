@@ -14,7 +14,7 @@ const HeroSection = () => {
               Consultoria de <span className="gradient-heading">Investimentos</span> no <span className="text-invest-green font-bold">WhatsApp</span>
             </h1>
             <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl">
-              Tire dúvidas, acompanhe mercados e receba análises personalizadas com um chatbot especializado.
+              Tire dúvidas, acompanhe mercados e receba análises personalizadas diretamente no WhatsApp.
             </p>
             
             <div className="bg-gray-50 p-4 rounded-lg mb-6 border border-gray-100">
