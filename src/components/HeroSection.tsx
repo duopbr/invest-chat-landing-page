@@ -22,7 +22,7 @@ const HeroSection = () => {
               <ul className="space-y-2">
                 <li className="flex items-start gap-2">
                   <Check className="text-invest-green h-5 w-5 mt-1 flex-shrink-0" />
-                  <span>Investidores iniciantes</span>
+                  <span>Investidores de todos os níveis</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <Check className="text-invest-green h-5 w-5 mt-1 flex-shrink-0" />
