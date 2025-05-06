@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Check, Timer } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";

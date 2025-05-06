@@ -11,7 +11,7 @@ const Navbar = () => {
     <>
       <div className="bg-invest-green py-2 text-white text-center font-medium text-sm px-4 flex items-center justify-center gap-2">
         <Clock className="h-4 w-4" />
-        <span>Oferta especial: Vagas limitadas para consultoria de investimentos - Garanta sua vaga hoje!</span>
+        <span>Oferta especial: Vagas limitadas para consultoria de investimentos no WhatsApp - Garanta sua vaga hoje!</span>
       </div>
       <nav className="w-full bg-white/90 backdrop-blur-sm z-50 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
