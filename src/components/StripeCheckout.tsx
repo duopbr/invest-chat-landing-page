@@ -8,7 +8,8 @@ interface StripeCheckoutProps {
 
 const StripeCheckout = ({ buttonText = "Assinar agora", className = "" }: StripeCheckoutProps) => {
   const handleCheckout = () => {
-    window.open("https://buy.stripe.com/6oE4go67w2nIgrC9AM", "_blank");
+    // Open Stripe checkout and redirect to /obrigado page after success
+    window.open("https://buy.stripe.com/6oE4go67w2nIgrC9AM?success_url=" + encodeURIComponent(window.location.origin + "/obrigado"), "_blank");
   };
   
   return (
