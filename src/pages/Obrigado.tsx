@@ -35,7 +35,7 @@ const Obrigado = () => {
           </div>
           <h1 className="text-3xl font-bold mb-6">✅ Compra confirmada!</h1>
           <p className="text-lg text-gray-700 mb-6">
-            Obrigado por assinar o nosso Chatbot Financeiro no WhatsApp.
+            Obrigado por assinar o nosso Consultor de Investimentos no WhatsApp.
           </p>
           
           <p className="text-lg text-gray-700 mb-8">
