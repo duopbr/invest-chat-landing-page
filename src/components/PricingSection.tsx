@@ -2,22 +2,30 @@
 import { Timer } from "lucide-react";
 import PricingCard from "./PricingCard";
 
-const PricingSection = () => {
+interface PricingSectionProps {
+  showHeading?: boolean;
+}
+
+const PricingSection = ({ showHeading = true }: PricingSectionProps) => {
   return (
     <section id="pricing" className="py-16 px-4 bg-gradient-to-r from-invest-blue to-invest-blue/80 text-white">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col items-center text-center">
-          <div className="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full mb-6">
-            <Timer className="h-4 w-4" />
-            <span className="text-sm font-medium">Oferta por tempo limitado</span>
-          </div>
-          
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Consultor de investimentos 24/7 no <span className="text-invest-green font-bold">WhatsApp</span>
-          </h2>
-          <p className="text-lg max-w-2xl mb-8 text-white/90">
-            Escolha o plano ideal para você e acesse análises, informações de mercado e tire dúvidas diretamente no WhatsApp.
-          </p>
+          {showHeading && (
+            <>
+              <div className="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full mb-6">
+                <Timer className="h-4 w-4" />
+                <span className="text-sm font-medium">Oferta por tempo limitado</span>
+              </div>
+              
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                Consultor de investimentos 24/7 no <span className="text-invest-green font-bold">WhatsApp</span>
+              </h2>
+              <p className="text-lg max-w-2xl mb-8 text-white/90">
+                Escolha o plano ideal para você e acesse análises, informações de mercado e tire dúvidas diretamente no WhatsApp.
+              </p>
+            </>
+          )}
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl">
             <PricingCard 

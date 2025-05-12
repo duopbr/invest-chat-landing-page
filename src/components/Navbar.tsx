@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import StripeCheckout from "./StripeCheckout";
 import { Clock } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,20 +14,25 @@ const Navbar = () => {
         <Clock className="h-4 w-4" />
         <span>Oferta especial: Vagas limitadas para consultoria de investimentos no WhatsApp - Garanta sua vaga hoje!</span>
       </div>
-      <nav className="w-full bg-white/90 backdrop-blur-sm z-50 shadow-sm">
+      <nav className="w-full bg-white/90 backdrop-blur-sm z-50 shadow-sm fixed top-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0 flex items-center">
-                <img 
-                  src="/lovable-uploads/54442f75-591b-4301-beb4-3793cae2203e.png" 
-                  alt="Duop Logo" 
-                  className="h-10 w-auto"
-                />
+                <Link to="/">
+                  <img 
+                    src="/lovable-uploads/54442f75-591b-4301-beb4-3793cae2203e.png" 
+                    alt="Duop Logo" 
+                    className="h-10 w-auto"
+                  />
+                </Link>
               </div>
             </div>
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
+                <Link to="/planos" className="text-gray-600 hover:text-invest-blue px-3 py-2 rounded-md text-sm font-medium">
+                  Planos
+                </Link>
                 <a href="#services" className="text-gray-600 hover:text-invest-blue px-3 py-2 rounded-md text-sm font-medium">
                   Serviços
                 </a>
@@ -75,6 +81,13 @@ const Navbar = () => {
         {/* Mobile menu */}
         <div className={`${isOpen ? 'block' : 'hidden'} md:hidden`}>
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white shadow-lg">
+            <Link 
+              to="/planos" 
+              className="text-gray-600 hover:text-invest-blue block px-3 py-2 rounded-md text-base font-medium"
+              onClick={() => setIsOpen(false)}
+            >
+              Planos
+            </Link>
             <a 
               href="#services" 
               className="text-gray-600 hover:text-invest-blue block px-3 py-2 rounded-md text-base font-medium"
