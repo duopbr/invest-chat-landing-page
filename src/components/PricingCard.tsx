@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Check, CreditCard } from "lucide-react";
@@ -58,7 +57,7 @@ const PricingCard = ({
             Mais Popular
           </div>
         )}
-        <div className={`flex flex-col h-full ${isPopular ? "border-t-0" : ""}`}>
+        <div className={`flex flex-col ${isPopular ? "border-t-0" : ""}`}>
           <CardHeader className="px-6 py-6 text-center">
             <CardTitle className="text-xl font-bold">{title}</CardTitle>
             <div className="mt-4 flex flex-col items-center">
@@ -107,7 +106,7 @@ const PricingCard = ({
       </Card>
 
       <Dialog open={pixDialogOpen} onOpenChange={setPixDialogOpen}>
-        <DialogContent className="max-w-md mx-auto">
+        <DialogContent className="w-[95%] max-w-md mx-auto">
           <DialogHeader>
             <DialogTitle>Pagamento via Pix</DialogTitle>
             <DialogDescription>Escaneie o QR Code ou copie a chave Pix</DialogDescription>
@@ -117,21 +116,21 @@ const PricingCard = ({
               <img 
                 src={pixQrCodeImage} 
                 alt="QR Code Pix" 
-                className="w-48 h-48 object-contain"
+                className="w-40 h-40 sm:w-48 sm:h-48 object-contain"
               />
             </div>
             <div className="w-full">
               <p className="text-center mb-2 text-sm">Chave Pix:</p>
-              <div className="flex items-center">
-                <code className="bg-gray-100 px-2 py-1 rounded mr-2 text-xs overflow-auto max-w-[calc(100%-4rem)] truncate">
+              <div className="flex flex-wrap items-center w-full gap-2">
+                <code className="bg-gray-100 px-2 py-1 rounded text-xs break-all flex-grow min-w-0">
                   {pixCode}
                 </code>
-                <Button size="sm" onClick={handleCopyPixKey} className="text-xs h-7">Copiar</Button>
+                <Button size="sm" onClick={handleCopyPixKey} className="text-xs h-7 whitespace-nowrap flex-shrink-0">Copiar</Button>
               </div>
             </div>
             <div className="mt-2 bg-yellow-50 p-3 rounded-md text-sm w-full">
-              <p className="font-medium text-yellow-800">Importante:</p>
-              <p className="text-yellow-700">
+              <p className="font-medium text-yellow-800 break-words">Importante:</p>
+              <p className="text-yellow-700 break-words">
                 Após realizar o pagamento, envie o comprovante para nosso WhatsApp
                 (21) 96713-5336 para confirmação rápida do seu acesso.
               </p>

@@ -1,12 +1,12 @@
-
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Check, Timer } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
-  const [pixDialogOpen, setPixDialogOpen] = useState(false);
+  const navigate = useNavigate();
   
   const handleStripeCheckout = () => {
     window.open("https://buy.stripe.com/6oE4go67w2nIgrC9AM?success_url=https://duopinvest.duop.com.br/obrigado", "_blank");
@@ -62,21 +62,13 @@ const HeroSection = () => {
                       Pagar com Cartão
                     </Button>
                     <Button
-                      onClick={() => setPixDialogOpen(true)}
+                      onClick={() => navigate('/planos')}
                       variant="outline"
                       className="font-medium py-3 px-6 rounded-lg text-base"
                     >
                       Pagar via Pix
                     </Button>
                   </div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="bg-white px-3 py-1 rounded-full border border-gray-200 text-xs font-medium">
-                  Sem fidelidade
-                </div>
-                <div className="bg-white px-3 py-1 rounded-full border border-gray-200 text-xs font-medium">
-                  Cancele quando quiser
                 </div>
               </div>
             </div>
@@ -100,43 +92,6 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-
-      {/* Pix Payment Dialog */}
-      <Dialog open={pixDialogOpen} onOpenChange={setPixDialogOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Pagamento via Pix</DialogTitle>
-          </DialogHeader>
-          <div className="flex flex-col items-center space-y-4">
-            <div className="border-2 border-gray-200 p-4 rounded-lg">
-              {/* QR Code image would go here */}
-              <div className="w-48 h-48 bg-gray-100 flex items-center justify-center">
-                <p className="text-gray-500">QR Code Pix</p>
-              </div>
-            </div>
-            <div>
-              <p className="text-center mb-2">Chave Pix:</p>
-              <div className="flex items-center">
-                <code className="bg-gray-100 px-3 py-1 rounded mr-2">11122233344</code>
-                <Button size="sm" onClick={handleCopyPixKey}>Copiar</Button>
-              </div>
-            </div>
-            <div className="mt-4 bg-yellow-50 p-4 rounded-md text-sm">
-              <p className="font-medium text-yellow-800">Importante:</p>
-              <p className="text-yellow-700">
-                Após realizar o pagamento, envie o comprovante para nosso WhatsApp
-                (21) 96713-5336 para confirmação rápida do seu acesso.
-              </p>
-            </div>
-            <Button 
-              className="w-full mt-4"
-              onClick={() => window.open("https://wa.me/5521967135336?text=Oi%2C%20realizei%20um%20pagamento%20via%20PIX%20e%20gostaria%20de%20confirmar", "_blank")}
-            >
-              Enviar Comprovante no WhatsApp
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
     </section>
   );
 };
