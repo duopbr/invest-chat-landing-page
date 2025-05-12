@@ -12,7 +12,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="bg-invest-green py-2 text-white text-center font-medium text-sm px-4 flex items-center justify-center gap-2">
+      <div className="bg-invest-green py-2 text-white text-center font-medium text-sm px-4 flex items-center justify-center gap-2 fixed w-full top-0 z-50">
         <Clock className="h-4 w-4" />
         <span>Oferta especial: Vagas limitadas para consultoria de investimentos no WhatsApp - Garanta sua vaga hoje!</span>
       </div>

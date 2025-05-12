@@ -9,7 +9,7 @@ const Planos = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-grow pt-24 pb-12">
+      <main className="flex-grow pt-32 pb-12">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 mb-6 md:mb-8">
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4">
             Complete sua assinatura
