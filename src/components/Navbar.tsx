@@ -3,10 +3,12 @@ import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import StripeCheckout from "./StripeCheckout";
 import { Clock } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const isOnPlanosPage = location.pathname === "/planos";
 
   return (
     <>
@@ -45,9 +47,11 @@ const Navbar = () => {
                 <a href="#coming-soon" className="text-gray-600 hover:text-invest-blue px-3 py-2 rounded-md text-sm font-medium">
                   Em breve
                 </a>
-                <div className="ml-4">
-                  <StripeCheckout buttonText="Assinar" />
-                </div>
+                {!isOnPlanosPage && (
+                  <div className="ml-4">
+                    <StripeCheckout buttonText="Assinar" />
+                  </div>
+                )}
               </div>
             </div>
             <div className="md:hidden">
@@ -116,9 +120,11 @@ const Navbar = () => {
             >
               Em breve
             </a>
-            <div className="block px-3 py-2">
-              <StripeCheckout buttonText="Assinar" />
-            </div>
+            {!isOnPlanosPage && (
+              <div className="block px-3 py-2">
+                <StripeCheckout buttonText="Assinar" />
+              </div>
+            )}
           </div>
         </div>
       </nav>
