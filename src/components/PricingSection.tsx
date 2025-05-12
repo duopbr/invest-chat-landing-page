@@ -8,20 +8,20 @@ interface PricingSectionProps {
 
 const PricingSection = ({ showHeading = true }: PricingSectionProps) => {
   return (
-    <section id="pricing" className="py-16 px-4 bg-gradient-to-r from-invest-blue to-invest-blue/80 text-white">
+    <section id="pricing" className="py-16 px-4 bg-white text-black">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col items-center text-center">
           {showHeading && (
             <>
-              <div className="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full mb-6">
-                <Timer className="h-4 w-4" />
-                <span className="text-sm font-medium">Oferta por tempo limitado</span>
+              <div className="inline-flex items-center gap-2 bg-invest-blue/10 px-4 py-2 rounded-full mb-6">
+                <Timer className="h-4 w-4 text-invest-blue" />
+                <span className="text-sm font-medium text-invest-blue">Oferta por tempo limitado</span>
               </div>
               
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 Consultor de investimentos 24/7 no <span className="text-invest-green font-bold">WhatsApp</span>
               </h2>
-              <p className="text-lg max-w-2xl mb-8 text-white/90">
+              <p className="text-lg max-w-2xl mb-8 text-gray-600">
                 Escolha o plano ideal para você e acesse análises, informações de mercado e tire dúvidas diretamente no WhatsApp.
               </p>
             </>
@@ -65,21 +65,21 @@ const PricingSection = ({ showHeading = true }: PricingSectionProps) => {
           
           <div className="mt-10 flex flex-wrap items-center justify-center gap-6">
             <div className="flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-invest-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               <span>7 dias de garantia</span>
             </div>
             
             <div className="flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-invest-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               <span>Cancelamento fácil</span>
             </div>
             
             <div className="flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-invest-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               <span>Suporte dedicado</span>
