@@ -52,17 +52,17 @@ const PricingCard = ({
 
   return (
     <>
-      <Card className={`w-full h-full overflow-hidden ${isPopular ? "border-invest-green" : "border-gray-200"}`}>
+      <Card className={`w-full h-full overflow-hidden border ${isPopular ? "border-invest-green" : "border-gray-200"} max-w-[350px] mx-auto`}>
         {isPopular && (
           <div className="bg-invest-green text-white text-center py-1.5 text-sm font-medium">
             Mais Popular
           </div>
         )}
         <div className={`flex flex-col h-full ${isPopular ? "border-t-0" : ""}`}>
-          <CardHeader className="px-6 py-6">
+          <CardHeader className="px-6 py-6 text-center">
             <CardTitle className="text-xl font-bold">{title}</CardTitle>
-            <div className="mt-4">
-              <div className="flex items-baseline">
+            <div className="mt-4 flex flex-col items-center">
+              <div className="flex items-baseline justify-center">
                 <span className="text-3xl font-bold">{price}</span>
                 <span className="text-base text-gray-500 ml-1">{period}</span>
               </div>
@@ -76,7 +76,7 @@ const PricingCard = ({
           </CardHeader>
 
           <CardContent className="px-6 py-0 flex-grow">
-            <p className="text-gray-600 mb-4">{description}</p>
+            <p className="text-gray-600 mb-4 text-center">{description}</p>
             <ul className="space-y-3">
               {benefits.map((benefit, index) => (
                 <li key={index} className="flex items-start">
@@ -87,7 +87,7 @@ const PricingCard = ({
             </ul>
           </CardContent>
 
-          <CardFooter className="flex flex-col space-y-3 px-6 py-6 border-t">
+          <CardFooter className="flex flex-col space-y-3 px-6 py-6 mt-4">
             <Button 
               onClick={handleStripeCheckout}
               className="w-full bg-invest-green hover:bg-invest-green/90"
@@ -98,7 +98,7 @@ const PricingCard = ({
             <Button 
               onClick={() => setPixDialogOpen(true)}
               variant="outline" 
-              className="w-full"
+              className="w-full border-gray-300"
             >
               Pagar via Pix
             </Button>

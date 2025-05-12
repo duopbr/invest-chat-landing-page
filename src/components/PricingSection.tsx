@@ -28,55 +28,61 @@ const PricingSection = ({ showHeading = true }: PricingSectionProps) => {
             </>
           )}
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl">
-            <PricingCard 
-              title="Plano Mensal"
-              description="Ideal para quem quer testar a consultoria e acompanhar o mercado mês a mês."
-              price="R$ 34,99"
-              period="/mês"
-              discountPercentage="50%"
-              discountType="sobre o plano mensal"
-              stripeLink="https://buy.stripe.com/6oE4go67w2nIgrC9AM?success_url=https://duopinvest.duop.com.br/obrigado"
-              pixCode="00020126650014br.gov.bcb.pix0114547777530001370225WHATSAPPESPECIALISTASDUOP520400005303986540534.995802BR5916GPR ANALISE LTDA6008BRASILIA62070503***63048CF0"
-              pixQrCodeImage="/lovable-uploads/0d74bf51-d9d2-40ea-934d-2baf983cf549.png"
-              benefits={[
-                "Acesso completo ao assistente financeiro no WhatsApp",
-                "Oferta por tempo limitado"
-              ]}
-            />
-            <PricingCard 
-              title="Plano Trimestral"
-              description="Economize e acompanhe o mercado com continuidade por 3 meses."
-              price="R$ 94,99"
-              period="/trimestre"
-              monthlyEquivalent="Equivalente a R$ 31,66/mês"
-              discountPercentage="60%"
-              discountType="sobre o plano mensal"
-              stripeLink="https://buy.stripe.com/14k02Q67w1jE2OY3ch?success_url=https://duopinvest.duop.com.br/obrigado"
-              isPopular={true}
-              pixCode="00020126650014br.gov.bcb.pix0114547777530001370225WHATSAPPESPECIALISTASDUOP520400005303986540594.995802BR5916GPR ANALISE LTDA6008BRASILIA62070503***63048CF0"
-              pixQrCodeImage="/lovable-uploads/0d74bf51-d9d2-40ea-934d-2baf983cf549.png"
-              benefits={[
-                "Acesso completo ao assistente financeiro no WhatsApp",
-                "Oferta por tempo limitado"
-              ]}
-            />
-            <PricingCard 
-              title="Plano Semestral"
-              description="Para quem quer compromisso de longo prazo e o melhor custo-benefício."
-              price="R$ 167,99"
-              period="/semestre"
-              monthlyEquivalent="Equivalente a R$ 27,99/mês"
-              discountPercentage="70%"
-              discountType="sobre o plano mensal"
-              stripeLink="https://buy.stripe.com/aEU8wA5ZsboQgrC8wC?success_url=https://duopinvest.duop.com.br/obrigado"
-              pixCode="00020126650014br.gov.bcb.pix0114547777530001370225WHATSAPPESPECIALISTASDUOP520400005303986540167.995802BR5916GPR ANALISE LTDA6008BRASILIA62070503***63048CF0"
-              pixQrCodeImage="/lovable-uploads/0d74bf51-d9d2-40ea-934d-2baf983cf549.png"
-              benefits={[
-                "Acesso completo ao assistente financeiro no WhatsApp",
-                "Oferta por tempo limitado"
-              ]}
-            />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl">
+            <div className="flex justify-center">
+              <PricingCard 
+                title="Plano Mensal"
+                description="Ideal para quem quer testar a consultoria e acompanhar o mercado mês a mês."
+                price="R$ 34,99"
+                period="/mês"
+                discountPercentage="50%"
+                discountType="sobre o plano mensal"
+                stripeLink="https://buy.stripe.com/6oE4go67w2nIgrC9AM?success_url=https://duopinvest.duop.com.br/obrigado"
+                pixCode="00020126650014br.gov.bcb.pix0114547777530001370225WHATSAPPESPECIALISTASDUOP520400005303986540534.995802BR5916GPR ANALISE LTDA6008BRASILIA62070503***63048CF0"
+                pixQrCodeImage="/lovable-uploads/0d74bf51-d9d2-40ea-934d-2baf983cf549.png"
+                benefits={[
+                  "Acesso completo ao assistente financeiro no WhatsApp",
+                  "Oferta por tempo limitado"
+                ]}
+              />
+            </div>
+            <div className="flex justify-center">
+              <PricingCard 
+                title="Plano Trimestral"
+                description="Economize e acompanhe o mercado com continuidade por 3 meses."
+                price="R$ 94,99"
+                period="/trimestre"
+                monthlyEquivalent="Equivalente a R$ 31,66/mês"
+                discountPercentage="60%"
+                discountType="sobre o plano mensal"
+                stripeLink="https://buy.stripe.com/14k02Q67w1jE2OY3ch?success_url=https://duopinvest.duop.com.br/obrigado"
+                isPopular={true}
+                pixCode="00020126650014br.gov.bcb.pix0114547777530001370225WHATSAPPESPECIALISTASDUOP520400005303986540594.995802BR5916GPR ANALISE LTDA6008BRASILIA62070503***63048CF0"
+                pixQrCodeImage="/lovable-uploads/0d74bf51-d9d2-40ea-934d-2baf983cf549.png"
+                benefits={[
+                  "Acesso completo ao assistente financeiro no WhatsApp",
+                  "Oferta por tempo limitado"
+                ]}
+              />
+            </div>
+            <div className="flex justify-center">
+              <PricingCard 
+                title="Plano Semestral"
+                description="Para quem quer compromisso de longo prazo e o melhor custo-benefício."
+                price="R$ 167,99"
+                period="/semestre"
+                monthlyEquivalent="Equivalente a R$ 27,99/mês"
+                discountPercentage="70%"
+                discountType="sobre o plano mensal"
+                stripeLink="https://buy.stripe.com/aEU8wA5ZsboQgrC8wC?success_url=https://duopinvest.duop.com.br/obrigado"
+                pixCode="00020126650014br.gov.bcb.pix0114547777530001370225WHATSAPPESPECIALISTASDUOP520400005303986540167.995802BR5916GPR ANALISE LTDA6008BRASILIA62070503***63048CF0"
+                pixQrCodeImage="/lovable-uploads/0d74bf51-d9d2-40ea-934d-2baf983cf549.png"
+                benefits={[
+                  "Acesso completo ao assistente financeiro no WhatsApp",
+                  "Oferta por tempo limitado"
+                ]}
+              />
+            </div>
           </div>
         </div>
       </div>
