@@ -52,22 +52,27 @@ const HeroSection = () => {
                   <Timer className="h-3 w-3 mr-1" />
                   50% OFF
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-gray-500 text-sm line-through">R$69,99</span>
-                  <div className="flex gap-2">
-                    <Button
-                      onClick={handleStripeCheckout}
-                      className="bg-[#FFEDB3] text-gray-900 hover:bg-[#FFE499] font-medium py-3 px-6 rounded-lg text-base"
-                    >
-                      Pagar com Cartão
-                    </Button>
-                    <Button
-                      onClick={() => navigate('/planos', { state: { preferredPayment: 'pix' } })}
-                      className="bg-[#00B894] text-white hover:bg-[#00A080] font-medium py-3 px-6 rounded-lg text-base"
-                    >
-                      Pagar via Pix
-                    </Button>
-                  </div>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-gray-500 text-sm">
+                    de <span className="line-through">R$69,99</span>
+                  </span>
+                  <span className="text-invest-green font-bold text-lg">
+                    por R$34,99
+                  </span>
+                </div>
+                <div className="flex gap-2 mt-2">
+                  <Button
+                    onClick={handleStripeCheckout}
+                    className="bg-[#00985B] text-white hover:bg-[#007F4D] font-medium py-3 px-6 rounded-lg text-base"
+                  >
+                    Pagar com Cartão
+                  </Button>
+                  <Button
+                    onClick={() => navigate('/planos', { state: { preferredPayment: 'pix' } })}
+                    className="bg-[#D1FADF] text-green-800 hover:bg-[#BCF5D0] border border-green-800 font-medium py-3 px-6 rounded-lg text-base"
+                  >
+                    Pagar via Pix
+                  </Button>
                 </div>
               </div>
             </div>

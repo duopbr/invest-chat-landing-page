@@ -172,7 +172,7 @@ const PricingCard = ({
             {preferredPayment !== 'pix' && (
               <Button 
                 onClick={handleStripeCheckout}
-                className="w-full bg-[#FFEDB3] text-gray-900 hover:bg-[#FFE499]"
+                className="w-full bg-[#00985B] text-white hover:bg-[#007F4D]"
               >
                 <CreditCard className="mr-2 h-4 w-4" />
                 Pagar com Cartão
@@ -181,7 +181,7 @@ const PricingCard = ({
             {(preferredPayment === 'pix' || preferredPayment === null) && (
               <Button 
                 onClick={() => handleModalOpenChange(true)}
-                className="w-full text-white bg-[#00B894] hover:bg-[#00A080]"
+                className="w-full bg-[#D1FADF] text-green-800 hover:bg-[#BCF5D0] border border-green-800"
               >
                 Pagar via Pix
               </Button>
