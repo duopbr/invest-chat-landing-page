@@ -37,7 +37,7 @@ const PricingSection = ({ showHeading = true, preferredPayment = null }: Pricing
                 period="/mês"
                 discountPercentage="50%"
                 discountType="sobre o plano mensal"
-                stripeLink="https://buy.stripe.com/6oE4go67w2nIgrC9AM?success_url=https://duopinvest.duop.com.br/obrigado"
+                stripeLink="https://buy.stripe.com/6oE4go67w2nIgrC9AM"
                 pixCode="00020126650014br.gov.bcb.pix0114547777530001370225WHATSAPPESPECIALISTASDUOP520400005303986540534.995802BR5916GPR ANALISE LTDA6008BRASILIA62070503***63048CF0"
                 pixQrCodeImage="/imagens/Plano Mensal.png"
                 preferredPayment={preferredPayment}
@@ -56,7 +56,7 @@ const PricingSection = ({ showHeading = true, preferredPayment = null }: Pricing
                 monthlyEquivalent="Equivalente a R$ 31,66/mês"
                 discountPercentage="60%"
                 discountType="sobre o plano mensal"
-                stripeLink="https://buy.stripe.com/14k02Q67w1jE2OY3ch?success_url=https://duopinvest.duop.com.br/obrigado"
+                stripeLink="https://buy.stripe.com/cN2bIQ7bA5zU5MY8wJ"
                 isPopular={true}
                 pixCode="00020126680014br.gov.bcb.pix0114547777530001370228WHATSAPP ESPECIALISTAS DUOP 520400005303986540594.995802BR5916GPR ANALISE LTDA6008BRASILIA62070503***6304C79D"
                 pixQrCodeImage="/imagens/Plano Trimestral.png"
@@ -76,7 +76,7 @@ const PricingSection = ({ showHeading = true, preferredPayment = null }: Pricing
                 monthlyEquivalent="Equivalente a R$ 27,99/mês"
                 discountPercentage="70%"
                 discountType="sobre o plano mensal"
-                stripeLink="https://buy.stripe.com/aEU8wA5ZsboQgrC8wC?success_url=https://duopinvest.duop.com.br/obrigado"
+                stripeLink="https://buy.stripe.com/5kA5ksdzY5zU8Za8wK"
                 pixCode="00020126680014br.gov.bcb.pix0114547777530001370228WHATSAPP ESPECIALISTAS DUOP 5204000053039865406167.995802BR5916GPR ANALISE LTDA6008BRASILIA62070503***6304C3F2"
                 pixQrCodeImage="/imagens/Plano Semestral.png"
                 preferredPayment={preferredPayment}
