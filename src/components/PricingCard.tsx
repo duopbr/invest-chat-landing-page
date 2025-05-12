@@ -2,7 +2,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Check, CreditCard } from "lucide-react";
-import { useState, FormEvent, useEffect } from "react";
+import { useState, FormEvent, useEffect, ChangeEvent } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 
@@ -25,6 +25,20 @@ interface PricingCardProps {
   onPhoneNumberSubmit: (phoneNumber: string, planTitle: string) => Promise<boolean>;
   isSubmittingPhoneNumber: boolean;
 }
+
+// Função para formatar o número de telefone
+const formatPhoneNumber = (value: string): string => {
+  if (!value) return "";
+  const digits = value.replace(/\D/g, '');
+  const N = digits.length;
+
+  if (N <= 2) return `+${digits}`;
+  if (N <= 4) return `+55 ${digits.substring(2)}`;
+  if (N <= 9) return `+55 ${digits.substring(2, 4)} ${digits.substring(4)}`;
+  if (N <= 13) return `+55 ${digits.substring(2, 4)} ${digits.substring(4, 9)}-${digits.substring(9)}`;
+  // Limita a 13 dígitos (+55 DD 9XXXX XXXX)
+  return `+55 ${digits.substring(2, 4)} ${digits.substring(4, 9)}-${digits.substring(9, 13)}`;
+};
 
 const PricingCard = ({
   title,
@@ -55,7 +69,7 @@ const PricingCard = ({
     if (showPixDetailsDirectly) {
       setCurrentShowPixDetails(true);
       if (submittedPhoneNumber) {
-        setLocalPhoneNumber(submittedPhoneNumber);
+        setLocalPhoneNumber(formatPhoneNumber(submittedPhoneNumber));
       }
     }
   }, [showPixDetailsDirectly, submittedPhoneNumber]);
@@ -72,8 +86,25 @@ const PricingCard = ({
     });
   };
 
+  const handlePhoneNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatPhoneNumber(e.target.value);
+    setLocalPhoneNumber(formatted);
+  };
+
   const handleLocalPhoneFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    
+    // Validação do formato completo
+    const phoneRegex = /^\+55 \d{2} \d{5}-\d{4}$/;
+    if (!phoneRegex.test(localPhoneNumber)) {
+      toast({
+        title: "Formato inválido",
+        description: "Por favor, use o formato +55 DD 9XXXX-XXXX.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
     setLocalIsSubmitting(true);
     const success = await onPhoneNumberSubmit(localPhoneNumber, title);
     if (success) {
@@ -89,7 +120,7 @@ const PricingCard = ({
     if (open) {
       if (showPixDetailsDirectly && submittedPhoneNumber) {
         setCurrentShowPixDetails(true);
-        setLocalPhoneNumber(submittedPhoneNumber);
+        setLocalPhoneNumber(formatPhoneNumber(submittedPhoneNumber));
       } else {
         setCurrentShowPixDetails(false);
         setLocalPhoneNumber("");
@@ -141,7 +172,7 @@ const PricingCard = ({
             {preferredPayment !== 'pix' && (
               <Button 
                 onClick={handleStripeCheckout}
-                className="w-full bg-[#FFFBEA] text-gray-900 hover:bg-[#FFF8D4]"
+                className="w-full bg-[#FFEDB3] text-gray-900 hover:bg-[#FFE499]"
               >
                 <CreditCard className="mr-2 h-4 w-4" />
                 Pagar com Cartão
@@ -181,9 +212,10 @@ const PricingCard = ({
                   id={`whatsapp-number-${title}`}
                   type="tel" 
                   value={localPhoneNumber}
-                  onChange={(e) => setLocalPhoneNumber(e.target.value)}
-                  placeholder="(XX) XXXXX-XXXX"
+                  onChange={handlePhoneNumberChange}
+                  placeholder="+55 21 99999-9999"
                   required 
+                  maxLength={19}
                   className="w-full"
                   disabled={isSubmittingPhoneNumber || localIsSubmitting}
                 />
