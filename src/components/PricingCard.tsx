@@ -3,7 +3,8 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "@/components/ui/button";
 import { Check, CreditCard } from "lucide-react";
 import { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { useToast } from "@/hooks/use-toast";
 
 interface PricingCardProps {
   title: string;
@@ -14,6 +15,8 @@ interface PricingCardProps {
   discountType: string;
   stripeLink: string;
   isPopular?: boolean;
+  pixCode?: string;
+  pixQrCodeImage?: string;
 }
 
 const PricingCard = ({
@@ -25,16 +28,22 @@ const PricingCard = ({
   discountType,
   stripeLink,
   isPopular = false,
+  pixCode = "00020126650014br.gov.bcb.pix0114547777530001370225WHATSAPPESPECIALISTASDUOP520400005303986540534.995802BR5916GPR ANALISE LTDA6008BRASILIA62070503***63048CF0",
+  pixQrCodeImage = "/lovable-uploads/0d74bf51-d9d2-40ea-934d-2baf983cf549.png",
 }: PricingCardProps) => {
   const [pixDialogOpen, setPixDialogOpen] = useState(false);
+  const { toast } = useToast();
 
   const handleStripeCheckout = () => {
     window.open(stripeLink, "_blank");
   };
 
   const handleCopyPixKey = () => {
-    navigator.clipboard.writeText("11122233344");
-    alert("Chave Pix copiada!");
+    navigator.clipboard.writeText(pixCode);
+    toast({
+      title: "Chave Pix copiada!",
+      description: "A chave Pix foi copiada para a área de transferência.",
+    });
   };
 
   return (
@@ -103,22 +112,26 @@ const PricingCard = ({
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Pagamento via Pix</DialogTitle>
+            <DialogDescription>Escaneie o QR Code ou copie a chave Pix</DialogDescription>
           </DialogHeader>
           <div className="flex flex-col items-center space-y-4">
             <div className="border-2 border-gray-200 p-4 rounded-lg">
-              {/* QR Code image would go here */}
-              <div className="w-48 h-48 bg-gray-100 flex items-center justify-center">
-                <p className="text-gray-500">QR Code Pix</p>
-              </div>
+              <img 
+                src={pixQrCodeImage} 
+                alt="QR Code Pix" 
+                className="w-48 h-48 object-contain"
+              />
             </div>
             <div>
               <p className="text-center mb-2">Chave Pix:</p>
               <div className="flex items-center">
-                <code className="bg-gray-100 px-3 py-1 rounded mr-2">11122233344</code>
+                <code className="bg-gray-100 px-3 py-1 rounded mr-2 text-xs overflow-auto max-w-full truncate">
+                  {pixCode}
+                </code>
                 <Button size="sm" onClick={handleCopyPixKey}>Copiar</Button>
               </div>
             </div>
-            <div className="mt-4 bg-yellow-50 p-4 rounded-md text-sm">
+            <div className="mt-4 bg-yellow-50 p-4 rounded-md text-sm w-full">
               <p className="font-medium text-yellow-800">Importante:</p>
               <p className="text-yellow-700">
                 Após realizar o pagamento, envie o comprovante para nosso WhatsApp
