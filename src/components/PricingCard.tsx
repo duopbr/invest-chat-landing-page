@@ -1,9 +1,11 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Check, CreditCard } from "lucide-react";
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from '@/lib/supabaseClient';
 
 interface PricingCardProps {
   title: string;
@@ -37,6 +39,9 @@ const PricingCard = ({
   preferredPayment = null,
 }: PricingCardProps) => {
   const [pixDialogOpen, setPixDialogOpen] = useState(false);
+  const [showPixDetails, setShowPixDetails] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
   const handleStripeCheckout = () => {
@@ -49,6 +54,52 @@ const PricingCard = ({
       title: "Chave Pix copiada!",
       description: "A chave Pix foi copiada para a área de transferência.",
     });
+  };
+
+  const handlePhoneSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!phoneNumber) {
+      toast({ title: "Erro", description: "Por favor, insira seu número de WhatsApp.", variant: "destructive" });
+      return;
+    }
+    setIsSubmitting(true);
+
+    try {
+      const { data, error } = await supabase
+        .from('pix_phone_submissions')
+        .insert([
+          { phone_number: phoneNumber, plan_title: title }
+        ])
+        .select();
+
+      if (error) {
+        throw error;
+      }
+
+      console.log("Número de WhatsApp enviado para Supabase:", phoneNumber, "Plano:", title, "Data:", data);
+      toast({
+        title: "Número enviado!",
+        description: "Seu número foi registrado. Continue para o pagamento PIX.",
+      });
+      setShowPixDetails(true);
+    } catch (error: any) {
+      console.error("Erro ao enviar para Supabase:", error);
+      toast({
+        title: "Erro ao enviar número",
+        description: error.message || "Não foi possível registrar seu número. Tente novamente.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleOpenChange = (open: boolean) => {
+    setPixDialogOpen(open);
+    if (!open) {
+      setShowPixDetails(false);
+      setPhoneNumber("");
+    }
   };
 
   return (
@@ -111,43 +162,75 @@ const PricingCard = ({
         </div>
       </Card>
 
-      <Dialog open={pixDialogOpen} onOpenChange={setPixDialogOpen}>
+      <Dialog open={pixDialogOpen} onOpenChange={handleOpenChange}>
         <DialogContent className="w-[95%] max-w-md mx-auto">
           <DialogHeader>
             <DialogTitle>Pagamento via Pix</DialogTitle>
-            <DialogDescription>Escaneie o QR Code ou copie a chave Pix</DialogDescription>
+            {!showPixDetails && (
+              <DialogDescription>Informe seu WhatsApp para identificarmos seu pagamento.</DialogDescription>
+            )}
+            {showPixDetails && (
+              <DialogDescription>Escaneie o QR Code ou copie a chave Pix</DialogDescription>
+            )}
           </DialogHeader>
-          <div className="flex flex-col items-center space-y-4">
-            <div className="border-2 border-gray-200 p-4 rounded-lg">
-              <img 
-                src={pixQrCodeImage} 
-                alt="QR Code Pix" 
-                className="w-40 h-40 sm:w-48 sm:h-48 object-contain"
-              />
-            </div>
-            <div className="w-full">
-              <p className="text-center mb-2 text-sm">Chave Pix:</p>
-              <div className="flex flex-wrap items-center w-full gap-2">
-                <code className="bg-gray-100 px-2 py-1 rounded text-xs break-all flex-grow min-w-0">
-                  {pixCode}
-                </code>
-                <Button size="sm" onClick={handleCopyPixKey} className="text-xs h-7 whitespace-nowrap flex-shrink-0">Copiar</Button>
+          
+          {!showPixDetails && (
+            <form onSubmit={handlePhoneSubmit} className="space-y-4 py-4">
+              <div>
+                <label htmlFor="whatsapp-number" className="block text-sm font-medium text-gray-700 mb-1">
+                  Seu número de WhatsApp (com DDD)
+                </label>
+                <Input 
+                  id="whatsapp-number"
+                  type="tel" 
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  placeholder="(XX) XXXXX-XXXX"
+                  required 
+                  className="w-full"
+                  disabled={isSubmitting}
+                />
               </div>
+              <Button type="submit" className="w-full" disabled={isSubmitting}>
+                {isSubmitting ? 'Enviando...' : 'Continuar para PIX'}
+              </Button>
+            </form>
+          )}
+          
+          {showPixDetails && (
+            <div className="flex flex-col items-center space-y-4 pt-4">
+              <p className="text-sm text-gray-600">Número informado: {phoneNumber}</p>
+              <div className="border-2 border-gray-200 p-4 rounded-lg">
+                <img 
+                  src={pixQrCodeImage} 
+                  alt="QR Code Pix" 
+                  className="w-40 h-40 sm:w-48 sm:h-48 object-contain"
+                />
+              </div>
+              <div className="w-full">
+                <p className="text-center mb-2 text-sm">Chave Pix:</p>
+                <div className="flex flex-wrap items-center w-full gap-2">
+                  <code className="bg-gray-100 px-2 py-1 rounded text-xs break-all flex-grow min-w-0">
+                    {pixCode}
+                  </code>
+                  <Button size="sm" onClick={handleCopyPixKey} className="text-xs h-7 whitespace-nowrap flex-shrink-0">Copiar</Button>
+                </div>
+              </div>
+              <div className="mt-2 bg-yellow-50 p-3 rounded-md text-sm w-full">
+                <p className="font-medium text-yellow-800 break-words">Importante:</p>
+                <p className="text-yellow-700 break-words">
+                  Após realizar o pagamento, envie o comprovante para nosso WhatsApp
+                  (21) 96713-5336 para confirmação rápida do seu acesso.
+                </p>
+              </div>
+              <Button 
+                className="w-full"
+                onClick={() => window.open("https://wa.me/5521967135336?text=Oi%2C%20realizei%20um%20pagamento%20via%20PIX%20e%20gostaria%20de%20confirmar.%20Meu%20n%C3%BAmero:%20" + phoneNumber, "_blank")}
+              >
+                Enviar Comprovante no WhatsApp
+              </Button>
             </div>
-            <div className="mt-2 bg-yellow-50 p-3 rounded-md text-sm w-full">
-              <p className="font-medium text-yellow-800 break-words">Importante:</p>
-              <p className="text-yellow-700 break-words">
-                Após realizar o pagamento, envie o comprovante para nosso WhatsApp
-                (21) 96713-5336 para confirmação rápida do seu acesso.
-              </p>
-            </div>
-            <Button 
-              className="w-full"
-              onClick={() => window.open("https://wa.me/5521967135336?text=Oi%2C%20realizei%20um%20pagamento%20via%20PIX%20e%20gostaria%20de%20confirmar", "_blank")}
-            >
-              Enviar Comprovante no WhatsApp
-            </Button>
-          </div>
+          )}
         </DialogContent>
       </Dialog>
     </>
