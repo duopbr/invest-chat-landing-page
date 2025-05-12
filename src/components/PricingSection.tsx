@@ -1,5 +1,8 @@
+import { useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import PricingCard from "./PricingCard";
+import { supabase } from '@/lib/supabaseClient';
+import { useToast } from "@/hooks/use-toast";
 
 interface PricingSectionProps {
   showHeading?: boolean;
@@ -8,6 +11,39 @@ interface PricingSectionProps {
 
 const PricingSection = ({ showHeading = true, preferredPayment = null }: PricingSectionProps) => {
   const isMobile = useIsMobile();
+  const { toast } = useToast();
+
+  const [submittedPhoneNumber, setSubmittedPhoneNumber] = useState<string | null>(null);
+  const [showPixForAllCards, setShowPixForAllCards] = useState(false);
+  const [isSubmittingGlobal, setIsSubmittingGlobal] = useState(false);
+
+  const handlePhoneNumberProvided = async (phoneNumber: string, planTitle: string) => {
+    if (!phoneNumber) {
+      toast({ title: "Erro", description: "Por favor, insira seu número de WhatsApp.", variant: "destructive" });
+      return false;
+    }
+    setIsSubmittingGlobal(true);
+    try {
+      const { data, error } = await supabase
+        .from('pix_phone_submissions')
+        .insert([{ phone_number: phoneNumber, plan_title: planTitle }])
+        .select();
+
+      if (error) throw error;
+
+      console.log("Supabase: Número", phoneNumber, "Plano:", planTitle, "Data:", data);
+      toast({ title: "Número enviado!", description: "Continue para o pagamento PIX." });
+      setSubmittedPhoneNumber(phoneNumber);
+      setShowPixForAllCards(true);
+      setIsSubmittingGlobal(false);
+      return true;
+    } catch (error: any) {
+      console.error("Erro Supabase:", error);
+      toast({ title: "Erro", description: error.message || "Não foi possível registrar. Tente novamente.", variant: "destructive" });
+      setIsSubmittingGlobal(false);
+      return false;
+    }
+  };
   
   return (
     <section id="pricing" className="py-8 md:py-12 px-4 bg-white text-black">
@@ -41,6 +77,10 @@ const PricingSection = ({ showHeading = true, preferredPayment = null }: Pricing
                 pixCode="00020126650014br.gov.bcb.pix0114547777530001370225WHATSAPPESPECIALISTASDUOP520400005303986540534.995802BR5916GPR ANALISE LTDA6008BRASILIA62070503***63048CF0"
                 pixQrCodeImage="/imagens/Plano Mensal.png"
                 preferredPayment={preferredPayment}
+                submittedPhoneNumber={submittedPhoneNumber}
+                showPixDetailsDirectly={showPixForAllCards}
+                onPhoneNumberSubmit={handlePhoneNumberProvided}
+                isSubmittingPhoneNumber={isSubmittingGlobal}
                 benefits={[
                   "Acesso completo ao assistente financeiro no WhatsApp",
                   "Oferta por tempo limitado"
@@ -61,6 +101,10 @@ const PricingSection = ({ showHeading = true, preferredPayment = null }: Pricing
                 pixCode="00020126680014br.gov.bcb.pix0114547777530001370228WHATSAPP ESPECIALISTAS DUOP 520400005303986540594.995802BR5916GPR ANALISE LTDA6008BRASILIA62070503***6304C79D"
                 pixQrCodeImage="/imagens/Plano Trimestral.png"
                 preferredPayment={preferredPayment}
+                submittedPhoneNumber={submittedPhoneNumber}
+                showPixDetailsDirectly={showPixForAllCards}
+                onPhoneNumberSubmit={handlePhoneNumberProvided}
+                isSubmittingPhoneNumber={isSubmittingGlobal}
                 benefits={[
                   "Acesso completo ao assistente financeiro no WhatsApp",
                   "Oferta por tempo limitado"
@@ -80,6 +124,10 @@ const PricingSection = ({ showHeading = true, preferredPayment = null }: Pricing
                 pixCode="00020126680014br.gov.bcb.pix0114547777530001370228WHATSAPP ESPECIALISTAS DUOP 5204000053039865406167.995802BR5916GPR ANALISE LTDA6008BRASILIA62070503***6304C3F2"
                 pixQrCodeImage="/imagens/Plano Semestral.png"
                 preferredPayment={preferredPayment}
+                submittedPhoneNumber={submittedPhoneNumber}
+                showPixDetailsDirectly={showPixForAllCards}
+                onPhoneNumberSubmit={handlePhoneNumberProvided}
+                isSubmittingPhoneNumber={isSubmittingGlobal}
                 benefits={[
                   "Acesso completo ao assistente financeiro no WhatsApp",
                   "Oferta por tempo limitado"

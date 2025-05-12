@@ -2,10 +2,9 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Check, CreditCard } from "lucide-react";
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from '@/lib/supabaseClient';
 
 interface PricingCardProps {
   title: string;
@@ -21,6 +20,10 @@ interface PricingCardProps {
   pixQrCodeImage?: string;
   benefits: string[];
   preferredPayment?: 'pix' | null;
+  submittedPhoneNumber: string | null;
+  showPixDetailsDirectly: boolean;
+  onPhoneNumberSubmit: (phoneNumber: string, planTitle: string) => Promise<boolean>;
+  isSubmittingPhoneNumber: boolean;
 }
 
 const PricingCard = ({
@@ -37,12 +40,25 @@ const PricingCard = ({
   pixQrCodeImage,
   benefits,
   preferredPayment = null,
+  submittedPhoneNumber,
+  showPixDetailsDirectly,
+  onPhoneNumberSubmit,
+  isSubmittingPhoneNumber,
 }: PricingCardProps) => {
   const [pixDialogOpen, setPixDialogOpen] = useState(false);
-  const [showPixDetails, setShowPixDetails] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [localPhoneNumber, setLocalPhoneNumber] = useState("");
+  const [localIsSubmitting, setLocalIsSubmitting] = useState(false);
+  const [currentShowPixDetails, setCurrentShowPixDetails] = useState(false);
   const { toast } = useToast();
+
+  useEffect(() => {
+    if (showPixDetailsDirectly) {
+      setCurrentShowPixDetails(true);
+      if (submittedPhoneNumber) {
+        setLocalPhoneNumber(submittedPhoneNumber);
+      }
+    }
+  }, [showPixDetailsDirectly, submittedPhoneNumber]);
 
   const handleStripeCheckout = () => {
     window.open(stripeLink, "_blank");
@@ -56,49 +72,31 @@ const PricingCard = ({
     });
   };
 
-  const handlePhoneSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleLocalPhoneFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!phoneNumber) {
-      toast({ title: "Erro", description: "Por favor, insira seu número de WhatsApp.", variant: "destructive" });
-      return;
+    setLocalIsSubmitting(true);
+    const success = await onPhoneNumberSubmit(localPhoneNumber, title);
+    if (success) {
+      // setCurrentShowPixDetails(true);
+    } else {
+      // O toast de erro já é mostrado pela função onPhoneNumberSubmit
     }
-    setIsSubmitting(true);
-
-    try {
-      const { data, error } = await supabase
-        .from('pix_phone_submissions')
-        .insert([
-          { phone_number: phoneNumber, plan_title: title }
-        ])
-        .select();
-
-      if (error) {
-        throw error;
-      }
-
-      console.log("Número de WhatsApp enviado para Supabase:", phoneNumber, "Plano:", title, "Data:", data);
-      toast({
-        title: "Número enviado!",
-        description: "Seu número foi registrado. Continue para o pagamento PIX.",
-      });
-      setShowPixDetails(true);
-    } catch (error: any) {
-      console.error("Erro ao enviar para Supabase:", error);
-      toast({
-        title: "Erro ao enviar número",
-        description: error.message || "Não foi possível registrar seu número. Tente novamente.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+    setLocalIsSubmitting(false);
   };
-
-  const handleOpenChange = (open: boolean) => {
+  
+  const handleModalOpenChange = (open: boolean) => {
     setPixDialogOpen(open);
-    if (!open) {
-      setShowPixDetails(false);
-      setPhoneNumber("");
+    if (open) {
+      if (showPixDetailsDirectly && submittedPhoneNumber) {
+        setCurrentShowPixDetails(true);
+        setLocalPhoneNumber(submittedPhoneNumber);
+      } else {
+        setCurrentShowPixDetails(false);
+        setLocalPhoneNumber("");
+      }
+    } else {
+      // Ao fechar, não resetamos o localPhoneNumber se já foi submetido globalmente
+      // setCurrentShowPixDetails(false); // Não precisa resetar aqui, pois o useEffect e a lógica de abertura cuidam disso.
     }
   };
 
@@ -151,7 +149,7 @@ const PricingCard = ({
             )}
             {(preferredPayment === 'pix' || preferredPayment === null) && (
               <Button 
-                onClick={() => setPixDialogOpen(true)}
+                onClick={() => handleModalOpenChange(true)}
                 className="w-full text-white bg-[#00B894] hover:bg-[#00A080]"
               >
                 Pagar via Pix
@@ -161,44 +159,44 @@ const PricingCard = ({
         </div>
       </Card>
 
-      <Dialog open={pixDialogOpen} onOpenChange={handleOpenChange}>
+      <Dialog open={pixDialogOpen} onOpenChange={handleModalOpenChange}>
         <DialogContent className="w-[95%] max-w-md mx-auto">
           <DialogHeader>
             <DialogTitle>Pagamento via Pix</DialogTitle>
-            {!showPixDetails && (
+            {!currentShowPixDetails && (
               <DialogDescription>Informe seu WhatsApp para identificarmos seu pagamento.</DialogDescription>
             )}
-            {showPixDetails && (
+            {currentShowPixDetails && (
               <DialogDescription>Escaneie o QR Code ou copie a chave Pix</DialogDescription>
             )}
           </DialogHeader>
           
-          {!showPixDetails && (
-            <form onSubmit={handlePhoneSubmit} className="space-y-4 py-4">
+          {!currentShowPixDetails && (
+            <form onSubmit={handleLocalPhoneFormSubmit} className="space-y-4 py-4">
               <div>
-                <label htmlFor="whatsapp-number" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor={`whatsapp-number-${title}`} className="block text-sm font-medium text-gray-700 mb-1">
                   Seu número de WhatsApp (com DDD)
                 </label>
                 <Input 
-                  id="whatsapp-number"
+                  id={`whatsapp-number-${title}`}
                   type="tel" 
-                  value={phoneNumber}
-                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  value={localPhoneNumber}
+                  onChange={(e) => setLocalPhoneNumber(e.target.value)}
                   placeholder="(XX) XXXXX-XXXX"
                   required 
                   className="w-full"
-                  disabled={isSubmitting}
+                  disabled={isSubmittingPhoneNumber || localIsSubmitting}
                 />
               </div>
-              <Button type="submit" className="w-full" disabled={isSubmitting}>
-                {isSubmitting ? 'Enviando...' : 'Continuar para PIX'}
+              <Button type="submit" className="w-full" disabled={isSubmittingPhoneNumber || localIsSubmitting}>
+                {(isSubmittingPhoneNumber || localIsSubmitting) ? 'Enviando...' : 'Continuar para PIX'}
               </Button>
             </form>
           )}
           
-          {showPixDetails && (
+          {currentShowPixDetails && (
             <div className="flex flex-col items-center space-y-4 pt-4">
-              <p className="text-sm text-gray-600">Número informado: {phoneNumber}</p>
+              <p className="text-sm text-gray-600">Número informado: {submittedPhoneNumber || localPhoneNumber}</p>
               <div className="border-2 border-gray-200 p-4 rounded-lg">
                 <img 
                   src={pixQrCodeImage} 
@@ -226,7 +224,7 @@ const PricingCard = ({
               </div>
               <Button 
                 className="w-full"
-                onClick={() => window.open("https://wa.me/5521967135336?text=Oi%2C%20realizei%20um%20pagamento%20via%20PIX%20e%20gostaria%20de%20confirmar.%20Meu%20n%C3%BAmero:%20" + phoneNumber, "_blank")}
+                onClick={() => window.open("https://wa.me/5521967135336?text=Oi%2C%20realizei%20um%20pagamento%20via%20PIX%20e%20gostaria%20de%20confirmar.%20Meu%20n%C3%BAmero:%20" + (submittedPhoneNumber || localPhoneNumber), "_blank")}
               >
                 Enviar Comprovante no WhatsApp
               </Button>
