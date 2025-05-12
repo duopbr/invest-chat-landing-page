@@ -1,11 +1,14 @@
-
 import Navbar from "@/components/Navbar";
 import PricingSection from "@/components/PricingSection";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import ServicesSection from "@/components/ServicesSection";
+import { useLocation } from "react-router-dom";
 
 const Planos = () => {
+  const location = useLocation();
+  const preferredPayment = location.state?.preferredPayment; // Pode ser 'pix' ou null
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -18,7 +21,7 @@ const Planos = () => {
             Escolha o plano ideal para você e a forma de pagamento que preferir
           </p>
         </div>
-        <PricingSection showHeading={false} />
+        <PricingSection showHeading={false} preferredPayment={preferredPayment} />
         <ServicesSection />
       </main>
       <Footer />

@@ -62,7 +62,7 @@ const HeroSection = () => {
                       Pagar com Cartão
                     </Button>
                     <Button
-                      onClick={() => navigate('/planos')}
+                      onClick={() => navigate('/planos', { state: { preferredPayment: 'pix' } })}
                       variant="outline"
                       className="font-medium py-3 px-6 rounded-lg text-base"
                     >

@@ -18,6 +18,7 @@ interface PricingCardProps {
   pixCode?: string;
   pixQrCodeImage?: string;
   benefits: string[];
+  preferredPayment?: 'pix' | null;
 }
 
 const PricingCard = ({
@@ -33,6 +34,7 @@ const PricingCard = ({
   pixCode,
   pixQrCodeImage,
   benefits,
+  preferredPayment = null,
 }: PricingCardProps) => {
   const [pixDialogOpen, setPixDialogOpen] = useState(false);
   const { toast } = useToast();
@@ -87,20 +89,24 @@ const PricingCard = ({
           </CardContent>
 
           <CardFooter className="flex flex-col space-y-3 px-6 py-6 mt-4">
-            <Button 
-              onClick={handleStripeCheckout}
-              className="w-full bg-invest-green hover:bg-invest-green/90"
-            >
-              <CreditCard className="mr-2 h-4 w-4" />
-              Pagar com Cartão
-            </Button>
-            <Button 
-              onClick={() => setPixDialogOpen(true)}
-              variant="outline" 
-              className="w-full border-gray-300 mt-2"
-            >
-              Pagar via Pix
-            </Button>
+            {preferredPayment !== 'pix' && (
+              <Button 
+                onClick={handleStripeCheckout}
+                className="w-full bg-invest-green hover:bg-invest-green/90"
+              >
+                <CreditCard className="mr-2 h-4 w-4" />
+                Pagar com Cartão
+              </Button>
+            )}
+            {(preferredPayment === 'pix' || preferredPayment === null) && (
+              <Button 
+                onClick={() => setPixDialogOpen(true)}
+                variant="outline" 
+                className="w-full border-gray-300"
+              >
+                Pagar via Pix
+              </Button>
+            )}
           </CardFooter>
         </div>
       </Card>
