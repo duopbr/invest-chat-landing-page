@@ -218,8 +218,10 @@ const PricingCard = ({
               <div className="mt-2 bg-yellow-50 p-3 rounded-md text-sm w-full">
                 <p className="font-medium text-yellow-800 break-words">Importante:</p>
                 <p className="text-yellow-700 break-words">
-                  Após realizar o pagamento, envie o comprovante para nosso WhatsApp
-                  (21) 96713-5336 para confirmação rápida do seu acesso.
+                  Entraremos em contato no seu WhatsApp (o número que você enviou).
+                </p>
+                <p className="text-yellow-700 break-words mt-1">
+                  Qualquer dúvida, mandar mensagem para este número +55 21 97397-3673 ou para este email contato@duop.com.br
                 </p>
               </div>
               <Button 
