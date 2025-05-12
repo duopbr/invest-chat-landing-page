@@ -98,7 +98,7 @@ const PricingCard = ({
             <Button 
               onClick={() => setPixDialogOpen(true)}
               variant="outline" 
-              className="w-full border-gray-300"
+              className="w-full border-gray-300 mt-2 mx-auto"
             >
               Pagar via Pix
             </Button>

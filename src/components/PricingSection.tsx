@@ -28,7 +28,7 @@ const PricingSection = ({ showHeading = true }: PricingSectionProps) => {
             </>
           )}
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-8 w-full max-w-5xl">
             <div className="flex justify-center">
               <PricingCard 
                 title="Plano Mensal"
