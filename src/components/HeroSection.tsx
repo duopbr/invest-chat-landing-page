@@ -57,14 +57,13 @@ const HeroSection = () => {
                   <div className="flex gap-2">
                     <Button
                       onClick={handleStripeCheckout}
-                      className="bg-invest-green hover:bg-invest-green/90 text-white font-medium py-3 px-6 rounded-lg text-base"
+                      className="bg-[#FFEDB3] text-gray-900 hover:bg-[#FFE499] font-medium py-3 px-6 rounded-lg text-base"
                     >
                       Pagar com Cartão
                     </Button>
                     <Button
                       onClick={() => navigate('/planos', { state: { preferredPayment: 'pix' } })}
-                      variant="outline"
-                      className="font-medium py-3 px-6 rounded-lg text-base"
+                      className="bg-[#00B894] text-white hover:bg-[#00A080] font-medium py-3 px-6 rounded-lg text-base"
                     >
                       Pagar via Pix
                     </Button>

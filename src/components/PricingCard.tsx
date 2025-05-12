@@ -121,7 +121,7 @@ const PricingCard = ({
               {monthlyEquivalent && (
                 <p className="text-sm text-gray-500 mt-1">{monthlyEquivalent}</p>
               )}
-              <div className="mt-2 text-green-600 text-sm font-medium">
+              <div className="mt-2 text-red-600 text-sm font-medium">
                 <span>{discountPercentage} de desconto {discountType}</span>
               </div>
             </div>
@@ -143,7 +143,7 @@ const PricingCard = ({
             {preferredPayment !== 'pix' && (
               <Button 
                 onClick={handleStripeCheckout}
-                className="w-full bg-invest-green hover:bg-invest-green/90"
+                className="w-full bg-[#FFFBEA] text-gray-900 hover:bg-[#FFF8D4]"
               >
                 <CreditCard className="mr-2 h-4 w-4" />
                 Pagar com Cartão
@@ -152,8 +152,7 @@ const PricingCard = ({
             {(preferredPayment === 'pix' || preferredPayment === null) && (
               <Button 
                 onClick={() => setPixDialogOpen(true)}
-                variant="outline" 
-                className="w-full border-gray-300"
+                className="w-full text-white bg-[#00B894] hover:bg-[#00A080]"
               >
                 Pagar via Pix
               </Button>
