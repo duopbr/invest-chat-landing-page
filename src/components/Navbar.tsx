@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import StripeCheckout from "./StripeCheckout";
@@ -8,7 +7,15 @@ import { Link, useLocation } from "react-router-dom";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  const isOnPlanosPage = location.pathname === "/planos";
+
+  const scrollToPricing = () => {
+    const pricingSection = document.getElementById('pricing');
+    if (pricingSection) {
+      pricingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    // Fechar menu mobile se estiver aberto
+    setIsOpen(false);
+  };
 
   return (
     <>
@@ -47,11 +54,14 @@ const Navbar = () => {
                 <a href="#coming-soon" className="text-gray-600 hover:text-invest-blue px-3 py-2 rounded-md text-sm font-medium">
                   Em breve
                 </a>
-                {!isOnPlanosPage && (
-                  <div className="ml-4">
-                    <StripeCheckout buttonText="Assinar" />
-                  </div>
-                )}
+                <div className="ml-4">
+                  <Button 
+                    onClick={scrollToPricing} 
+                    className="bg-[#00B894] text-white hover:bg-[#00A080]"
+                  >
+                    Assinar
+                  </Button>
+                </div>
               </div>
             </div>
             <div className="md:hidden">
@@ -120,11 +130,14 @@ const Navbar = () => {
             >
               Em breve
             </a>
-            {!isOnPlanosPage && (
-              <div className="block px-3 py-2">
-                <StripeCheckout buttonText="Assinar" />
-              </div>
-            )}
+            <div className="block px-3 py-2">
+               <Button 
+                onClick={scrollToPricing} 
+                className="w-full bg-[#00B894] text-white hover:bg-[#00A080]"
+              >
+                Assinar
+              </Button>
+            </div>
           </div>
         </div>
       </nav>
