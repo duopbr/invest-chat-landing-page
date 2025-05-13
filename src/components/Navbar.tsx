@@ -54,14 +54,14 @@ const Navbar = () => {
                 <a href="#coming-soon" className="text-gray-600 hover:text-invest-blue px-3 py-2 rounded-md text-sm font-medium">
                   Em breve
                 </a>
-                <div className="ml-4">
+                  <div className="ml-4">
                   <Button 
                     onClick={scrollToPricing} 
                     className="bg-[#00B894] text-white hover:bg-[#00A080]"
                   >
                     Assinar
                   </Button>
-                </div>
+                  </div>
               </div>
             </div>
             <div className="md:hidden">
@@ -130,14 +130,14 @@ const Navbar = () => {
             >
               Em breve
             </a>
-            <div className="block px-3 py-2">
+              <div className="block px-3 py-2">
                <Button 
                 onClick={scrollToPricing} 
                 className="w-full bg-[#00B894] text-white hover:bg-[#00A080]"
               >
                 Assinar
               </Button>
-            </div>
+              </div>
           </div>
         </div>
       </nav>

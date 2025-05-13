@@ -61,18 +61,18 @@ const HeroSection = () => {
                   </span>
                 </div>
                 <div className="flex gap-2 mt-2">
-                  <Button
-                    onClick={handleStripeCheckout}
+                    <Button
+                      onClick={handleStripeCheckout}
                     className="bg-[#00985B] text-white hover:bg-[#007F4D] font-medium py-3 px-6 rounded-lg text-base"
-                  >
-                    Pagar com Cartão
-                  </Button>
-                  <Button
+                    >
+                      Pagar com Cartão
+                    </Button>
+                    <Button
                     onClick={() => navigate('/planos', { state: { preferredPayment: 'pix' } })}
                     className="bg-[#D1FADF] text-green-800 hover:bg-[#BCF5D0] border border-green-800 font-medium py-3 px-6 rounded-lg text-base"
-                  >
-                    Pagar via Pix
-                  </Button>
+                    >
+                      Pagar via Pix
+                    </Button>
                 </div>
               </div>
             </div>
