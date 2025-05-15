@@ -40,6 +40,19 @@ const formatPhoneNumber = (value: string): string => {
   return `+55 ${digits.substring(2, 4)} ${digits.substring(4, 9)}-${digits.substring(9, 13)}`;
 };
 
+const slugify = (text: string) => text.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+
+const extractNumericPrice = (priceString: string): number => {
+  if (!priceString) return 0;
+  // Remove "R$", espaços.
+  let numericString = priceString.replace(/R\$\s*/, '');
+  // Remove pontos de milhar.
+  numericString = numericString.replace(/\.(?=\d{3})/g, ''); 
+  // Substitui a vírgula decimal por ponto.
+  numericString = numericString.replace(',', '.');
+  return parseFloat(numericString) || 0;
+};
+
 const PricingCard = ({
   title,
   description,
@@ -170,7 +183,10 @@ const PricingCard = ({
 
           <CardFooter className="flex flex-col space-y-3 px-6 py-6 mt-4">
             {preferredPayment !== 'pix' && (
-              <Button 
+              <Button
+                id={`btn-stripe-${slugify(title)}`}
+                data-payment-type="cartao"
+                data-plan-price={extractNumericPrice(price)}
                 onClick={handleStripeCheckout}
                 className="w-full bg-[#00985B] text-white hover:bg-[#007F4D]"
               >
@@ -179,7 +195,10 @@ const PricingCard = ({
               </Button>
             )}
             {(preferredPayment === 'pix' || preferredPayment === null) && (
-              <Button 
+              <Button
+                id={`btn-pix-${slugify(title)}`}
+                data-payment-type="pix"
+                data-plan-price={extractNumericPrice(price)}
                 onClick={() => handleModalOpenChange(true)}
                 className="w-full bg-[#D1FADF] text-green-800 hover:bg-[#BCF5D0] border border-green-800"
               >
