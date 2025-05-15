@@ -205,11 +205,11 @@ const PricingCard = ({
           {!currentShowPixDetails && (
             <form onSubmit={handleLocalPhoneFormSubmit} className="space-y-4 py-4">
               <div>
-                <label htmlFor={`whatsapp-number-${title}`} className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="ph" className="block text-sm font-medium text-gray-700 mb-1">
                   Seu número de WhatsApp (com DDD)
                 </label>
                 <Input 
-                  id={`whatsapp-number-${title}`}
+                  id="ph"
                   type="tel" 
                   value={localPhoneNumber}
                   onChange={handlePhoneNumberChange}
