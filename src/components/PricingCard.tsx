@@ -275,7 +275,7 @@ const PricingCard = ({
               </div>
               <Button 
                 className="w-full"
-                onClick={() => window.open("https://wa.me/5521967135336?text=Oi%2C%20realizei%20um%20pagamento%20via%20PIX%20e%20gostaria%20de%20confirmar.%20Meu%20n%C3%BAmero:%20" + (submittedPhoneNumber || localPhoneNumber), "_blank")}
+                onClick={() => window.open("https://wa.me/5521973973673?text=Oi%2C%20realizei%20um%20pagamento%20via%20PIX%20e%20gostaria%20de%20confirmar.%20Meu%20n%C3%BAmero:%20" + (submittedPhoneNumber || localPhoneNumber), "_blank")}
               >
                 Enviar Comprovante no WhatsApp
               </Button>
