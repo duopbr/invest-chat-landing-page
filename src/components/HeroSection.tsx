@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Check, Timer } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
@@ -54,10 +55,10 @@ const HeroSection = () => {
                 </div>
                 <div className="flex items-baseline gap-2">
                   <span className="text-gray-500 text-sm">
-                    de <span className="line-through">R$69,99</span>
+                    de <span className="line-through">R$139,80</span>
                   </span>
                   <span className="text-invest-green font-bold text-lg">
-                    por R$34,99
+                    por R$69,90
                   </span>
                 </div>
                 <div className="flex gap-2 mt-2">
@@ -77,7 +78,7 @@ const HeroSection = () => {
               </div>
             </div>
             <p className="text-sm text-gray-500">
-              <span className="font-medium">Oferta por tempo limitado: garanta seu acesso agora!</span> Acesso completo por R$34,99/mês.
+              <span className="font-medium">Oferta por tempo limitado: garanta seu acesso agora!</span> Acesso completo por R$69,90/mês.
             </p>
           </div>
           <div className="w-full lg:w-1/2 relative">
