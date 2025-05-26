@@ -27,7 +27,7 @@ const HeroSection = () => {
               Consultoria de Investimentos no <span className="text-invest-green font-bold">WhatsApp</span>
             </h1>
             <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl">
-              Chega de se sentir inseguro ou confuso sobre onde e como investir seu dinheiro! Com nossa Consultoria de Investimentos no WhatsApp, você recebe análises personalizadas feitas para o seu perfil, tira suas dúvidas instantaneamente e acompanha o mercado de forma simplificada, tudo com a orientação de um especialista direto no seu celular.
+              Consultoria personalizada direto no WhatsApp. Tire dúvidas, receba análises e acompanhe o mercado com orientação especializada.
             </p>
             
             <div className="bg-gray-50 p-4 rounded-lg mb-6 border border-gray-100">
