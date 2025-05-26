@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Check, Timer, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -9,10 +8,10 @@ const HeroSection = () => {
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
   
   const chatMessages = [
-    { type: 'user', text: 'Como funciona o Tesouro Selic?', delay: 0 },
-    { type: 'bot', text: 'O Tesouro Selic é um título público que acompanha a taxa básica de juros. É ideal para reserva de emergência! 📊', delay: 2000 },
-    { type: 'user', text: 'Vale a pena investir agora?', delay: 4000 },
-    { type: 'bot', text: 'Com a Selic a 14,75%, o Tesouro Selic está oferecendo uma excelente rentabilidade real! Considerando seu perfil conservador, é uma ótima opção! 💰', delay: 6000 },
+    { type: 'user', text: 'Como funciona o Tesouro Selic e qual o cenário atual?', delay: 0 },
+    { type: 'bot', text: 'O Tesouro Selic é indexado à taxa básica de juros (atualmente 14,75% a.a.). Características principais: liquidez diária, rentabilidade pós-fixada, tributação regressiva de IR (22,5% a 15%), taxa de custódia B3 de 0,20% a.a. Ideal para reserva de emergência devido à baixa volatilidade e proteção contra risco de crédito pelo Tesouro Nacional. 📊', delay: 3000 },
+    { type: 'user', text: 'Vale a pena investir considerando a inflação atual?', delay: 6000 },
+    { type: 'bot', text: 'Com IPCA em 4,87% (12 meses) e Selic a 14,75%, temos rentabilidade real de aproximadamente 9,4% a.a. - excelente para renda fixa! O diferencial de juros reais está historicamente atrativo. Para perfil conservador, recomendo 60-80% em Tesouro Selic na reserva, complementando com IPCA+ para proteção inflacionária de longo prazo. Cenário macro favorável com política monetária restritiva. 💰📈', delay: 9000 },
   ];
 
   useEffect(() => {
@@ -121,7 +120,7 @@ const HeroSection = () => {
           <div className="w-full lg:w-1/2 relative">
             <div className="relative">
               {/* Chat Simulation */}
-              <div className="rounded-2xl shadow-2xl overflow-hidden max-w-[320px] mx-auto relative z-10 bg-white">
+              <div className="rounded-2xl shadow-2xl overflow-hidden max-w-[380px] mx-auto relative z-10 bg-white">
                 {/* WhatsApp Header */}
                 <div className="bg-[#075E54] p-4 flex items-center gap-3">
                   <div className="w-10 h-10 bg-emerald-400 rounded-full flex items-center justify-center">
@@ -134,20 +133,20 @@ const HeroSection = () => {
                 </div>
                 
                 {/* Chat Messages */}
-                <div className="h-96 bg-[#E5DDD5] p-4 space-y-3 overflow-hidden">
+                <div className="h-96 bg-[#E5DDD5] p-4 space-y-3 overflow-y-auto">
                   {chatMessages.slice(0, currentMessageIndex + 1).map((message, index) => (
                     <div
                       key={index}
                       className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in`}
                     >
                       <div
-                        className={`max-w-[80%] p-3 rounded-lg ${
+                        className={`max-w-[85%] p-3 rounded-lg ${
                           message.type === 'user'
                             ? 'bg-[#DCF8C6] text-gray-800'
                             : 'bg-white text-gray-800 shadow-sm'
                         }`}
                       >
-                        <p className="text-sm">{message.text}</p>
+                        <p className="text-xs leading-relaxed">{message.text}</p>
                         <div className="text-xs text-gray-500 mt-1 text-right">
                           {new Date().toLocaleTimeString('pt-BR', { 
                             hour: '2-digit', 
