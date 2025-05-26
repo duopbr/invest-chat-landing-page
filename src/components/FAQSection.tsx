@@ -35,32 +35,34 @@ const FAQSection = () => {
   ];
 
   return (
-    <section id="faq" className="py-16 px-4">
+    <section id="faq" className="py-16 px-4 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-100">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-12">
-          <span className="text-invest-green font-semibold text-sm">DÚVIDAS</span>
+          <span className="text-amber-600 font-semibold text-sm">DÚVIDAS</span>
           <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4">
             Perguntas Frequentes
           </h2>
-          <p className="text-gray-600 text-lg max-w-3xl mx-auto">
+          <p className="text-gray-700 text-lg max-w-3xl mx-auto">
             Respostas para as dúvidas mais comuns
           </p>
         </div>
 
-        <Accordion type="single" collapsible className="w-full">
-          {faqs.map((faq, index) => (
-            <AccordionItem key={index} value={`item-${index}`}>
-              <AccordionTrigger className="text-left">{faq.question}</AccordionTrigger>
-              <AccordionContent>{faq.answer}</AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-amber-100">
+          <Accordion type="single" collapsible className="w-full">
+            {faqs.map((faq, index) => (
+              <AccordionItem key={index} value={`item-${index}`} className="border-amber-100">
+                <AccordionTrigger className="text-left hover:text-amber-600">{faq.question}</AccordionTrigger>
+                <AccordionContent className="text-gray-700">{faq.answer}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
         
         <div className="mt-10 text-center">
-          <p className="mb-4 text-gray-600">Ainda tem dúvidas?</p>
+          <p className="mb-4 text-gray-700">Ainda tem dúvidas?</p>
           <a 
             href="mailto:contato@duop.com" 
-            className="text-invest-green font-medium hover:underline"
+            className="text-amber-600 font-medium hover:underline"
           >
             Entre em contato
           </a>
