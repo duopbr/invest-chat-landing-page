@@ -106,8 +106,6 @@ const HeroSection = () => {
           
           <div className="w-full lg:w-1/2 relative">
             <div className="relative">
-              {/* Decorative background for video */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-emerald-400 to-green-400 rounded-3xl opacity-20 blur-lg"></div>
               <div className="rounded-2xl shadow-2xl overflow-hidden max-w-[320px] mx-auto relative z-10 bg-white p-2">
                 <div className="relative" style={{ paddingBottom: "177.78%" }}>
                   <iframe 
