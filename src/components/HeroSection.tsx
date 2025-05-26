@@ -23,10 +23,10 @@ const HeroSection = () => {
         <div className="flex flex-col lg:flex-row items-center">
           <div className="w-full lg:w-1/2 mb-10 lg:mb-0">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Tenha uma <span className="text-invest-green font-bold">Segunda Opinião</span> de Especialistas Consolidados
+              Investir sem <span className="text-invest-green font-bold">Complicação</span>
             </h1>
             <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl">
-              Acesso direto no WhatsApp a especialistas consolidados do mercado para uma segunda opinião sobre seus investimentos e dúvidas financeiras.
+              Tire dúvidas, acompanhe o mercado e receba análises sob medida — tudo pelo WhatsApp.
             </p>
             
             <div className="bg-gray-50 p-4 rounded-lg mb-6 border border-gray-100">
