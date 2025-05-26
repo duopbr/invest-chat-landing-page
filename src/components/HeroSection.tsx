@@ -26,7 +26,7 @@ const HeroSection = () => {
               Investir sem <span className="text-invest-green font-bold">Complicação</span>
             </h1>
             <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl">
-              Tire dúvidas, acompanhe o mercado e receba análises sob medida — tudo pelo WhatsApp.
+              Tire dúvidas, acompanhe o mercado e receba análises com IA — tudo no WhatsApp.
             </p>
             
             <div className="bg-gray-50 p-4 rounded-lg mb-6 border border-gray-100">
