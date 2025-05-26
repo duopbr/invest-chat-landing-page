@@ -1,21 +1,35 @@
 
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Check, Timer, Sparkles } from "lucide-react";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
   const navigate = useNavigate();
+  const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
+  
+  const chatMessages = [
+    { type: 'user', text: 'Como funciona o Tesouro Selic?', delay: 0 },
+    { type: 'bot', text: 'O Tesouro Selic é um título público que acompanha a taxa básica de juros. É ideal para reserva de emergência! 📊', delay: 2000 },
+    { type: 'user', text: 'Vale a pena investir agora?', delay: 4000 },
+    { type: 'bot', text: 'Com a Selic a 10,75%, o Tesouro Selic está oferecendo uma boa rentabilidade real. Considerando seu perfil conservador, pode ser uma boa opção! 💰', delay: 6000 },
+  ];
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (currentMessageIndex < chatMessages.length - 1) {
+        setCurrentMessageIndex(currentMessageIndex + 1);
+      } else {
+        // Reset animation after all messages
+        setTimeout(() => setCurrentMessageIndex(0), 2000);
+      }
+    }, chatMessages[currentMessageIndex]?.delay || 2000);
+
+    return () => clearTimeout(timer);
+  }, [currentMessageIndex, chatMessages]);
   
   const handleStripeCheckout = () => {
     window.open("https://buy.stripe.com/6oE4go67w2nIgrC9AM?success_url=https://duopinvest.duop.com.br/obrigado", "_blank");
-  };
-  
-  const handleCopyPixKey = () => {
-    navigator.clipboard.writeText("11122233344");
-    alert("Chave Pix copiada!");
   };
 
   return (
@@ -106,16 +120,66 @@ const HeroSection = () => {
           
           <div className="w-full lg:w-1/2 relative">
             <div className="relative">
-              <div className="rounded-2xl shadow-2xl overflow-hidden max-w-[320px] mx-auto relative z-10 bg-white p-2">
-                <div className="relative" style={{ paddingBottom: "177.78%" }}>
-                  <iframe 
-                    className="absolute top-0 left-0 w-full h-full rounded-xl"
-                    src="https://youtube.com/embed/Ei0y7jhNKzM" 
-                    title="Duop Demo" 
-                    frameBorder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowFullScreen>
-                  </iframe>
+              {/* Chat Simulation */}
+              <div className="rounded-2xl shadow-2xl overflow-hidden max-w-[320px] mx-auto relative z-10 bg-white">
+                {/* WhatsApp Header */}
+                <div className="bg-[#075E54] p-4 flex items-center gap-3">
+                  <div className="w-10 h-10 bg-emerald-400 rounded-full flex items-center justify-center">
+                    <Sparkles className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-white font-medium">Duop IA</h3>
+                    <p className="text-green-200 text-xs">online</p>
+                  </div>
+                </div>
+                
+                {/* Chat Messages */}
+                <div className="h-96 bg-[#E5DDD5] p-4 space-y-3 overflow-hidden">
+                  {chatMessages.slice(0, currentMessageIndex + 1).map((message, index) => (
+                    <div
+                      key={index}
+                      className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in`}
+                    >
+                      <div
+                        className={`max-w-[80%] p-3 rounded-lg ${
+                          message.type === 'user'
+                            ? 'bg-[#DCF8C6] text-gray-800'
+                            : 'bg-white text-gray-800 shadow-sm'
+                        }`}
+                      >
+                        <p className="text-sm">{message.text}</p>
+                        <div className="text-xs text-gray-500 mt-1 text-right">
+                          {new Date().toLocaleTimeString('pt-BR', { 
+                            hour: '2-digit', 
+                            minute: '2-digit' 
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                  
+                  {/* Typing indicator */}
+                  {currentMessageIndex < chatMessages.length - 1 && (
+                    <div className="flex justify-start">
+                      <div className="bg-white p-3 rounded-lg shadow-sm">
+                        <div className="flex space-x-1">
+                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-100"></div>
+                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-200"></div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                
+                {/* Input Area */}
+                <div className="bg-[#F0F0F0] p-3 flex items-center gap-2">
+                  <div className="flex-1 bg-white rounded-full px-4 py-2">
+                    <p className="text-gray-500 text-sm">Digite sua mensagem...</p>
+                  </div>
+                  <div className="w-8 h-8 bg-[#075E54] rounded-full flex items-center justify-center">
+                    <MessageCircle className="h-4 w-4 text-white" />
+                  </div>
                 </div>
               </div>
             </div>
