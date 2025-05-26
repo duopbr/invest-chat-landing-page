@@ -12,7 +12,7 @@ const HeroSection = () => {
     { type: 'user', text: 'Como funciona o Tesouro Selic?', delay: 0 },
     { type: 'bot', text: 'O Tesouro Selic é um título público que acompanha a taxa básica de juros. É ideal para reserva de emergência! 📊', delay: 2000 },
     { type: 'user', text: 'Vale a pena investir agora?', delay: 4000 },
-    { type: 'bot', text: 'Com a Selic a 10,75%, o Tesouro Selic está oferecendo uma boa rentabilidade real. Considerando seu perfil conservador, pode ser uma boa opção! 💰', delay: 6000 },
+    { type: 'bot', text: 'Com a Selic a 14,75%, o Tesouro Selic está oferecendo uma excelente rentabilidade real! Considerando seu perfil conservador, é uma ótima opção! 💰', delay: 6000 },
   ];
 
   useEffect(() => {
