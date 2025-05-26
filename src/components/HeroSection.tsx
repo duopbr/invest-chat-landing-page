@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Check, Timer } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
@@ -24,25 +23,25 @@ const HeroSection = () => {
         <div className="flex flex-col lg:flex-row items-center">
           <div className="w-full lg:w-1/2 mb-10 lg:mb-0">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Pare de Perder Dinheiro por Não Saber <span className="text-invest-green font-bold">Quando Investir</span>
+              Tenha uma <span className="text-invest-green font-bold">Segunda Opinião</span> de Especialistas Consolidados
             </h1>
             <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl">
-              Consultoria no WhatsApp que te orienta quando comprar, vender ou aguardar. Tenha um especialista no seu bolso respondendo suas dúvidas em tempo real.
+              Acesso direto no WhatsApp a especialistas consolidados do mercado para uma segunda opinião sobre seus investimentos e dúvidas financeiras.
             </p>
             
             <div className="bg-gray-50 p-4 rounded-lg mb-6 border border-gray-100">
               <ul className="space-y-2">
                 <li className="flex items-start gap-2">
                   <Check className="text-invest-green h-5 w-5 mt-1 flex-shrink-0" />
-                  <span>Orientação sem viés para investidores</span>
+                  <span>Segunda opinião de especialistas consolidados</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <Check className="text-invest-green h-5 w-5 mt-1 flex-shrink-0" />
-                  <span>Timing de mercado para ajustes de carteira</span>
+                  <span>Análises e insights sobre seus investimentos</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <Check className="text-invest-green h-5 w-5 mt-1 flex-shrink-0" />
-                  <span>Explicações para as oscilações dos seus ativos</span>
+                  <span>Esclarecimento de dúvidas financeiras</span>
                 </li>
               </ul>
             </div>
