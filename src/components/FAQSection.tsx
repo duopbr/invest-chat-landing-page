@@ -35,10 +35,10 @@ const FAQSection = () => {
   ];
 
   return (
-    <section id="faq" className="py-16 px-4 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-100">
+    <section id="faq" className="py-16 px-4 bg-gradient-to-br from-green-50 via-emerald-50 to-white">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-12">
-          <span className="text-amber-600 font-semibold text-sm">DÚVIDAS</span>
+          <span className="text-green-600 font-semibold text-sm">DÚVIDAS</span>
           <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4">
             Perguntas Frequentes
           </h2>
@@ -47,11 +47,11 @@ const FAQSection = () => {
           </p>
         </div>
 
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-amber-100">
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-green-100">
           <Accordion type="single" collapsible className="w-full">
             {faqs.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`} className="border-amber-100">
-                <AccordionTrigger className="text-left hover:text-amber-600">{faq.question}</AccordionTrigger>
+              <AccordionItem key={index} value={`item-${index}`} className="border-green-100">
+                <AccordionTrigger className="text-left hover:text-green-600">{faq.question}</AccordionTrigger>
                 <AccordionContent className="text-gray-700">{faq.answer}</AccordionContent>
               </AccordionItem>
             ))}
@@ -62,7 +62,7 @@ const FAQSection = () => {
           <p className="mb-4 text-gray-700">Ainda tem dúvidas?</p>
           <a 
             href="mailto:contato@duop.com" 
-            className="text-amber-600 font-medium hover:underline"
+            className="text-green-600 font-medium hover:underline"
           >
             Entre em contato
           </a>
