@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Check, Timer } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
@@ -23,10 +24,10 @@ const HeroSection = () => {
         <div className="flex flex-col lg:flex-row items-center">
           <div className="w-full lg:w-1/2 mb-10 lg:mb-0">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Pare de Perder Dinheiro por Não Saber <span className="text-invest-green font-bold">Quando Investir</span>
+              Automatize, <span className="text-invest-green">centralize e gerencie 100%</span> dos seus investimentos com <span className="text-invest-green font-bold">Inteligência Artificial</span>
             </h1>
             <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl">
-              <strong>Você investe sem orientação e perde oportunidades?</strong> Nossa consultoria no WhatsApp te orienta em tempo real sobre quando comprar, vender ou aguardar. <strong>Imagine ter um especialista no seu bolso</strong> respondendo suas dúvidas na hora e te ajudando a tomar as melhores decisões de investimento.
+              Automatize qualquer decisão de investimento com IA avançada e análises dinâmicas. Configure rapidamente, economize tempo, aumente ganhos e crie estratégias inteligentes. Conte com suporte exclusivo e tecnologia de ponta em investimentos.
             </p>
             
             <div className="bg-gray-50 p-4 rounded-lg mb-6 border border-gray-100">
@@ -65,13 +66,13 @@ const HeroSection = () => {
                       onClick={handleStripeCheckout}
                     className="bg-[#00985B] text-white hover:bg-[#007F4D] font-medium py-3 px-6 rounded-lg text-base"
                     >
-                      Pagar com Cartão
+                      Testar agora!
                     </Button>
                     <Button
                     onClick={() => navigate('/planos', { state: { preferredPayment: 'pix' } })}
                     className="bg-[#D1FADF] text-green-800 hover:bg-[#BCF5D0] border border-green-800 font-medium py-3 px-6 rounded-lg text-base"
                     >
-                      Pagar via Pix
+                      Fale conosco
                     </Button>
                 </div>
               </div>
