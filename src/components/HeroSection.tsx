@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Check, Timer, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -10,9 +9,9 @@ const HeroSection = () => {
   
   const chatMessages = [
     { type: 'user', text: 'Como funciona o Tesouro Selic e qual o cenário atual?', delay: 0 },
-    { type: 'bot', text: 'O Tesouro Selic é indexado à taxa básica de juros (atualmente 14,75% a.a.). Características principais: liquidez diária, rentabilidade pós-fixada, tributação regressiva de IR (22,5% a 15%), taxa de custódia B3 de 0,20% a.a. Ideal para reserva de emergência devido à baixa volatilidade e proteção contra risco de crédito pelo Tesouro Nacional. 📊', delay: 3000 },
+    { type: 'bot', text: 'O Tesouro Selic está atrelado à taxa básica de juros, atualmente em 14,75% a.a. - o maior patamar desde 2016. Características: liquidez diária (resgate D+1), rentabilidade pós-fixada que acompanha a Selic, tributação regressiva de IR (22,5% até 180 dias, caindo para 15% após 720 dias), IOF nos primeiros 30 dias, taxa de custódia B3 de 0,20% a.a. É o ativo mais seguro do país, garantido pelo Tesouro Nacional, ideal para reserva de emergência. Risco: praticamente zero. Liquidez: excelente. 📊', delay: 3000 },
     { type: 'user', text: 'Vale a pena investir considerando a inflação atual?', delay: 6000 },
-    { type: 'bot', text: 'Com IPCA em 4,87% (12 meses) e Selic a 14,75%, temos rentabilidade real de aproximadamente 9,4% a.a. - excelente para renda fixa! O diferencial de juros reais está historicamente atrativo. Para perfil conservador, recomendo 60-80% em Tesouro Selic na reserva, complementando com IPCA+ para proteção inflacionária de longo prazo. Cenário macro favorável com política monetária restritiva. 💰📈', delay: 9000 },
+    { type: 'bot', text: 'Absolutamente! Com IPCA acumulado em 4,87% (últimos 12 meses) e Selic a 14,75%, temos rentabilidade real de aproximadamente 9,4% a.a. - excelente para renda fixa! Historicamente, juro real acima de 6% é considerado muito atrativo. Recomendação de alocação: 60-80% da reserva em Tesouro Selic (liquidez), 20-40% em Tesouro IPCA+ 2029-2035 (proteção inflacionária de longo prazo). Cenário macro: Copom sinaliza manutenção da Selic elevada até inflação convergir para meta de 3%. Momento ótimo para renda fixa conservadora! 💰📈', delay: 9000 },
   ];
 
   useEffect(() => {
@@ -33,24 +32,24 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 pt-28 pb-12 md:pt-32 md:pb-16 px-4 relative overflow-hidden">
+    <section className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-white pt-28 pb-12 md:pt-32 md:pb-16 px-4 relative overflow-hidden">
       {/* Background decorative elements */}
-      <div className="absolute top-20 left-10 w-32 h-32 bg-blue-200 rounded-full opacity-20 blur-xl animate-pulse"></div>
-      <div className="absolute bottom-20 right-10 w-40 h-40 bg-purple-300 rounded-full opacity-15 blur-2xl animate-pulse delay-1000"></div>
-      <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-indigo-100 rounded-full opacity-30 blur-lg animate-bounce-subtle"></div>
+      <div className="absolute top-20 left-10 w-32 h-32 bg-green-200 rounded-full opacity-20 blur-xl animate-pulse"></div>
+      <div className="absolute bottom-20 right-10 w-40 h-40 bg-emerald-300 rounded-full opacity-15 blur-2xl animate-pulse delay-1000"></div>
+      <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-green-100 rounded-full opacity-30 blur-lg animate-bounce-subtle"></div>
       
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col lg:flex-row items-center">
           <div className="w-full lg:w-1/2 mb-10 lg:mb-0">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium mb-6 shadow-sm">
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium mb-6 shadow-sm">
               <Sparkles className="h-4 w-4" />
               Inteligência Artificial para Investimentos
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Investir sem{" "}
-              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-700 bg-clip-text text-transparent font-extrabold">
+              <span className="bg-gradient-to-r from-green-600 via-emerald-600 to-green-700 bg-clip-text text-transparent font-extrabold">
                 Complicação
               </span>
             </h1>
@@ -59,23 +58,23 @@ const HeroSection = () => {
               Tire dúvidas, acompanhe o mercado e receba análises com IA — tudo no WhatsApp.
             </p>
             
-            <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl mb-8 border border-blue-100 shadow-lg">
+            <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl mb-8 border border-green-100 shadow-lg">
               <ul className="space-y-4">
                 <li className="flex items-start gap-3">
-                  <div className="bg-blue-100 p-1 rounded-full">
-                    <Check className="text-blue-600 h-4 w-4" />
+                  <div className="bg-green-100 p-1 rounded-full">
+                    <Check className="text-green-600 h-4 w-4" />
                   </div>
                   <span className="text-gray-700 font-medium">Segunda opinião de especialistas consolidados</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <div className="bg-blue-100 p-1 rounded-full">
-                    <Check className="text-blue-600 h-4 w-4" />
+                  <div className="bg-green-100 p-1 rounded-full">
+                    <Check className="text-green-600 h-4 w-4" />
                   </div>
                   <span className="text-gray-700 font-medium">Análises e insights sobre seus investimentos</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <div className="bg-blue-100 p-1 rounded-full">
-                    <Check className="text-blue-600 h-4 w-4" />
+                  <div className="bg-green-100 p-1 rounded-full">
+                    <Check className="text-green-600 h-4 w-4" />
                   </div>
                   <span className="text-gray-700 font-medium">Esclarecimento de dúvidas financeiras</span>
                 </li>
@@ -92,20 +91,20 @@ const HeroSection = () => {
                   <span className="text-gray-500 text-lg">
                     de <span className="line-through">R$139,80</span>
                   </span>
-                  <span className="text-blue-600 font-bold text-2xl">
+                  <span className="text-green-600 font-bold text-2xl">
                     por R$69,90
                   </span>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Button
                     onClick={handleStripeCheckout}
-                    className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-4 px-8 rounded-xl text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+                    className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-4 px-8 rounded-xl text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
                   >
                     Pagar com Cartão
                   </Button>
                   <Button
                     onClick={() => navigate('/planos', { state: { preferredPayment: 'pix' } })}
-                    className="bg-white text-blue-700 hover:bg-blue-50 border-2 border-blue-600 font-semibold py-4 px-8 rounded-xl text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+                    className="bg-white text-green-700 hover:bg-green-50 border-2 border-green-600 font-semibold py-4 px-8 rounded-xl text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
                   >
                     Pagar via Pix
                   </Button>
@@ -113,8 +112,8 @@ const HeroSection = () => {
               </div>
             </div>
             
-            <p className="text-sm text-gray-600 bg-white/60 p-3 rounded-lg border border-blue-100">
-              <span className="font-semibold text-blue-700">🔥 Oferta por tempo limitado:</span> garanta seu acesso agora! Acesso completo por R$69,90/mês.
+            <p className="text-sm text-gray-600 bg-white/60 p-3 rounded-lg border border-green-100">
+              <span className="font-semibold text-green-700">🔥 Oferta por tempo limitado:</span> garante seu acesso agora! Acesso completo por R$69,90/mês.
             </p>
           </div>
           
