@@ -84,6 +84,7 @@ const PricingSection = ({ showHeading = true, preferredPayment = null }: Pricing
                 isSubmittingPhoneNumber={isSubmittingGlobal}
                 benefits={[
                   "Acesso completo ao assistente financeiro no WhatsApp",
+                  "Consultoria personalizada de carteira de investimentos",
                   "Oferta por tempo limitado"
                 ]}
               />
@@ -108,6 +109,7 @@ const PricingSection = ({ showHeading = true, preferredPayment = null }: Pricing
                 isSubmittingPhoneNumber={isSubmittingGlobal}
                 benefits={[
                   "Acesso completo ao assistente financeiro no WhatsApp",
+                  "Consultoria personalizada de carteira de investimentos",
                   "Oferta por tempo limitado"
                 ]}
               />
@@ -131,6 +133,7 @@ const PricingSection = ({ showHeading = true, preferredPayment = null }: Pricing
                 isSubmittingPhoneNumber={isSubmittingGlobal}
                 benefits={[
                   "Acesso completo ao assistente financeiro no WhatsApp",
+                  "Consultoria personalizada de carteira de investimentos",
                   "Oferta por tempo limitado"
                 ]}
               />
