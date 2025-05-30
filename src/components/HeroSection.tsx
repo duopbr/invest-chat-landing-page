@@ -88,8 +88,8 @@ const HeroSection = () => {
             
             <div className="flex flex-col sm:flex-row items-start gap-6 mb-6 animate-fade-in delay-600">
               <div className="w-full sm:w-auto">
-                <div className="mb-3 bg-gradient-to-r from-red-500 via-orange-500 to-red-600 text-white px-4 py-2 rounded-full text-sm font-bold inline-flex items-center shadow-lg animate-[pulse_3s_ease-in-out_infinite] hover:scale-110 transition-transform duration-300 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 animate-[slide_4s_ease-in-out_infinite]"></div>
+                <div className="mb-3 bg-gradient-to-r from-red-500 via-orange-500 to-red-600 text-white px-4 py-2 rounded-full text-sm font-bold inline-flex items-center shadow-lg animate-[pulse_6s_ease-in-out_infinite] hover:scale-110 transition-transform duration-300 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 animate-[slide_8s_ease-in-out_infinite]"></div>
                   <Timer className="h-4 w-4 mr-2" />
                   50% OFF - Oferta Limitada
                 </div>
