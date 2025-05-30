@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Check, Timer, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -6,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 const HeroSection = () => {
   const navigate = useNavigate();
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
   
   const chatMessages = [
     { type: 'user', text: 'Como funciona o Tesouro Selic e qual o cenário atual?', delay: 0 },
@@ -15,6 +17,7 @@ const HeroSection = () => {
   ];
 
   useEffect(() => {
+    setIsVisible(true);
     const timer = setTimeout(() => {
       if (currentMessageIndex < chatMessages.length - 1) {
         setCurrentMessageIndex(currentMessageIndex + 1);
@@ -33,47 +36,49 @@ const HeroSection = () => {
 
   return (
     <section className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-white pt-28 pb-12 md:pt-32 md:pb-16 px-4 relative overflow-hidden">
-      {/* Background decorative elements */}
+      {/* Animated background elements */}
       <div className="absolute top-20 left-10 w-32 h-32 bg-green-200 rounded-full opacity-20 blur-xl animate-pulse"></div>
       <div className="absolute bottom-20 right-10 w-40 h-40 bg-emerald-300 rounded-full opacity-15 blur-2xl animate-pulse delay-1000"></div>
-      <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-green-100 rounded-full opacity-30 blur-lg animate-bounce-subtle"></div>
+      <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-green-100 rounded-full opacity-30 blur-lg animate-bounce"></div>
+      <div className="absolute top-1/3 right-1/3 w-16 h-16 bg-emerald-200 rounded-full opacity-25 blur-md animate-ping"></div>
+      <div className="absolute bottom-1/3 left-1/3 w-20 h-20 bg-green-300 rounded-full opacity-20 blur-lg animate-pulse delay-500"></div>
       
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col lg:flex-row items-center">
-          <div className="w-full lg:w-1/2 mb-10 lg:mb-0">
+          <div className={`w-full lg:w-1/2 mb-10 lg:mb-0 transform transition-all duration-1000 ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}`}>
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium mb-6 shadow-sm">
-              <Sparkles className="h-4 w-4" />
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium mb-6 shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105">
+              <Sparkles className="h-4 w-4 animate-spin" />
               Inteligência Artificial para Investimentos
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight animate-fade-in">
               Investir sem{" "}
-              <span className="bg-gradient-to-r from-green-600 via-emerald-600 to-green-700 bg-clip-text text-transparent font-extrabold">
+              <span className="bg-gradient-to-r from-green-600 via-emerald-600 to-green-700 bg-clip-text text-transparent font-extrabold animate-pulse">
                 Complicação
               </span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-gray-700 mb-8 max-w-2xl font-medium">
+            <p className="text-xl md:text-2xl text-gray-700 mb-8 max-w-2xl font-medium animate-fade-in delay-200">
               Tire dúvidas, acompanhe o mercado e receba análises com IA — tudo no WhatsApp.
             </p>
             
-            <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl mb-8 border border-green-100 shadow-lg">
+            <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl mb-8 border border-green-100 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 animate-fade-in delay-400">
               <ul className="space-y-4">
-                <li className="flex items-start gap-3">
-                  <div className="bg-green-100 p-1 rounded-full">
+                <li className="flex items-start gap-3 transform hover:translate-x-2 transition-transform duration-300">
+                  <div className="bg-green-100 p-1 rounded-full animate-bounce">
                     <Check className="text-green-600 h-4 w-4" />
                   </div>
                   <span className="text-gray-700 font-medium">Segunda opinião de especialistas consolidados</span>
                 </li>
-                <li className="flex items-start gap-3">
-                  <div className="bg-green-100 p-1 rounded-full">
+                <li className="flex items-start gap-3 transform hover:translate-x-2 transition-transform duration-300 delay-100">
+                  <div className="bg-green-100 p-1 rounded-full animate-bounce delay-200">
                     <Check className="text-green-600 h-4 w-4" />
                   </div>
                   <span className="text-gray-700 font-medium">Análises e insights sobre seus investimentos</span>
                 </li>
-                <li className="flex items-start gap-3">
-                  <div className="bg-green-100 p-1 rounded-full">
+                <li className="flex items-start gap-3 transform hover:translate-x-2 transition-transform duration-300 delay-200">
+                  <div className="bg-green-100 p-1 rounded-full animate-bounce delay-400">
                     <Check className="text-green-600 h-4 w-4" />
                   </div>
                   <span className="text-gray-700 font-medium">Esclarecimento de dúvidas financeiras</span>
@@ -81,30 +86,30 @@ const HeroSection = () => {
               </ul>
             </div>
             
-            <div className="flex flex-col sm:flex-row items-start gap-6 mb-6">
+            <div className="flex flex-col sm:flex-row items-start gap-6 mb-6 animate-fade-in delay-600">
               <div className="w-full sm:w-auto">
-                <div className="mb-3 bg-gradient-to-r from-red-500 to-pink-500 text-white px-4 py-2 rounded-full text-sm font-bold inline-flex items-center shadow-lg">
-                  <Timer className="h-4 w-4 mr-2" />
+                <div className="mb-3 bg-gradient-to-r from-red-500 to-pink-500 text-white px-4 py-2 rounded-full text-sm font-bold inline-flex items-center shadow-lg animate-pulse hover:animate-none hover:scale-110 transition-transform duration-300">
+                  <Timer className="h-4 w-4 mr-2 animate-spin" />
                   50% OFF - Oferta Limitada
                 </div>
                 <div className="flex items-baseline gap-3 mb-4">
                   <span className="text-gray-500 text-lg">
                     de <span className="line-through">R$139,80</span>
                   </span>
-                  <span className="text-green-600 font-bold text-2xl">
+                  <span className="text-green-600 font-bold text-2xl animate-pulse">
                     por R$69,90
                   </span>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Button
                     onClick={handleStripeCheckout}
-                    className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-4 px-8 rounded-xl text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+                    className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-4 px-8 rounded-xl text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 animate-glow"
                   >
                     Pagar com Cartão
                   </Button>
                   <Button
                     onClick={() => navigate('/planos', { state: { preferredPayment: 'pix' } })}
-                    className="bg-white text-green-700 hover:bg-green-50 border-2 border-green-600 font-semibold py-4 px-8 rounded-xl text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+                    className="bg-white text-green-700 hover:bg-green-50 border-2 border-green-600 font-semibold py-4 px-8 rounded-xl text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105"
                   >
                     Pagar via Pix
                   </Button>
@@ -112,23 +117,23 @@ const HeroSection = () => {
               </div>
             </div>
             
-            <p className="text-sm text-gray-600 bg-white/60 p-3 rounded-lg border border-green-100">
+            <p className="text-sm text-gray-600 bg-white/60 p-3 rounded-lg border border-green-100 animate-fade-in delay-800 hover:bg-white/80 transition-all duration-300">
               <span className="font-semibold text-green-700">🔥 Oferta por tempo limitado:</span> garante seu acesso agora! Acesso completo por R$69,90/mês.
             </p>
           </div>
           
-          <div className="w-full lg:w-1/2 relative">
+          <div className={`w-full lg:w-1/2 relative transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`}>
             <div className="relative">
               {/* Chat Simulation */}
-              <div className="rounded-2xl shadow-2xl overflow-hidden max-w-[380px] mx-auto relative z-10 bg-white">
+              <div className="rounded-2xl shadow-2xl overflow-hidden max-w-[380px] mx-auto relative z-10 bg-white hover:shadow-3xl transition-all duration-500 hover:scale-105 animate-float">
                 {/* WhatsApp Header */}
                 <div className="bg-[#075E54] p-4 flex items-center gap-3">
-                  <div className="w-10 h-10 bg-emerald-400 rounded-full flex items-center justify-center">
-                    <Sparkles className="h-5 w-5 text-white" />
+                  <div className="w-10 h-10 bg-emerald-400 rounded-full flex items-center justify-center animate-pulse">
+                    <Sparkles className="h-5 w-5 text-white animate-spin" />
                   </div>
                   <div>
                     <h3 className="text-white font-medium">Duop IA</h3>
-                    <p className="text-green-200 text-xs">online</p>
+                    <p className="text-green-200 text-xs animate-pulse">online</p>
                   </div>
                 </div>
                 
@@ -140,10 +145,10 @@ const HeroSection = () => {
                       className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in`}
                     >
                       <div
-                        className={`max-w-[85%] p-3 rounded-lg ${
+                        className={`max-w-[85%] p-3 rounded-lg transform hover:scale-105 transition-all duration-300 ${
                           message.type === 'user'
-                            ? 'bg-[#DCF8C6] text-gray-800'
-                            : 'bg-white text-gray-800 shadow-sm'
+                            ? 'bg-[#DCF8C6] text-gray-800 hover:bg-[#c8f7c5]'
+                            : 'bg-white text-gray-800 shadow-sm hover:shadow-md'
                         }`}
                       >
                         <p className="text-xs leading-relaxed">{message.text}</p>
@@ -159,7 +164,7 @@ const HeroSection = () => {
                   
                   {/* Typing indicator */}
                   {currentMessageIndex < chatMessages.length - 1 && (
-                    <div className="flex justify-start">
+                    <div className="flex justify-start animate-fade-in">
                       <div className="bg-white p-3 rounded-lg shadow-sm">
                         <div className="flex space-x-1">
                           <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
@@ -173,10 +178,10 @@ const HeroSection = () => {
                 
                 {/* Input Area */}
                 <div className="bg-[#F0F0F0] p-3 flex items-center gap-2">
-                  <div className="flex-1 bg-white rounded-full px-4 py-2">
+                  <div className="flex-1 bg-white rounded-full px-4 py-2 hover:shadow-md transition-shadow duration-300">
                     <p className="text-gray-500 text-sm">Digite sua mensagem...</p>
                   </div>
-                  <div className="w-8 h-8 bg-[#075E54] rounded-full flex items-center justify-center">
+                  <div className="w-8 h-8 bg-[#075E54] rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-300 cursor-pointer">
                     <MessageCircle className="h-4 w-4 text-white" />
                   </div>
                 </div>
