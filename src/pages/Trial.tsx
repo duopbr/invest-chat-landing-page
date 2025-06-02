@@ -14,16 +14,16 @@ import TrialFloatingButton from "@/components/TrialFloatingButton";
 import { useState } from "react";
 
 interface TrialProps {
-  onTrialClick: () => void;
+  onTrialClick?: () => void;
 }
 
-const Trial: React.FC<TrialProps> = ({ onTrialClick: propOnTrialClick }) => {
+const Trial: React.FC<TrialProps> = ({ onTrialClick }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleTrialClick = () => {
     setIsModalOpen(true);
-    if (propOnTrialClick) {
-      propOnTrialClick();
+    if (onTrialClick) {
+      onTrialClick();
     }
   };
 
