@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   Dialog,
   DialogContent,
@@ -20,11 +19,10 @@ interface TrialSignupModalProps {
 const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [consent, setConsent] = useState(false);
-  const [errors, setErrors] = useState<{ email?: string; phone?: string; consent?: string }>({});
+  const [errors, setErrors] = useState<{ email?: string; phone?: string }>({});
 
   const validateForm = () => {
-    const newErrors: { email?: string; phone?: string; consent?: string } = {};
+    const newErrors: { email?: string; phone?: string } = {};
 
     if (!email || !email.includes("@")) {
       newErrors.email = "Email válido é obrigatório";
@@ -34,17 +32,13 @@ const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
       newErrors.phone = "Telefone válido é obrigatório";
     }
 
-    if (!consent) {
-      newErrors.consent = "É necessário aceitar o consentimento";
-    }
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = () => {
     if (validateForm()) {
-      console.log("Cadastro realizado:", { email, phone, consent });
+      console.log("Cadastro realizado:", { email, phone });
       
       // Redirecionar para WhatsApp
       const whatsappMessage = encodeURIComponent(
@@ -58,7 +52,6 @@ const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
       // Reset form
       setEmail("");
       setPhone("");
-      setConsent(false);
       setErrors({});
     }
   };
@@ -101,26 +94,6 @@ const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
             {errors.phone && (
               <p className="text-sm text-red-500">{errors.phone}</p>
             )}
-          </div>
-
-          <div className="flex items-start space-x-2">
-            <Checkbox
-              id="consent"
-              checked={consent}
-              onCheckedChange={(checked) => setConsent(checked as boolean)}
-              className={errors.consent ? "border-red-500" : ""}
-            />
-            <div className="grid gap-1.5 leading-none">
-              <Label
-                htmlFor="consent"
-                className="text-sm font-normal leading-relaxed peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                Aceito receber comunicações sobre investimentos e ofertas da Duop por email e WhatsApp. *
-              </Label>
-              {errors.consent && (
-                <p className="text-sm text-red-500">{errors.consent}</p>
-              )}
-            </div>
           </div>
 
           <div className="bg-green-50 p-3 rounded-lg text-sm text-green-700">
