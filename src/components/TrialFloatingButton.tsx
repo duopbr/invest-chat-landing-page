@@ -24,7 +24,7 @@ const TrialFloatingButton = ({ onTrialClick }: TrialFloatingButtonProps) => {
   }, []);
 
   return (
-    <div className={`fixed bottom-32 right-6 z-50 transition-all duration-300 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`}>
+    <div className={`fixed bottom-20 right-6 z-50 transition-all duration-300 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`}>
       <Button 
         onClick={onTrialClick}
         className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
