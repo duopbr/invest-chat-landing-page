@@ -115,7 +115,7 @@ const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
           </DialogTitle>
         </DialogHeader>
         
-        <div className="space-y-4 py-4">
+        <form id="trialForm" className="space-y-4 py-4">
           <div className="space-y-2">
             <Label htmlFor="email">Email *</Label>
             <Input
@@ -158,6 +158,7 @@ const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
           </div>
 
           <Button
+            type="button"
             onClick={handleSubmit}
             disabled={isSubmitting}
             className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-3 rounded-xl"
@@ -169,7 +170,7 @@ const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
           <p className="text-xs text-gray-500 text-center">
             Aceito receber comunicações sobre investimentos e ofertas da Duop. Ao se cadastrar, você concorda com nossa política de privacidade e termos de uso.
           </p>
-        </div>
+        </form>
       </DialogContent>
     </Dialog>
   );
