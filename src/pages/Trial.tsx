@@ -9,22 +9,32 @@ import ComingSoonSection from "@/components/ComingSoonSection";
 import TeamSection from "@/components/TeamSection";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
+import TrialSignupModal from "@/components/TrialSignupModal";
+import TrialFloatingButton from "@/components/TrialFloatingButton";
+import { useState } from "react";
 
 const Trial = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
+      <Navbar onTrialClick={() => setIsModalOpen(true)} />
       <main>
-        <TrialHeroSection />
-        <ServicesSection />
-        <HowItWorksSection />
-        <FeaturesSection />
-        <FAQSection />
-        <ComingSoonSection />
-        <TeamSection />
+        <TrialHeroSection onTrialClick={() => setIsModalOpen(true)} />
+        <ServicesSection onTrialClick={() => setIsModalOpen(true)} />
+        <HowItWorksSection onTrialClick={() => setIsModalOpen(true)} />
+        <FeaturesSection onTrialClick={() => setIsModalOpen(true)} />
+        <FAQSection onTrialClick={() => setIsModalOpen(true)} />
+        <ComingSoonSection onTrialClick={() => setIsModalOpen(true)} />
+        <TeamSection onTrialClick={() => setIsModalOpen(true)} />
       </main>
-      <Footer />
+      <Footer onTrialClick={() => setIsModalOpen(true)} />
       <ScrollToTop />
+      <TrialFloatingButton onTrialClick={() => setIsModalOpen(true)} />
+      <TrialSignupModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     </div>
   );
 };

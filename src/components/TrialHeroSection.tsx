@@ -1,13 +1,14 @@
-
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Check, Timer, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
-import TrialSignupModal from "./TrialSignupModal";
 
-const TrialHeroSection = () => {
+interface TrialHeroSectionProps {
+  onTrialClick: () => void;
+}
+
+const TrialHeroSection = ({ onTrialClick }: TrialHeroSectionProps) => {
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   
   const chatMessages = [
     { type: 'user', text: 'Como funciona o Tesouro Selic e qual o cenário atual?', delay: 0 },
@@ -105,7 +106,7 @@ const TrialHeroSection = () => {
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Button
-                    onClick={() => setIsModalOpen(true)}
+                    onClick={onTrialClick}
                     className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-4 px-8 rounded-xl text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105"
                   >
                     Começar Teste Gratuito
@@ -187,11 +188,6 @@ const TrialHeroSection = () => {
           </div>
         </div>
       </div>
-
-      <TrialSignupModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-      />
     </section>
   );
 };
