@@ -14,7 +14,7 @@ import TrialFloatingButton from "@/components/TrialFloatingButton";
 import { useState } from "react";
 
 interface TrialProps {
-  onTrialClick?: () => void;
+  onTrialClick: () => void;
 }
 
 const Trial: React.FC<TrialProps> = ({ onTrialClick: propOnTrialClick }) => {
@@ -29,12 +29,12 @@ const Trial: React.FC<TrialProps> = ({ onTrialClick: propOnTrialClick }) => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
+      <Navbar onTrialClick={handleTrialClick} />
       <main>
         <TrialHeroSection onTrialClick={handleTrialClick} />
         <ServicesSection />
         <HowItWorksSection />
-        <FeaturesSection />
+        <FeaturesSection onTrialClick={handleTrialClick} />
         <FAQSection />
         <ComingSoonSection />
         <TeamSection />

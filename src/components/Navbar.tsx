@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import StripeCheckout from "./StripeCheckout";
@@ -12,7 +13,7 @@ const Navbar: React.FC<NavbarProps> = ({ onTrialClick }) => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
-  const scrollToPricing = () => {
+  const handleButtonClick = () => {
     if (onTrialClick) {
       onTrialClick();
       setIsOpen(false);
@@ -26,6 +27,8 @@ const Navbar: React.FC<NavbarProps> = ({ onTrialClick }) => {
     // Fechar menu mobile se estiver aberto
     setIsOpen(false);
   };
+
+  const buttonText = location.pathname === '/trial' ? 'Teste Gratuito' : 'Assinar';
 
   return (
     <>
@@ -66,10 +69,10 @@ const Navbar: React.FC<NavbarProps> = ({ onTrialClick }) => {
                 </a>
                   <div className="ml-4">
                   <Button 
-                    onClick={scrollToPricing} 
+                    onClick={handleButtonClick} 
                     className="bg-[#00B894] text-white hover:bg-[#00A080]"
                   >
-                    Assinar
+                    {buttonText}
                   </Button>
                   </div>
               </div>
@@ -142,10 +145,10 @@ const Navbar: React.FC<NavbarProps> = ({ onTrialClick }) => {
             </a>
               <div className="block px-3 py-2">
                <Button 
-                onClick={scrollToPricing} 
+                onClick={handleButtonClick} 
                 className="w-full bg-[#00B894] text-white hover:bg-[#00A080]"
               >
-                Assinar
+                {buttonText}
               </Button>
               </div>
           </div>

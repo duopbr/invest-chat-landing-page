@@ -1,7 +1,28 @@
 
 import { Button } from "@/components/ui/button";
+import { useLocation } from "react-router-dom";
 
-const FeaturesSection = () => {
+interface FeaturesSectionProps {
+  onTrialClick?: () => void;
+}
+
+const FeaturesSection: React.FC<FeaturesSectionProps> = ({ onTrialClick }) => {
+  const location = useLocation();
+
+  const handleButtonClick = () => {
+    if (location.pathname === '/trial' && onTrialClick) {
+      onTrialClick();
+    } else {
+      // Comportamento original para outras páginas
+      const ctaSection = document.getElementById('cta');
+      if (ctaSection) {
+        ctaSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  };
+
+  const buttonText = location.pathname === '/trial' ? 'Quero meu Teste Gratuito' : 'Comece a investir melhor hoje';
+
   return (
     <section className="py-16 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
@@ -92,11 +113,12 @@ const FeaturesSection = () => {
             </div>
             
             <div className="mt-8">
-              <a href="#cta">
-                <Button className="bg-invest-blue hover:bg-invest-blue/90 text-white">
-                  Comece a investir melhor hoje
-                </Button>
-              </a>
+              <Button 
+                onClick={handleButtonClick}
+                className="bg-invest-blue hover:bg-invest-blue/90 text-white px-6 py-3"
+              >
+                {buttonText}
+              </Button>
             </div>
           </div>
         </div>
