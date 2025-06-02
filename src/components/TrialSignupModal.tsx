@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -68,6 +67,15 @@ const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
     setIsSubmitting(true);
     
     try {
+      // Disparo do evento GTM
+      if (typeof window !== 'undefined' && window.dataLayer) {
+        window.dataLayer.push({
+          event: 'lead',
+          lead_type: 'trial',
+          form_location: 'modal'
+        });
+      }
+
       // Salvar no Supabase
       const { error } = await supabase
         .from('pix_phone_submissions')
@@ -85,7 +93,7 @@ const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
 
       console.log("Cadastro realizado e salvo no Supabase:", { email, phone });
       
-      // Redirecionar para WhatsApp com número correto
+      // Redirecionar para WhatsApp
       const whatsappMessage = encodeURIComponent(
         `Olá! Me cadastrei para o teste gratuito de 7 dias da consultoria de investimentos.`
       );
