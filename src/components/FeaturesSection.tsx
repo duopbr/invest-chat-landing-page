@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface FeaturesSectionProps {
   onTrialClick?: () => void;
@@ -8,16 +8,14 @@ interface FeaturesSectionProps {
 
 const FeaturesSection: React.FC<FeaturesSectionProps> = ({ onTrialClick }) => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const handleButtonClick = () => {
     if (location.pathname === '/trial' && onTrialClick) {
       onTrialClick();
     } else {
-      // Comportamento original para outras páginas
-      const ctaSection = document.getElementById('cta');
-      if (ctaSection) {
-        ctaSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      // Redireciona para a página de planos
+      navigate('/planos');
     }
   };
 
