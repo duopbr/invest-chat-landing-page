@@ -1,4 +1,5 @@
 
+
 import { Button } from "@/components/ui/button";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -14,8 +15,15 @@ const FeaturesSection: React.FC<FeaturesSectionProps> = ({ onTrialClick }) => {
     if (location.pathname === '/trial' && onTrialClick) {
       onTrialClick();
     } else {
-      // Redireciona para a página de planos
+      // Redireciona para a página de planos e rola para a seção de preços
       navigate('/planos');
+      // Pequeno delay para garantir que a página carregou antes de fazer o scroll
+      setTimeout(() => {
+        const pricingSection = document.getElementById('pricing');
+        if (pricingSection) {
+          pricingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
     }
   };
 
@@ -126,3 +134,4 @@ const FeaturesSection: React.FC<FeaturesSectionProps> = ({ onTrialClick }) => {
 };
 
 export default FeaturesSection;
+
