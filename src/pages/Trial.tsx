@@ -13,14 +13,25 @@ import TrialSignupModal from "@/components/TrialSignupModal";
 import TrialFloatingButton from "@/components/TrialFloatingButton";
 import { useState } from "react";
 
-const Trial = () => {
+interface TrialProps {
+  onTrialClick?: () => void;
+}
+
+const Trial: React.FC<TrialProps> = ({ onTrialClick: propOnTrialClick }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleTrialClick = () => {
+    setIsModalOpen(true);
+    if (propOnTrialClick) {
+      propOnTrialClick();
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar onTrialClick={() => setIsModalOpen(true)} />
+      <Navbar />
       <main>
-        <TrialHeroSection onTrialClick={() => setIsModalOpen(true)} />
+        <TrialHeroSection onTrialClick={handleTrialClick} />
         <ServicesSection />
         <HowItWorksSection />
         <FeaturesSection />
@@ -30,7 +41,7 @@ const Trial = () => {
       </main>
       <Footer />
       <ScrollToTop />
-      <TrialFloatingButton onTrialClick={() => setIsModalOpen(true)} />
+      <TrialFloatingButton onTrialClick={handleTrialClick} />
       <TrialSignupModal 
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 

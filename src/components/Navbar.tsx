@@ -4,11 +4,21 @@ import StripeCheckout from "./StripeCheckout";
 import { Clock } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
-const Navbar = () => {
+interface NavbarProps {
+  onTrialClick?: () => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ onTrialClick }) => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
   const scrollToPricing = () => {
+    if (onTrialClick) {
+      onTrialClick();
+      setIsOpen(false);
+      return;
+    }
+    
     const pricingSection = document.getElementById('pricing');
     if (pricingSection) {
       pricingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
