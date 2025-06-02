@@ -21,14 +21,14 @@ const Trial = () => {
       <Navbar onTrialClick={() => setIsModalOpen(true)} />
       <main>
         <TrialHeroSection onTrialClick={() => setIsModalOpen(true)} />
-        <ServicesSection onTrialClick={() => setIsModalOpen(true)} />
-        <HowItWorksSection onTrialClick={() => setIsModalOpen(true)} />
-        <FeaturesSection onTrialClick={() => setIsModalOpen(true)} />
-        <FAQSection onTrialClick={() => setIsModalOpen(true)} />
-        <ComingSoonSection onTrialClick={() => setIsModalOpen(true)} />
-        <TeamSection onTrialClick={() => setIsModalOpen(true)} />
+        <ServicesSection />
+        <HowItWorksSection />
+        <FeaturesSection />
+        <FAQSection />
+        <ComingSoonSection />
+        <TeamSection />
       </main>
-      <Footer onTrialClick={() => setIsModalOpen(true)} />
+      <Footer />
       <ScrollToTop />
       <TrialFloatingButton onTrialClick={() => setIsModalOpen(true)} />
       <TrialSignupModal 
