@@ -21,6 +21,28 @@ const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
   const [phone, setPhone] = useState("");
   const [errors, setErrors] = useState<{ email?: string; phone?: string }>({});
 
+  const formatPhoneNumber = (value: string) => {
+    // Remove tudo que não for número
+    const numbers = value.replace(/\D/g, '');
+    
+    // Se começar com 55, remove para recolocar depois
+    const cleanNumbers = numbers.startsWith('55') ? numbers.slice(2) : numbers;
+    
+    // Aplica a máscara +55 (XX) XXXXX-XXXX
+    if (cleanNumbers.length === 0) return '';
+    if (cleanNumbers.length <= 2) return `+55 (${cleanNumbers}`;
+    if (cleanNumbers.length <= 7) return `+55 (${cleanNumbers.slice(0, 2)}) ${cleanNumbers.slice(2)}`;
+    if (cleanNumbers.length <= 11) return `+55 (${cleanNumbers.slice(0, 2)}) ${cleanNumbers.slice(2, 7)}-${cleanNumbers.slice(7)}`;
+    
+    // Limita a 11 dígitos (2 DDD + 9 número)
+    return `+55 (${cleanNumbers.slice(0, 2)}) ${cleanNumbers.slice(2, 7)}-${cleanNumbers.slice(7, 11)}`;
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatPhoneNumber(e.target.value);
+    setPhone(formatted);
+  };
+
   const validateForm = () => {
     const newErrors: { email?: string; phone?: string } = {};
 
@@ -28,8 +50,10 @@ const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
       newErrors.email = "Email válido é obrigatório";
     }
 
-    if (!phone || phone.length < 10) {
-      newErrors.phone = "Telefone válido é obrigatório";
+    // Valida se o telefone está no formato completo +55 (XX) XXXXX-XXXX
+    const phoneRegex = /^\+55 \(\d{2}\) \d{5}-\d{4}$/;
+    if (!phone || !phoneRegex.test(phone)) {
+      newErrors.phone = "Telefone deve estar no formato +55 (XX) XXXXX-XXXX";
     }
 
     setErrors(newErrors);
@@ -42,7 +66,7 @@ const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
       
       // Redirecionar para WhatsApp
       const whatsappMessage = encodeURIComponent(
-        `Olá! Me cadastrei para o teste gratuito de 7 dias da consultoria de investimentos. Meu email: ${email}`
+        `Olá! Me cadastrei para o teste gratuito de 7 dias da consultoria de investimentos. Meu email: ${email} e telefone: ${phone}`
       );
       const whatsappUrl = `https://wa.me/5511999999999?text=${whatsappMessage}`;
       
@@ -86,10 +110,11 @@ const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
             <Input
               id="phone"
               type="tel"
-              placeholder="(11) 99999-9999"
+              placeholder="+55 (11) 99999-9999"
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={handlePhoneChange}
               className={errors.phone ? "border-red-500" : ""}
+              maxLength={19}
             />
             {errors.phone && (
               <p className="text-sm text-red-500">{errors.phone}</p>
