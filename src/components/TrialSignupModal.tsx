@@ -115,7 +115,7 @@ const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
           </Button>
 
           <p className="text-xs text-gray-500 text-center">
-            Ao se cadastrar, você concorda com nossa política de privacidade e termos de uso.
+            Aceito receber comunicações sobre investimentos e ofertas da Duop. Ao se cadastrar, você concorda com nossa política de privacidade e termos de uso.
           </p>
         </div>
       </DialogContent>
