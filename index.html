@@ -39,6 +39,28 @@
     <!-- End Google Tag Manager (noscript) -->
     
     <div id="root"></div>
+    
+    <script>
+      function handleTrialSubmit(e) {
+        e.preventDefault();
+
+        // ==>>> Disparo de evento no GTM
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'lead',          // Nome do evento no GTM
+          lead_type: 'trial',    // Parâmetro opcional
+          form_location: 'modal' // Outro parâmetro opcional
+        });
+
+        // (opcional) enviar parâmetros adicionais NÃO‑PII, jamais email/telefone!
+
+        // Continua fluxo de envio existente (Apps Script + redirect WhatsApp)
+        const form = e.target;
+        form.submit(); // ou chamada ao endpoint via fetch/axios, depois redirect
+        return false;
+      }
+    </script>
+    
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
