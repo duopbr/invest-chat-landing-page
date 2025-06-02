@@ -11,18 +11,21 @@ export type Database = {
     Tables: {
       pix_phone_submissions: {
         Row: {
+          Email: string | null
           id: number
           phone_number: string | null
           plan_title: string | null
           submitted_at: string | null
         }
         Insert: {
+          Email?: string | null
           id?: number
           phone_number?: string | null
           plan_title?: string | null
           submitted_at?: string | null
         }
         Update: {
+          Email?: string | null
           id?: number
           phone_number?: string | null
           plan_title?: string | null

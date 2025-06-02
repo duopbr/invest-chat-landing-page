@@ -50,9 +50,9 @@ const TrialHeroSection = ({ onTrialClick }: TrialHeroSectionProps) => {
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight animate-fade-in">
-              Experimente{" "}
+              Investir sem{" "}
               <span className="bg-gradient-to-r from-green-600 via-emerald-600 to-green-700 bg-clip-text text-transparent font-extrabold animate-pulse">
-                Gratuitamente
+                Complicação
               </span>
             </h1>
             
