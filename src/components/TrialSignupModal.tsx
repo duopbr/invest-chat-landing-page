@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { MessageCircle } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 interface TrialSignupModalProps {
   isOpen: boolean;
@@ -20,6 +21,7 @@ const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [errors, setErrors] = useState<{ email?: string; phone?: string }>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const formatPhoneNumber = (value: string) => {
     // Remove tudo que não for número
@@ -60,15 +62,34 @@ const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = () => {
-    if (validateForm()) {
-      console.log("Cadastro realizado:", { email, phone });
+  const handleSubmit = async () => {
+    if (!validateForm()) return;
+
+    setIsSubmitting(true);
+    
+    try {
+      // Salvar no Supabase
+      const { error } = await supabase
+        .from('pix_phone_submissions')
+        .insert({
+          Email: email,
+          phone_number: phone,
+          plan_title: 'Teste Gratuito 7 dias'
+        });
+
+      if (error) {
+        console.error('Erro ao salvar no Supabase:', error);
+        alert('Erro ao processar cadastro. Tente novamente.');
+        return;
+      }
+
+      console.log("Cadastro realizado e salvo no Supabase:", { email, phone });
       
-      // Redirecionar para WhatsApp
+      // Redirecionar para WhatsApp com número correto
       const whatsappMessage = encodeURIComponent(
-        `Olá! Me cadastrei para o teste gratuito de 7 dias da consultoria de investimentos. Meu email: ${email} e telefone: ${phone}`
+        `Olá! Me cadastrei para o teste gratuito de 7 dias da consultoria de investimentos.`
       );
-      const whatsappUrl = `https://wa.me/5511999999999?text=${whatsappMessage}`;
+      const whatsappUrl = `https://wa.me/5521967135336?text=${whatsappMessage}`;
       
       window.open(whatsappUrl, "_blank");
       onClose();
@@ -77,6 +98,11 @@ const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
       setEmail("");
       setPhone("");
       setErrors({});
+    } catch (error) {
+      console.error('Erro inesperado:', error);
+      alert('Erro inesperado. Tente novamente.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -133,10 +159,11 @@ const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
 
           <Button
             onClick={handleSubmit}
+            disabled={isSubmitting}
             className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-3 rounded-xl"
           >
             <MessageCircle className="h-4 w-4 mr-2" />
-            Enviar e Ir para o WhatsApp
+            {isSubmitting ? "Processando..." : "Enviar e Ir para o WhatsApp"}
           </Button>
 
           <p className="text-xs text-gray-500 text-center">
