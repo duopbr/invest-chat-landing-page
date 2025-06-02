@@ -1,8 +1,12 @@
 
-import { Check, MessageCircle, DollarSign, BadgeCheck } from "lucide-react";
+import { Check, MessageCircle, DollarSign, BadgeCheck, Gift } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
-const HowItWorksSection = () => {
+interface HowItWorksSectionProps {
+  onTrialClick?: () => void;
+}
+
+const HowItWorksSection = ({ onTrialClick }: HowItWorksSectionProps) => {
   const [visibleCards, setVisibleCards] = useState<boolean[]>([false, false, false]);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -49,6 +53,43 @@ const HowItWorksSection = () => {
           <p className="text-gray-700 text-lg max-w-3xl mx-auto">
             Consultoria financeira em 3 passos
           </p>
+        </div>
+
+        {/* Trial Box */}
+        <div className="mb-12 bg-gradient-to-r from-blue-50 to-purple-50 p-8 rounded-xl shadow-lg border-2 border-blue-200 max-w-4xl mx-auto hover:shadow-xl transition-all duration-500 hover:scale-105">
+          <div className="text-center">
+            <div className="flex justify-center mb-4">
+              <div className="h-16 w-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+                <Gift className="h-8 w-8 text-white" />
+              </div>
+            </div>
+            <h3 className="text-2xl font-bold mb-3 text-gray-800">🎁 Teste Gratuito de 7 Dias</h3>
+            <p className="text-gray-600 mb-6 text-lg">
+              Experimente nossa consultoria por 7 dias completos sem pagar nada. Acesso total a todas as funcionalidades!
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              <div className="flex items-center justify-center gap-2 text-blue-600">
+                <Check className="h-5 w-5" />
+                <span className="font-medium">Acesso completo</span>
+              </div>
+              <div className="flex items-center justify-center gap-2 text-blue-600">
+                <Check className="h-5 w-5" />
+                <span className="font-medium">Sem cobrança</span>
+              </div>
+              <div className="flex items-center justify-center gap-2 text-blue-600">
+                <Check className="h-5 w-5" />
+                <span className="font-medium">Cancele quando quiser</span>
+              </div>
+            </div>
+            {onTrialClick && (
+              <button
+                onClick={onTrialClick}
+                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-8 py-3 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg"
+              >
+                🚀 Começar Teste Gratuito
+              </button>
+            )}
+          </div>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

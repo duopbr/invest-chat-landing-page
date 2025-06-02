@@ -1,4 +1,3 @@
-
 import Navbar from "@/components/Navbar";
 import TrialHeroSection from "@/components/TrialHeroSection";
 import ServicesSection from "@/components/ServicesSection";
@@ -33,7 +32,7 @@ const Trial: React.FC<TrialProps> = ({ onTrialClick }) => {
       <main>
         <TrialHeroSection onTrialClick={handleTrialClick} />
         <ServicesSection />
-        <HowItWorksSection />
+        <HowItWorksSection onTrialClick={handleTrialClick} />
         <FeaturesSection onTrialClick={handleTrialClick} />
         <FAQSection />
         <ComingSoonSection />
