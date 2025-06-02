@@ -12,7 +12,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 
 const Trial = () => {
   return (
-    <div className="min-h-screen flex flex col">
+    <div className="min-h-screen flex flex-col">
       <Navbar />
       <main>
         <TrialHeroSection />

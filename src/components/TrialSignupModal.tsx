@@ -44,7 +44,6 @@ const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
 
   const handleSubmit = () => {
     if (validateForm()) {
-      // Aqui você pode implementar a lógica para salvar os dados
       console.log("Cadastro realizado:", { email, phone, consent });
       
       // Redirecionar para WhatsApp
