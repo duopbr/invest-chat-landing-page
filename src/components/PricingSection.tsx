@@ -1,6 +1,6 @@
+
 import { useIsMobile } from "@/hooks/use-mobile";
 import PricingCard from "./PricingCard";
-import { useNavigate } from "react-router-dom";
 
 interface PricingSectionProps {
   showHeading?: boolean;
@@ -9,15 +9,6 @@ interface PricingSectionProps {
 
 const PricingSection = ({ showHeading = true }: PricingSectionProps) => {
   const isMobile = useIsMobile();
-  const navigate = useNavigate();
-
-  // Função para redirecionar para checkout com dados do plano
-  const handlePlanSelect = (planData: any) => {
-    console.log("Plano selecionado:", planData); // Log para debug
-    navigate('/checkout', { 
-      state: planData
-    });
-  };
   
   return (
     <section id="pricing" className="py-8 md:py-12 px-4 bg-gradient-to-br from-slate-50 via-gray-50 to-zinc-100 text-black">
@@ -48,7 +39,6 @@ const PricingSection = ({ showHeading = true }: PricingSectionProps) => {
                 discountPercentage="50%"
                 discountType="sobre o plano mensal"
                 stripeLink="https://buy.stripe.com/6oE4go67w2nIgrC9AM"
-                onPlanSelect={handlePlanSelect}
                 benefits={[
                   "Acesso completo ao assistente financeiro no WhatsApp",
                   "Consultoria personalizada de carteira de investimentos",
@@ -67,7 +57,6 @@ const PricingSection = ({ showHeading = true }: PricingSectionProps) => {
                 discountType="sobre o plano mensal"
                 stripeLink="https://buy.stripe.com/cN2bIQ7bA5zU5MY8wJ"
                 isPopular={true}
-                onPlanSelect={handlePlanSelect}
                 benefits={[
                   "Acesso completo ao assistente financeiro no WhatsApp",
                   "Consultoria personalizada de carteira de investimentos",
@@ -85,7 +74,6 @@ const PricingSection = ({ showHeading = true }: PricingSectionProps) => {
                 discountPercentage="70%"
                 discountType="sobre o plano mensal"
                 stripeLink="https://buy.stripe.com/5kA5ksdzY5zU8Za8wK"
-                onPlanSelect={handlePlanSelect}
                 benefits={[
                   "Acesso completo ao assistente financeiro no WhatsApp",
                   "Consultoria personalizada de carteira de investimentos",
