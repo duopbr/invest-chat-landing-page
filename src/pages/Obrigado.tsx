@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -87,13 +86,15 @@ const Obrigado = () => {
 
             {/* Botões de ação */}
             <div className={`space-y-4 transform transition-all duration-1000 delay-1000 ${showAnimation ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-              <Button 
-                onClick={handleWhatsAppClick}
-                className="bg-[#25D366] hover:bg-[#20BD5C] text-white font-semibold py-4 px-8 rounded-xl text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 w-full sm:w-auto flex items-center gap-3"
-              >
-                <MessageCircle className="h-5 w-5" />
-                Começar no WhatsApp
-              </Button>
+              <div className="flex justify-center mt-8">
+                <Button
+                  onClick={handleWhatsAppClick}
+                  className="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  Começar no WhatsApp
+                </Button>
+              </div>
               
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Button
