@@ -1,18 +1,28 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Check, CreditCard, Smartphone, Shield, Users, Star, ArrowLeft } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 
 const Checkout = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { toast } = useToast();
   
+  const selectedPlan = location.state?.selectedPlan;
+  
+  // Se não há plano selecionado, redireciona para a página de planos
+  useEffect(() => {
+    if (!selectedPlan) {
+      navigate('/planos');
+    }
+  }, [selectedPlan, navigate]);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -51,8 +61,9 @@ const Checkout = () => {
     setIsProcessing(true);
 
     if (formData.paymentMethod === "card") {
-      // Redirecionar para Stripe
-      window.open("https://buy.stripe.com/6oE4go67w2nIgrC9AM?success_url=" + encodeURIComponent(window.location.origin + "/obrigado"), "_blank");
+      // Redirecionar para Stripe usando o link do plano selecionado
+      const successUrl = encodeURIComponent(window.location.origin + "/obrigado");
+      window.open(`${selectedPlan?.stripeLink}?success_url=${successUrl}`, "_blank");
     } else if (formData.paymentMethod === "pix") {
       // Mostrar PIX na mesma tela
       setShowPixPayment(true);
@@ -65,6 +76,20 @@ const Checkout = () => {
     navigate('/obrigado');
   };
 
+  const handleCopyPixKey = () => {
+    if (selectedPlan?.pixCode) {
+      navigator.clipboard.writeText(selectedPlan.pixCode);
+      toast({
+        title: "Chave Pix copiada!",
+        description: "A chave Pix foi copiada para a área de transferência.",
+      });
+    }
+  };
+
+  if (!selectedPlan) {
+    return null; // O useEffect já vai redirecionar
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-white">
       {/* Header simples */}
@@ -72,7 +97,7 @@ const Checkout = () => {
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center gap-4">
           <Button
             variant="ghost"
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/planos')}
             className="p-2"
           >
             <ArrowLeft className="h-5 w-5" />
@@ -168,7 +193,7 @@ const Checkout = () => {
                       <h3 className="text-lg font-semibold text-green-800 mb-4">Pagamento via PIX</h3>
                       <div className="bg-white p-4 rounded-lg inline-block">
                         <img 
-                          src="/imagens/Plano Mensal.png" 
+                          src={selectedPlan.pixQrCodeImage} 
                           alt="QR Code PIX" 
                           className="w-48 h-48 mx-auto"
                         />
@@ -177,8 +202,15 @@ const Checkout = () => {
                         Escaneie o QR Code com o app do seu banco ou copie o código PIX
                       </p>
                       <div className="mt-4 p-3 bg-gray-50 rounded border text-xs break-all">
-                        00020126650014br.gov.bcb.pix0114547777530001370225WHATSAPPESPECIALISTASDUOP520400005303986540534.995802BR5916GPR ANALISE LTDA6008BRASILIA62070503***63048CF0
+                        {selectedPlan.pixCode}
                       </div>
+                      <Button
+                        onClick={handleCopyPixKey}
+                        variant="outline"
+                        className="mt-2"
+                      >
+                        Copiar código PIX
+                      </Button>
                     </div>
                     
                     <div className="space-y-3">
@@ -227,8 +259,11 @@ const Checkout = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="border-b border-gray-100 pb-4">
-                  <h3 className="font-semibold text-lg">Plano Mensal - Duop IA</h3>
+                  <h3 className="font-semibold text-lg">{selectedPlan.title} - Duop IA</h3>
                   <p className="text-gray-600 text-sm mt-1">Consultoria de investimentos no WhatsApp</p>
+                  {selectedPlan.monthlyEquivalent && (
+                    <p className="text-sm text-green-600 mt-1">{selectedPlan.monthlyEquivalent}</p>
+                  )}
                 </div>
                 
                 <div className="space-y-3">
@@ -247,17 +282,24 @@ const Checkout = () => {
                 </div>
 
                 <div className="border-t border-gray-100 pt-4">
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-600">Preço original:</span>
-                    <span className="line-through text-gray-500">R$ 139,80</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-600">Desconto (50%):</span>
-                    <span className="text-red-600">-R$ 69,90</span>
-                  </div>
+                  {selectedPlan.originalPrice && (
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-600">Preço original:</span>
+                      <span className="line-through text-gray-500">{selectedPlan.originalPrice}</span>
+                    </div>
+                  )}
+                  {selectedPlan.discount && (
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-600">Desconto ({selectedPlan.discount}):</span>
+                      <span className="text-red-600">-{selectedPlan.originalPrice && selectedPlan.price ? 
+                        `R$ ${(parseFloat(selectedPlan.originalPrice.replace('R$ ', '').replace(',', '.')) - 
+                              parseFloat(selectedPlan.price.replace('R$ ', '').replace(',', '.'))).toFixed(2).replace('.', ',')}`
+                        : '...'}</span>
+                    </div>
+                  )}
                   <div className="flex justify-between items-center text-lg font-bold border-t border-gray-200 pt-2 mt-2">
                     <span>Total:</span>
-                    <span className="text-green-600">R$ 69,90/mês</span>
+                    <span className="text-green-600">{selectedPlan.price}{selectedPlan.period}</span>
                   </div>
                 </div>
               </CardContent>

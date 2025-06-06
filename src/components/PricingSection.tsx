@@ -1,9 +1,6 @@
 
-import { useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import PricingCard from "./PricingCard";
-import { supabase } from '@/lib/supabaseClient';
-import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 
 interface PricingSectionProps {
@@ -11,46 +8,17 @@ interface PricingSectionProps {
   preferredPayment?: 'pix' | null;
 }
 
-const PricingSection = ({ showHeading = true, preferredPayment = null }: PricingSectionProps) => {
+const PricingSection = ({ showHeading = true }: PricingSectionProps) => {
   const isMobile = useIsMobile();
-  const { toast } = useToast();
   const navigate = useNavigate();
 
-  const [submittedPhoneNumber, setSubmittedPhoneNumber] = useState<string | null>(null);
-  const [showPixForAllCards, setShowPixForAllCards] = useState(false);
-  const [isSubmittingGlobal, setIsSubmittingGlobal] = useState(false);
-
-  const handlePhoneNumberProvided = async (phoneNumber: string, planTitle: string) => {
-    if (!phoneNumber) {
-      toast({ title: "Erro", description: "Por favor, insira seu número de WhatsApp.", variant: "destructive" });
-      return false;
-    }
-    setIsSubmittingGlobal(true);
-    try {
-      const { data, error } = await supabase
-        .from('pix_phone_submissions')
-        .insert([{ phone_number: phoneNumber, plan_title: planTitle }])
-        .select();
-
-      if (error) throw error;
-
-      console.log("Supabase: Número", phoneNumber, "Plano:", planTitle, "Data:", data);
-      toast({ title: "Número enviado!", description: "Continue para o pagamento PIX." });
-      setSubmittedPhoneNumber(phoneNumber);
-      setShowPixForAllCards(true);
-      setIsSubmittingGlobal(false);
-      return true;
-    } catch (error: any) {
-      console.error("Erro Supabase:", error);
-      toast({ title: "Erro", description: error.message || "Não foi possível registrar. Tente novamente.", variant: "destructive" });
-      setIsSubmittingGlobal(false);
-      return false;
-    }
-  };
-
-  // Função para redirecionar para checkout
-  const handleCheckoutClick = () => {
-    navigate('/checkout');
+  // Função para redirecionar para checkout com dados do plano
+  const handlePlanSelect = (planData: any) => {
+    navigate('/checkout', { 
+      state: { 
+        selectedPlan: planData 
+      } 
+    });
   };
   
   return (
@@ -82,14 +50,16 @@ const PricingSection = ({ showHeading = true, preferredPayment = null }: Pricing
                 discountPercentage="50%"
                 discountType="sobre o plano mensal"
                 stripeLink="https://buy.stripe.com/6oE4go67w2nIgrC9AM"
-                pixCode="00020126650014br.gov.bcb.pix0114547777530001370225WHATSAPPESPECIALISTASDUOP520400005303986540534.995802BR5916GPR ANALISE LTDA6008BRASILIA62070503***63048CF0"
-                pixQrCodeImage="/imagens/Plano Mensal.png"
-                preferredPayment={preferredPayment}
-                submittedPhoneNumber={submittedPhoneNumber}
-                showPixDetailsDirectly={showPixForAllCards}
-                onPhoneNumberSubmit={handlePhoneNumberProvided}
-                isSubmittingPhoneNumber={isSubmittingGlobal}
-                onCheckoutClick={handleCheckoutClick}
+                onPlanSelect={() => handlePlanSelect({
+                  title: "Plano Mensal",
+                  price: "R$ 69,90",
+                  period: "/mês",
+                  originalPrice: "R$ 139,80",
+                  discount: "50%",
+                  stripeLink: "https://buy.stripe.com/6oE4go67w2nIgrC9AM",
+                  pixCode: "00020126650014br.gov.bcb.pix0114547777530001370225WHATSAPPESPECIALISTASDUOP520400005303986540534.995802BR5916GPR ANALISE LTDA6008BRASILIA62070503***63048CF0",
+                  pixQrCodeImage: "/imagens/Plano Mensal.png"
+                })}
                 benefits={[
                   "Acesso completo ao assistente financeiro no WhatsApp",
                   "Consultoria personalizada de carteira de investimentos",
@@ -108,14 +78,17 @@ const PricingSection = ({ showHeading = true, preferredPayment = null }: Pricing
                 discountType="sobre o plano mensal"
                 stripeLink="https://buy.stripe.com/cN2bIQ7bA5zU5MY8wJ"
                 isPopular={true}
-                pixCode="00020126680014br.gov.bcb.pix0114547777530001370228WHATSAPP ESPECIALISTAS DUOP 520400005303986540594.995802BR5916GPR ANALISE LTDA6008BRASILIA62070503***6304C79D"
-                pixQrCodeImage="/imagens/Plano Trimestral.png"
-                preferredPayment={preferredPayment}
-                submittedPhoneNumber={submittedPhoneNumber}
-                showPixDetailsDirectly={showPixForAllCards}
-                onPhoneNumberSubmit={handlePhoneNumberProvided}
-                isSubmittingPhoneNumber={isSubmittingGlobal}
-                onCheckoutClick={handleCheckoutClick}
+                onPlanSelect={() => handlePlanSelect({
+                  title: "Plano Trimestral",
+                  price: "R$ 167,90",
+                  period: "/trimestre",
+                  monthlyEquivalent: "Equivalente a R$ 55,97/mês",
+                  originalPrice: "R$ 419,70",
+                  discount: "60%",
+                  stripeLink: "https://buy.stripe.com/cN2bIQ7bA5zU5MY8wJ",
+                  pixCode: "00020126680014br.gov.bcb.pix0114547777530001370228WHATSAPP ESPECIALISTAS DUOP 520400005303986540594.995802BR5916GPR ANALISE LTDA6008BRASILIA62070503***6304C79D",
+                  pixQrCodeImage: "/imagens/Plano Trimestral.png"
+                })}
                 benefits={[
                   "Acesso completo ao assistente financeiro no WhatsApp",
                   "Consultoria personalizada de carteira de investimentos",
@@ -133,14 +106,17 @@ const PricingSection = ({ showHeading = true, preferredPayment = null }: Pricing
                 discountPercentage="70%"
                 discountType="sobre o plano mensal"
                 stripeLink="https://buy.stripe.com/5kA5ksdzY5zU8Za8wK"
-                pixCode="00020126680014br.gov.bcb.pix0114547777530001370228WHATSAPP ESPECIALISTAS DUOP 5204000053039865406167.995802BR5916GPR ANALISE LTDA6008BRASILIA62070503***6304C3F2"
-                pixQrCodeImage="/imagens/Plano Semestral.png"
-                preferredPayment={preferredPayment}
-                submittedPhoneNumber={submittedPhoneNumber}
-                showPixDetailsDirectly={showPixForAllCards}
-                onPhoneNumberSubmit={handlePhoneNumberProvided}
-                isSubmittingPhoneNumber={isSubmittingGlobal}
-                onCheckoutClick={handleCheckoutClick}
+                onPlanSelect={() => handlePlanSelect({
+                  title: "Plano Semestral",
+                  price: "R$ 251,90",
+                  period: "/semestre",
+                  monthlyEquivalent: "Equivalente a R$ 41,98/mês",
+                  originalPrice: "R$ 839,40",
+                  discount: "70%",
+                  stripeLink: "https://buy.stripe.com/5kA5ksdzY5zU8Za8wK",
+                  pixCode: "00020126680014br.gov.bcb.pix0114547777530001370228WHATSAPP ESPECIALISTAS DUOP 5204000053039865406167.995802BR5916GPR ANALISE LTDA6008BRASILIA62070503***6304C3F2",
+                  pixQrCodeImage: "/imagens/Plano Semestral.png"
+                })}
                 benefits={[
                   "Acesso completo ao assistente financeiro no WhatsApp",
                   "Consultoria personalizada de carteira de investimentos",
