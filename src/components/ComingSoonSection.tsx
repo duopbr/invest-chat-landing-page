@@ -1,5 +1,10 @@
 
+import { useEffect, useRef, useState } from "react";
+
 const ComingSoonSection = () => {
+  const [visibleCards, setVisibleCards] = useState<boolean[]>([false, false]);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
   const upcomingFeatures = [
     {
       title: "Consultoria de Carteira",
@@ -20,38 +25,79 @@ const ComingSoonSection = () => {
       )
     }
   ];
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Animate cards one by one
+            [0, 1].forEach((index) => {
+              setTimeout(() => {
+                setVisibleCards(prev => {
+                  const newState = [...prev];
+                  newState[index] = true;
+                  return newState;
+                });
+              }, index * 300);
+            });
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
   
   return (
-    <section id="coming-soon" className="py-16 px-4 bg-invest-blue/5">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <span className="text-invest-blue font-semibold text-sm">EM DESENVOLVIMENTO</span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4">
+    <section ref={sectionRef} id="coming-soon" className="py-16 px-4 bg-gray-50 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute top-10 left-1/4 w-32 h-32 bg-gray-200 rounded-full opacity-20 animate-pulse"></div>
+      <div className="absolute bottom-20 right-1/4 w-24 h-24 bg-gray-300 rounded-full opacity-15 animate-bounce delay-700"></div>
+      
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="text-center mb-12 animate-fade-in">
+          <span className="text-green-600 font-semibold text-sm animate-pulse">EM DESENVOLVIMENTO</span>
+          <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4 hover:scale-105 transition-transform duration-300">
             🔜 Em breve
           </h2>
-          <p className="text-gray-600 text-lg max-w-3xl mx-auto">
+          <p className="text-gray-700 text-lg max-w-3xl mx-auto">
             Estamos trabalhando nestas funcionalidades para tornar seu assistente de investimentos ainda mais poderoso.
           </p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {upcomingFeatures.map((feature, index) => (
-            <div key={index} className="bg-white p-6 rounded-xl border border-invest-blue/10 shadow-md relative overflow-hidden group">
-              <div className="absolute top-0 right-0 bg-invest-blue/10 text-invest-blue text-xs font-bold px-3 py-1">
+            <div 
+              key={index} 
+              className={`bg-white p-6 rounded-xl border border-gray-200 shadow-lg relative overflow-hidden group hover:shadow-2xl transition-all duration-500 cursor-pointer transform ${
+                visibleCards[index] 
+                  ? 'translate-y-0 opacity-100 scale-100' 
+                  : 'translate-y-10 opacity-0 scale-95'
+              } hover:-translate-y-2 hover:scale-105`}
+            >
+              <div className="absolute top-0 right-0 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg group-hover:bg-green-600 transition-colors duration-300 animate-pulse">
                 Em breve
               </div>
               
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-invest-blue/10 rounded-full flex items-center justify-center text-invest-blue flex-shrink-0 group-hover:bg-invest-blue/20 transition-colors">
-                  {feature.icon}
+                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 flex-shrink-0 group-hover:bg-green-200 transition-all duration-300 group-hover:scale-110 group-hover:rotate-12">
+                  <div className="group-hover:animate-spin">
+                    {feature.icon}
+                  </div>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">{feature.title}</h3>
-                  <p className="text-gray-600">{feature.description}</p>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-green-600 transition-colors duration-300">{feature.title}</h3>
+                  <p className="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">{feature.description}</p>
                 </div>
               </div>
               
-              <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-gradient-to-tr from-invest-blue/5 to-transparent rounded-full z-0 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-gradient-to-tr from-green-100/50 to-transparent rounded-full z-0 opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:scale-125"></div>
             </div>
           ))}
         </div>

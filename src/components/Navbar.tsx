@@ -1,14 +1,25 @@
+
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import StripeCheckout from "./StripeCheckout";
 import { Clock } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
-const Navbar = () => {
+interface NavbarProps {
+  onTrialClick?: () => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ onTrialClick }) => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
-  const scrollToPricing = () => {
+  const handleButtonClick = () => {
+    if (onTrialClick) {
+      onTrialClick();
+      setIsOpen(false);
+      return;
+    }
+    
     const pricingSection = document.getElementById('pricing');
     if (pricingSection) {
       pricingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -17,11 +28,13 @@ const Navbar = () => {
     setIsOpen(false);
   };
 
+  const buttonText = location.pathname === '/trial' ? 'Teste Gratuito' : 'Assinar';
+
   return (
     <>
       <div className="bg-invest-green py-2 text-white text-center font-medium text-sm px-4 flex items-center justify-center gap-2 fixed w-full top-0 z-50">
         <Clock className="h-4 w-4" />
-        <span>Oferta especial: Vagas limitadas para consultoria de investimentos no WhatsApp - Garanta sua vaga hoje!</span>
+        <span>Tire dúvidas, acompanhe o mercado e receba análises com Inteligência Artificial no WhatsApp</span>
       </div>
       <nav className="w-full bg-white/90 backdrop-blur-sm z-50 shadow-sm fixed top-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -56,10 +69,10 @@ const Navbar = () => {
                 </a>
                   <div className="ml-4">
                   <Button 
-                    onClick={scrollToPricing} 
+                    onClick={handleButtonClick} 
                     className="bg-[#00B894] text-white hover:bg-[#00A080]"
                   >
-                    Assinar
+                    {buttonText}
                   </Button>
                   </div>
               </div>
@@ -132,10 +145,10 @@ const Navbar = () => {
             </a>
               <div className="block px-3 py-2">
                <Button 
-                onClick={scrollToPricing} 
+                onClick={handleButtonClick} 
                 className="w-full bg-[#00B894] text-white hover:bg-[#00A080]"
               >
-                Assinar
+                {buttonText}
               </Button>
               </div>
           </div>

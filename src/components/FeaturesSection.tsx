@@ -1,7 +1,34 @@
 
-import { Button } from "@/components/ui/button";
 
-const FeaturesSection = () => {
+import { Button } from "@/components/ui/button";
+import { useLocation, useNavigate } from "react-router-dom";
+
+interface FeaturesSectionProps {
+  onTrialClick?: () => void;
+}
+
+const FeaturesSection: React.FC<FeaturesSectionProps> = ({ onTrialClick }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    if (location.pathname === '/trial' && onTrialClick) {
+      onTrialClick();
+    } else {
+      // Redireciona para a página de planos e rola para a seção de preços
+      navigate('/planos');
+      // Pequeno delay para garantir que a página carregou antes de fazer o scroll
+      setTimeout(() => {
+        const pricingSection = document.getElementById('pricing');
+        if (pricingSection) {
+          pricingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  };
+
+  const buttonText = location.pathname === '/trial' ? 'Quero meu Teste Gratuito' : 'Comece a investir melhor hoje';
+
   return (
     <section className="py-16 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
@@ -92,11 +119,12 @@ const FeaturesSection = () => {
             </div>
             
             <div className="mt-8">
-              <a href="#cta">
-                <Button className="bg-invest-blue hover:bg-invest-blue/90 text-white">
-                  Comece a investir melhor hoje
-                </Button>
-              </a>
+              <Button 
+                onClick={handleButtonClick}
+                className="bg-invest-blue hover:bg-invest-blue/90 text-white px-6 py-3"
+              >
+                {buttonText}
+              </Button>
             </div>
           </div>
         </div>
@@ -106,3 +134,4 @@ const FeaturesSection = () => {
 };
 
 export default FeaturesSection;
+

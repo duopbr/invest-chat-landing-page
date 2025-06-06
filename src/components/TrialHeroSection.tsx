@@ -1,10 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Check, Timer, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
-const HeroSection = () => {
-  const navigate = useNavigate();
+interface TrialHeroSectionProps {
+  onTrialClick: () => void;
+}
+
+const TrialHeroSection = ({ onTrialClick }: TrialHeroSectionProps) => {
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   
@@ -28,10 +30,6 @@ const HeroSection = () => {
 
     return () => clearTimeout(timer);
   }, [currentMessageIndex, chatMessages]);
-  
-  const handleCheckout = () => {
-    navigate('/checkout');
-  };
 
   return (
     <section className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-white pt-28 pb-12 md:pt-32 md:pb-16 px-4 relative overflow-hidden">
@@ -48,7 +46,7 @@ const HeroSection = () => {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium mb-6 shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105">
               <Sparkles className="h-4 w-4 animate-spin" />
-              Inteligência Artificial para Investimentos
+              Teste Gratuito - 7 Dias
             </div>
             
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight animate-fade-in">
@@ -60,7 +58,7 @@ const HeroSection = () => {
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-700 mb-8 max-w-2xl font-medium animate-fade-in delay-200">
-              Invista com confiança: tenha acesso a uma segunda opinião, insights validados e orientação sempre que precisar.
+              7 dias de acesso completo à consultoria de investimentos no WhatsApp. Sem compromisso.
             </p>
             
             <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl mb-8 border border-green-100 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 animate-fade-in delay-400">
@@ -69,51 +67,57 @@ const HeroSection = () => {
                   <div className="bg-green-100 p-1 rounded-full animate-bounce">
                     <Check className="text-green-600 h-4 w-4" />
                   </div>
-                  <span className="text-gray-700 font-medium">Segunda opinião de especialistas consolidados</span>
+                  <span className="text-gray-700 font-medium">Acesso completo por 7 dias</span>
                 </li>
                 <li className="flex items-start gap-3 transform hover:translate-x-2 transition-transform duration-300 delay-100">
                   <div className="bg-green-100 p-1 rounded-full animate-bounce delay-200">
                     <Check className="text-green-600 h-4 w-4" />
                   </div>
-                  <span className="text-gray-700 font-medium">Análises e insights sobre seus investimentos</span>
+                  <span className="text-gray-700 font-medium">Consultoria de investimentos no WhatsApp</span>
                 </li>
                 <li className="flex items-start gap-3 transform hover:translate-x-2 transition-transform duration-300 delay-200">
                   <div className="bg-green-100 p-1 rounded-full animate-bounce delay-400">
                     <Check className="text-green-600 h-4 w-4" />
                   </div>
-                  <span className="text-gray-700 font-medium">Esclarecimento de dúvidas financeiras</span>
+                  <span className="text-gray-700 font-medium">Análises personalizadas de carteira</span>
+                </li>
+                <li className="flex items-start gap-3 transform hover:translate-x-2 transition-transform duration-300 delay-300">
+                  <div className="bg-green-100 p-1 rounded-full animate-bounce delay-600">
+                    <Check className="text-green-600 h-4 w-4" />
+                  </div>
+                  <span className="text-gray-700 font-medium">Sem cartão de crédito necessário</span>
                 </li>
               </ul>
             </div>
             
             <div className="flex flex-col sm:flex-row items-start gap-6 mb-6 animate-fade-in delay-600">
               <div className="w-full sm:w-auto">
-                <div className="mb-3 bg-gradient-to-r from-red-500 via-orange-500 to-red-600 text-white px-4 py-2 rounded-full text-sm font-bold inline-flex items-center shadow-lg hover:scale-110 transition-transform duration-300 relative overflow-hidden">
+                <div className="mb-3 bg-gradient-to-r from-green-500 via-emerald-500 to-green-600 text-white px-4 py-2 rounded-full text-sm font-bold inline-flex items-center shadow-lg hover:scale-110 transition-transform duration-300 relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 animate-[slide_8s_ease-in-out_infinite]"></div>
                   <Timer className="h-4 w-4 mr-2" />
-                  50% OFF - Oferta Limitada
+                  Teste Gratuito - 7 Dias
                 </div>
                 <div className="flex items-baseline gap-3 mb-4">
-                  <span className="text-gray-500 text-lg">
-                    de <span className="line-through">R$139,80</span>
+                  <span className="text-gray-600 text-lg">
+                    Experimente
                   </span>
-                  <span className="text-green-600 font-bold text-2xl animate-pulse">
-                    por R$69,90
+                  <span className="text-green-600 font-bold text-2xl">
+                    GRÁTIS
                   </span>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Button
-                    onClick={handleCheckout}
-                    className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-4 px-8 rounded-xl text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 animate-glow w-full sm:w-auto"
+                    onClick={onTrialClick}
+                    className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-4 px-8 rounded-xl text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105"
                   >
-                    Assinar Agora
+                    Começar Teste Gratuito
                   </Button>
                 </div>
               </div>
             </div>
             
             <p className="text-sm text-gray-600 bg-white/60 p-3 rounded-lg border border-green-100 animate-fade-in delay-800 hover:bg-white/80 transition-all duration-300">
-              <span className="font-semibold text-green-700">🔥 Oferta por tempo limitado:</span> garante seu acesso agora! Acesso completo por R$69,90/mês.
+              <span className="font-semibold text-green-700">🎯 Sem compromisso:</span> teste por 7 dias gratuitamente. Cancele a qualquer momento.
             </p>
           </div>
           
@@ -189,4 +193,4 @@ const HeroSection = () => {
   );
 };
 
-export default HeroSection;
+export default TrialHeroSection;
