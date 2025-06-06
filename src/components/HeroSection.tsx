@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Check, Timer, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -52,11 +51,12 @@ const HeroSection = () => {
               Inteligência Artificial para Investimentos
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight animate-fade-in">
-              Investir sem{" "}
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight animate-fade-in">
+              Automatize, centralize e gerencie 100% do seu atendimento{" "}
               <span className="bg-gradient-to-r from-green-600 via-emerald-600 to-green-700 bg-clip-text text-transparent font-extrabold animate-pulse">
-                Complicação
-              </span>
+                com Inteligência Artificial
+              </span>{" "}
+              e fluxos dinâmicos
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-700 mb-8 max-w-2xl font-medium animate-fade-in delay-200">
