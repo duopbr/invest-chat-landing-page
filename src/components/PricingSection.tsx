@@ -39,6 +39,7 @@ const PricingSection = ({ showHeading = true }: PricingSectionProps) => {
                 discountPercentage="50%"
                 discountType="sobre o plano mensal"
                 stripeLink="https://buy.stripe.com/6oE4go67w2nIgrC9AM"
+                pixCode="00020126440014br.gov.bcb.pix0114547777530001370204DUOP520400005303986540554.995802BR5916GPR ANALISE LTDA6008BRASILIA62170513CLIENTEMENSAL63045711"
                 benefits={[
                   "Acesso completo ao assistente financeiro no WhatsApp",
                   "Consultoria personalizada de carteira de investimentos",
@@ -57,6 +58,7 @@ const PricingSection = ({ showHeading = true }: PricingSectionProps) => {
                 discountType="sobre o plano mensal"
                 stripeLink="https://buy.stripe.com/cN2bIQ7bA5zU5MY8wJ"
                 isPopular={true}
+                pixCode="00020126440014br.gov.bcb.pix0114547777530001370204DUOP5204000053039865406131.995802BR5916GPR ANALISE LTDA6008BRASILIA62210517clientetrimestral630448A2"
                 benefits={[
                   "Acesso completo ao assistente financeiro no WhatsApp",
                   "Consultoria personalizada de carteira de investimentos",
@@ -74,6 +76,7 @@ const PricingSection = ({ showHeading = true }: PricingSectionProps) => {
                 discountPercentage="70%"
                 discountType="sobre o plano mensal"
                 stripeLink="https://buy.stripe.com/5kA5ksdzY5zU8Za8wK"
+                pixCode="00020126440014br.gov.bcb.pix0114547777530001370204DUOP5204000053039865406197.995802BR5916GPR ANALISE LTDA6008BRASILIA62200516clientesemestral6304F36F"
                 benefits={[
                   "Acesso completo ao assistente financeiro no WhatsApp",
                   "Consultoria personalizada de carteira de investimentos",
