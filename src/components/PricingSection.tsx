@@ -1,4 +1,3 @@
-
 import { useIsMobile } from "@/hooks/use-mobile";
 import PricingCard from "./PricingCard";
 import { useNavigate } from "react-router-dom";
@@ -14,10 +13,9 @@ const PricingSection = ({ showHeading = true }: PricingSectionProps) => {
 
   // Função para redirecionar para checkout com dados do plano
   const handlePlanSelect = (planData: any) => {
+    console.log("Plano selecionado:", planData); // Log para debug
     navigate('/checkout', { 
-      state: { 
-        selectedPlan: planData 
-      } 
+      state: planData
     });
   };
   
@@ -50,16 +48,7 @@ const PricingSection = ({ showHeading = true }: PricingSectionProps) => {
                 discountPercentage="50%"
                 discountType="sobre o plano mensal"
                 stripeLink="https://buy.stripe.com/6oE4go67w2nIgrC9AM"
-                onPlanSelect={() => handlePlanSelect({
-                  title: "Plano Mensal",
-                  price: "R$ 69,90",
-                  period: "/mês",
-                  originalPrice: "R$ 139,80",
-                  discount: "50%",
-                  stripeLink: "https://buy.stripe.com/6oE4go67w2nIgrC9AM",
-                  pixCode: "00020126650014br.gov.bcb.pix0114547777530001370225WHATSAPPESPECIALISTASDUOP520400005303986540534.995802BR5916GPR ANALISE LTDA6008BRASILIA62070503***63048CF0",
-                  pixQrCodeImage: "/imagens/Plano Mensal.png"
-                })}
+                onPlanSelect={handlePlanSelect}
                 benefits={[
                   "Acesso completo ao assistente financeiro no WhatsApp",
                   "Consultoria personalizada de carteira de investimentos",
@@ -78,17 +67,7 @@ const PricingSection = ({ showHeading = true }: PricingSectionProps) => {
                 discountType="sobre o plano mensal"
                 stripeLink="https://buy.stripe.com/cN2bIQ7bA5zU5MY8wJ"
                 isPopular={true}
-                onPlanSelect={() => handlePlanSelect({
-                  title: "Plano Trimestral",
-                  price: "R$ 167,90",
-                  period: "/trimestre",
-                  monthlyEquivalent: "Equivalente a R$ 55,97/mês",
-                  originalPrice: "R$ 419,70",
-                  discount: "60%",
-                  stripeLink: "https://buy.stripe.com/cN2bIQ7bA5zU5MY8wJ",
-                  pixCode: "00020126680014br.gov.bcb.pix0114547777530001370228WHATSAPP ESPECIALISTAS DUOP 520400005303986540594.995802BR5916GPR ANALISE LTDA6008BRASILIA62070503***6304C79D",
-                  pixQrCodeImage: "/imagens/Plano Trimestral.png"
-                })}
+                onPlanSelect={handlePlanSelect}
                 benefits={[
                   "Acesso completo ao assistente financeiro no WhatsApp",
                   "Consultoria personalizada de carteira de investimentos",
@@ -106,17 +85,7 @@ const PricingSection = ({ showHeading = true }: PricingSectionProps) => {
                 discountPercentage="70%"
                 discountType="sobre o plano mensal"
                 stripeLink="https://buy.stripe.com/5kA5ksdzY5zU8Za8wK"
-                onPlanSelect={() => handlePlanSelect({
-                  title: "Plano Semestral",
-                  price: "R$ 251,90",
-                  period: "/semestre",
-                  monthlyEquivalent: "Equivalente a R$ 41,98/mês",
-                  originalPrice: "R$ 839,40",
-                  discount: "70%",
-                  stripeLink: "https://buy.stripe.com/5kA5ksdzY5zU8Za8wK",
-                  pixCode: "00020126680014br.gov.bcb.pix0114547777530001370228WHATSAPP ESPECIALISTAS DUOP 5204000053039865406167.995802BR5916GPR ANALISE LTDA6008BRASILIA62070503***6304C3F2",
-                  pixQrCodeImage: "/imagens/Plano Semestral.png"
-                })}
+                onPlanSelect={handlePlanSelect}
                 benefits={[
                   "Acesso completo ao assistente financeiro no WhatsApp",
                   "Consultoria personalizada de carteira de investimentos",

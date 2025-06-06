@@ -1,16 +1,18 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Copy, Check } from "lucide-react";
 import { useState } from "react";
 
 interface PixPaymentSectionProps {
   onPaymentConfirm: () => void;
+  pixCode: string;
+  pixQrCodeImage: string;
 }
 
-const PixPaymentSection = ({ onPaymentConfirm }: PixPaymentSectionProps) => {
+const PixPaymentSection = ({ onPaymentConfirm, pixCode, pixQrCodeImage }: PixPaymentSectionProps) => {
   const [copied, setCopied] = useState(false);
-  const pixCode = "00020126580014BR.GOV.BCB.PIX01364d4e22e8-4d45-4a9f-a8e7-123456789abc520400005303986540529.906204teste";
 
   const copyPixCode = () => {
     navigator.clipboard.writeText(pixCode);
@@ -27,9 +29,17 @@ const PixPaymentSection = ({ onPaymentConfirm }: PixPaymentSectionProps) => {
         
         <div className="text-center mb-6">
           <div className="inline-block p-4 bg-white border-2 border-gray-200 rounded-lg">
-            <div className="w-48 h-48 bg-gray-100 flex items-center justify-center rounded">
-              <span className="text-gray-500">QR Code PIX</span>
-            </div>
+            {pixQrCodeImage ? (
+              <img 
+                src={pixQrCodeImage} 
+                alt="QR Code PIX" 
+                className="w-48 h-48 object-contain"
+              />
+            ) : (
+              <div className="w-48 h-48 bg-gray-100 flex items-center justify-center rounded">
+                <span className="text-gray-500">QR Code PIX</span>
+              </div>
+            )}
           </div>
         </div>
 
