@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -32,7 +31,6 @@ const Checkout = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
   const [showPixPayment, setShowPixPayment] = useState(false);
 
   useEffect(() => {
@@ -186,7 +184,16 @@ const Checkout = () => {
   };
 
   const handlePixPaymentConfirm = () => {
-    setShowSuccess(true);
+          // Redireciona para a página de obrigado com os dados do plano
+      navigate("/obrigado", { 
+        state: { 
+          planName: planData.title,
+          planPrice: planData.price,
+          paymentMethod: "pix",
+          pixCode: planData.pixCode,
+          pixQrCodeImage: planData.pixQrCodeImage
+        }
+      });
     
     // Evento de compra concluída
     if (typeof window.dataLayer !== 'undefined') {
@@ -211,28 +218,7 @@ const Checkout = () => {
 
   if (!planData) return null;
 
-  if (showSuccess) {
-    return (
-      <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md mx-auto">
-          <Card>
-            <CardContent className="p-6 text-center">
-              <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4">
-                <Check className="h-6 w-6 text-green-600" />
-              </div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">Pagamento Confirmado!</h2>
-              <p className="text-gray-600 mb-4">
-                Obrigado por assinar o {planData.title}. Você receberá um e-mail com as instruções de acesso.
-              </p>
-              <Button onClick={() => navigate("/")} className="w-full">
-                Voltar para a página inicial
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-    );
-  }
+
 
   // Se está mostrando a tela de PIX
   if (showPixPayment && paymentMethod === "pix") {
