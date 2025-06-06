@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -218,8 +219,6 @@ const Checkout = () => {
 
   if (!planData) return null;
 
-
-
   // Se está mostrando a tela de PIX
   if (showPixPayment && paymentMethod === "pix") {
     return (
@@ -244,6 +243,9 @@ const Checkout = () => {
     );
   }
 
+  // Remove R$ duplicado se existir
+  const cleanPrice = planData.price?.replace(/^R\$\s*R\$\s*/, 'R$ ') || planData.price;
+
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
@@ -264,7 +266,7 @@ const Checkout = () => {
               </CardHeader>
               <CardContent>
                 <h3 className="text-xl font-bold text-gray-900">{planData.title}</h3>
-                <p className="text-2xl font-bold text-green-600 mt-2">R$ {planData.price}</p>
+                <p className="text-2xl font-bold text-green-600 mt-2">{cleanPrice}</p>
                 <p className="text-sm text-gray-500 mb-4">{planData.period}</p>
                 <ul className="space-y-2">
                   {planData.benefits.map((benefit: string, index: number) => (
