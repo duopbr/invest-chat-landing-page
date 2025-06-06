@@ -34,7 +34,7 @@ const PricingSection = ({ showHeading = true }: PricingSectionProps) => {
               <PricingCard 
                 title="Plano Mensal"
                 description="Ideal para quem quer testar a consultoria e acompanhar o mercado mês a mês."
-                price="R$ 54,99"
+                price="R$ 131,99"
                 period="/mês"
                 discountPercentage="50%"
                 discountType="sobre o plano mensal"
@@ -50,9 +50,9 @@ const PricingSection = ({ showHeading = true }: PricingSectionProps) => {
               <PricingCard 
                 title="Plano Trimestral"
                 description="Economize e acompanhe o mercado com continuidade por 3 meses."
-                price="R$ 197,96"
+                price="R$ 197,99"
                 period="/trimestre"
-                monthlyEquivalent="Equivalente a R$ 65,99/mês"
+                monthlyEquivalent="Equivalente a R$ 66,00/mês"
                 discountPercentage="60%"
                 discountType="sobre o plano mensal"
                 stripeLink="https://buy.stripe.com/cN2bIQ7bA5zU5MY8wJ"
