@@ -4,6 +4,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import PricingCard from "./PricingCard";
 import { supabase } from '@/lib/supabaseClient';
 import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 
 interface PricingSectionProps {
   showHeading?: boolean;
@@ -13,6 +14,7 @@ interface PricingSectionProps {
 const PricingSection = ({ showHeading = true, preferredPayment = null }: PricingSectionProps) => {
   const isMobile = useIsMobile();
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const [submittedPhoneNumber, setSubmittedPhoneNumber] = useState<string | null>(null);
   const [showPixForAllCards, setShowPixForAllCards] = useState(false);
@@ -44,6 +46,11 @@ const PricingSection = ({ showHeading = true, preferredPayment = null }: Pricing
       setIsSubmittingGlobal(false);
       return false;
     }
+  };
+
+  // Função para redirecionar para checkout
+  const handleCheckoutClick = () => {
+    navigate('/checkout');
   };
   
   return (
@@ -82,6 +89,7 @@ const PricingSection = ({ showHeading = true, preferredPayment = null }: Pricing
                 showPixDetailsDirectly={showPixForAllCards}
                 onPhoneNumberSubmit={handlePhoneNumberProvided}
                 isSubmittingPhoneNumber={isSubmittingGlobal}
+                onCheckoutClick={handleCheckoutClick}
                 benefits={[
                   "Acesso completo ao assistente financeiro no WhatsApp",
                   "Consultoria personalizada de carteira de investimentos",
@@ -107,6 +115,7 @@ const PricingSection = ({ showHeading = true, preferredPayment = null }: Pricing
                 showPixDetailsDirectly={showPixForAllCards}
                 onPhoneNumberSubmit={handlePhoneNumberProvided}
                 isSubmittingPhoneNumber={isSubmittingGlobal}
+                onCheckoutClick={handleCheckoutClick}
                 benefits={[
                   "Acesso completo ao assistente financeiro no WhatsApp",
                   "Consultoria personalizada de carteira de investimentos",
@@ -131,6 +140,7 @@ const PricingSection = ({ showHeading = true, preferredPayment = null }: Pricing
                 showPixDetailsDirectly={showPixForAllCards}
                 onPhoneNumberSubmit={handlePhoneNumberProvided}
                 isSubmittingPhoneNumber={isSubmittingGlobal}
+                onCheckoutClick={handleCheckoutClick}
                 benefits={[
                   "Acesso completo ao assistente financeiro no WhatsApp",
                   "Consultoria personalizada de carteira de investimentos",
