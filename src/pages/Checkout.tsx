@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useToast } from "@/components/ui/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import Testimonials from "@/components/checkout/Testimonials";
 import SecurityBadges from "@/components/checkout/SecurityBadges";
 import { Check, ArrowLeft } from "lucide-react";
@@ -44,13 +45,60 @@ const Checkout = () => {
     setPaymentMethod(value as "card" | "pix");
   };
 
-  const handleStripeRedirect = () => {
+  const saveCheckoutData = async () => {
+    try {
+      const { error } = await supabase
+        .from('checkout_submissions')
+        .insert([
+          {
+            name,
+            email,
+            plan_title: planData.title,
+            plan_price: planData.price,
+            payment_method: paymentMethod
+          }
+        ]);
+
+      if (error) {
+        console.error('Erro ao salvar dados do checkout:', error);
+        toast({
+          title: "Erro ao salvar dados",
+          description: "Ocorreu um erro ao processar suas informações. Tente novamente.",
+          variant: "destructive",
+        });
+        return false;
+      }
+
+      console.log('Dados do checkout salvos com sucesso');
+      return true;
+    } catch (error) {
+      console.error('Erro ao salvar dados do checkout:', error);
+      toast({
+        title: "Erro ao salvar dados",
+        description: "Ocorreu um erro ao processar suas informações. Tente novamente.",
+        variant: "destructive",
+      });
+      return false;
+    }
+  };
+
+  const handleStripeRedirect = async () => {
     if (!email || !name) {
       toast({
         title: "Campos obrigatórios",
         description: "Por favor, preencha seu nome e e-mail.",
         variant: "destructive",
       });
+      return;
+    }
+
+    setIsLoading(true);
+
+    // Salvar dados no Supabase antes do redirecionamento
+    const saved = await saveCheckoutData();
+    
+    if (!saved) {
+      setIsLoading(false);
       return;
     }
 
@@ -89,6 +137,15 @@ const Checkout = () => {
     }
 
     setIsLoading(true);
+
+    // Salvar dados no Supabase
+    const saved = await saveCheckoutData();
+    
+    if (!saved) {
+      setIsLoading(false);
+      return;
+    }
+
     try {
       // Simula um tempo de processamento
       await new Promise(resolve => setTimeout(resolve, 2000));
@@ -115,8 +172,8 @@ const Checkout = () => {
       }
     } catch (error) {
       toast({
-        title: "Erro ao gerar PIX",
-        description: "Ocorreu um erro ao gerar o QR Code. Tente novamente.",
+        title: "Erro ao processar PIX",
+        description: "Ocorreu um erro ao processar o pagamento. Tente novamente.",
         variant: "destructive",
       });
     } finally {
@@ -229,8 +286,9 @@ const Checkout = () => {
                 <Button
                   onClick={handleStripeRedirect}
                   className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-3 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                  disabled={isLoading}
                 >
-                  Finalizar compra
+                  {isLoading ? "Processando..." : "Finalizar compra"}
                 </Button>
               ) : (
                 <div className="space-y-4">
