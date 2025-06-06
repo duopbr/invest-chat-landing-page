@@ -1,7 +1,10 @@
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Check } from "lucide-react";
+import { slugify, extractNumericPrice } from "@/utils/priceUtils";
+import PricingDisplay from "./pricing/PricingDisplay";
+import BenefitsList from "./pricing/BenefitsList";
+import PopularBadge from "./pricing/PopularBadge";
 
 interface PricingCardProps {
   title: string;
@@ -16,19 +19,6 @@ interface PricingCardProps {
   benefits: string[];
   onPlanSelect: () => void;
 }
-
-const slugify = (text: string) => text.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
-
-const extractNumericPrice = (priceString: string): number => {
-  if (!priceString) return 0;
-  // Remove "R$", espaços.
-  let numericString = priceString.replace(/R\$\s*/, '');
-  // Remove pontos de milhar.
-  numericString = numericString.replace(/\.(?=\d{3})/g, ''); 
-  // Substitui a vírgula decimal por ponto.
-  numericString = numericString.replace(',', '.');
-  return parseFloat(numericString) || 0;
-};
 
 const PricingCard = ({
   title,
@@ -46,38 +36,22 @@ const PricingCard = ({
 
   return (
     <Card className={`w-full h-full overflow-hidden border ${isPopular ? "border-invest-green" : "border-gray-200"} max-w-[350px] mx-auto`}>
-      {isPopular && (
-        <div className="bg-invest-green text-white text-center py-1.5 text-sm font-medium">
-          Mais Popular
-        </div>
-      )}
+      {isPopular && <PopularBadge />}
       <div className={`flex flex-col ${isPopular ? "border-t-0" : ""}`}>
         <CardHeader className="px-6 py-6 text-center">
           <CardTitle className="text-xl font-bold">{title}</CardTitle>
-          <div className="mt-4 flex flex-col items-center">
-            <div className="flex items-baseline justify-center">
-              <span className="text-3xl font-bold">{price}</span>
-              <span className="text-base text-gray-500 ml-1">{period}</span>
-            </div>
-            {monthlyEquivalent && (
-              <p className="text-sm text-gray-500 mt-1">{monthlyEquivalent}</p>
-            )}
-            <div className="mt-2 text-red-600 text-sm font-medium">
-              <span>{discountPercentage} de desconto {discountType}</span>
-            </div>
-          </div>
+          <PricingDisplay
+            price={price}
+            period={period}
+            monthlyEquivalent={monthlyEquivalent}
+            discountPercentage={discountPercentage}
+            discountType={discountType}
+          />
         </CardHeader>
 
         <CardContent className="px-6 py-0 flex-grow">
           <p className="text-gray-600 mb-4 text-center">{description}</p>
-          <ul className="space-y-3">
-            {benefits.map((benefit, index) => (
-              <li key={index} className="flex items-start">
-                <Check className="text-green-500 h-5 w-5 mr-2 flex-shrink-0 mt-0.5" />
-                <span className="text-sm">{benefit}</span>
-              </li>
-            ))}
-          </ul>
+          <BenefitsList benefits={benefits} />
         </CardContent>
 
         <CardFooter className="flex flex-col space-y-3 px-6 py-6 mt-4">
