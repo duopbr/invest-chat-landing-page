@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Check, Timer, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -51,11 +50,11 @@ const TrialHeroSection = ({ onTrialClick }: TrialHeroSectionProps) => {
             </div>
             
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight animate-fade-in">
-              Automatize, centralize e gerencie 100% do seu atendimento{" "}
+              Decisões mais inteligentes, análises em segundos e{" "}
               <span className="bg-gradient-to-r from-green-600 via-emerald-600 to-green-700 bg-clip-text text-transparent font-extrabold animate-pulse">
-                com Inteligência Artificial
+                suporte contínuo com IA
               </span>{" "}
-              e fluxos dinâmicos
+              no WhatsApp
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-700 mb-8 max-w-2xl font-medium animate-fade-in delay-200">

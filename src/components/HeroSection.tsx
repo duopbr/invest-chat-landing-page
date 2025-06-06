@@ -52,15 +52,15 @@ const HeroSection = () => {
             </div>
             
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight animate-fade-in">
-              Automatize, centralize e gerencie 100% do seu atendimento{" "}
+              Decisões mais inteligentes, análises em segundos e{" "}
               <span className="bg-gradient-to-r from-green-600 via-emerald-600 to-green-700 bg-clip-text text-transparent font-extrabold animate-pulse">
-                com Inteligência Artificial
+                suporte contínuo com IA
               </span>{" "}
-              e fluxos dinâmicos
+              no WhatsApp
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-700 mb-8 max-w-2xl font-medium animate-fade-in delay-200">
-              Tire dúvidas, acompanhe o mercado e receba análises com IA — tudo no WhatsApp.
+              Invista com confiança: tenha acesso a uma segunda opinião, insights validados e orientação sempre que precisar.
             </p>
             
             <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl mb-8 border border-green-100 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 animate-fade-in delay-400">
