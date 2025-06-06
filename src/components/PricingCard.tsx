@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { slugify, extractNumericPrice } from "@/utils/priceUtils";
@@ -35,6 +36,18 @@ const PricingCard = ({
 }: PricingCardProps) => {
   const navigate = useNavigate();
 
+  // Define QR code images based on plan title
+  const getPixQrCodeImage = (planTitle: string) => {
+    if (planTitle.includes("Mensal")) {
+      return "/lovable-uploads/c58bd464-e5d1-4f65-8a08-c169aabbfa4f.png";
+    } else if (planTitle.includes("Trimestral")) {
+      return "/lovable-uploads/f5db6e97-3064-4793-8b93-60acf3e1fa2a.png";
+    } else if (planTitle.includes("Semestral")) {
+      return "/lovable-uploads/b7f66c6c-b903-475a-9cf5-7ff7f9ad7d66.png";
+    }
+    return "/placeholder.svg";
+  };
+
   const handlePlanSelect = () => {
     const planData = {
       title,
@@ -46,7 +59,7 @@ const PricingCard = ({
       stripeLink,
       benefits,
       pixCode,
-      pixQrCodeImage: `/imagens/${title.replace(/\s+/g, '')}.png`
+      pixQrCodeImage: getPixQrCodeImage(title)
     };
 
     // Evento de seleção do plano
