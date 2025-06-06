@@ -34,7 +34,7 @@ const Navbar: React.FC<NavbarProps> = ({ onTrialClick }) => {
     <>
       <div className="bg-invest-green py-2 text-white text-center font-medium text-sm px-4 flex items-center justify-center gap-2 fixed w-full top-0 z-50">
         <Clock className="h-4 w-4" />
-        <span>Oferta especial: Vagas limitadas para consultoria de investimentos no WhatsApp - Garanta sua vaga hoje!</span>
+        <span>Tire dúvidas, acompanhe o mercado e receba análises com Inteligência Artificial no WhatsApp</span>
       </div>
       <nav className="w-full bg-white/90 backdrop-blur-sm z-50 shadow-sm fixed top-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

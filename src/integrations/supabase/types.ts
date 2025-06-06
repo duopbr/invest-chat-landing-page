@@ -13,6 +13,8 @@ export type Database = {
         Row: {
           Email: string | null
           id: number
+          "Investir Mês": string | null
+          Patrimonio: string | null
           phone_number: string | null
           plan_title: string | null
           submitted_at: string | null
@@ -20,6 +22,8 @@ export type Database = {
         Insert: {
           Email?: string | null
           id?: number
+          "Investir Mês"?: string | null
+          Patrimonio?: string | null
           phone_number?: string | null
           plan_title?: string | null
           submitted_at?: string | null
@@ -27,6 +31,8 @@ export type Database = {
         Update: {
           Email?: string | null
           id?: number
+          "Investir Mês"?: string | null
+          Patrimonio?: string | null
           phone_number?: string | null
           plan_title?: string | null
           submitted_at?: string | null
