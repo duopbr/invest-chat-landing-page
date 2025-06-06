@@ -9,6 +9,9 @@ interface PlanSummaryProps {
 }
 
 const PlanSummary = ({ planName, planPrice, planBenefits }: PlanSummaryProps) => {
+  // Remove R$ duplicado se existir
+  const cleanPrice = planPrice.replace(/^R\$\s*R\$\s*/, 'R$ ');
+  
   return (
     <Card className="mb-8 border-invest-green/20">
       <CardContent className="p-6">
@@ -20,7 +23,7 @@ const PlanSummary = ({ planName, planPrice, planBenefits }: PlanSummaryProps) =>
             <h3 className="text-lg font-medium text-invest-green">
               {planName}
             </h3>
-            <p className="text-2xl font-bold text-gray-900">{planPrice}</p>
+            <p className="text-2xl font-bold text-gray-900">{cleanPrice}</p>
           </div>
         </div>
         <div className="border-t pt-4">
