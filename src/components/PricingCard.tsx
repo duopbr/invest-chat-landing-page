@@ -6,6 +6,17 @@ import { useState, FormEvent, useEffect, ChangeEvent } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 
+// Adiciona a declaração global para window.dataLayer
+declare global {
+  interface Window {
+    dataLayer: any[];
+  }
+}
+// Garante que dataLayer exista
+if (typeof window !== 'undefined') {
+  window.dataLayer = window.dataLayer || [];
+}
+
 interface PricingCardProps {
   title: string;
   description: string;
@@ -84,10 +95,60 @@ const PricingCard = ({
       if (submittedPhoneNumber) {
         setLocalPhoneNumber(formatPhoneNumber(submittedPhoneNumber));
       }
+      
+      // Disparar evento InitiateCheckout para PIX quando detalhes são mostrados diretamente
+      const numericPrice = extractNumericPrice(price);
+      console.log("[PricingCard - PIX useEffect] showPixDetailsDirectly:", showPixDetailsDirectly, "Submitted Phone:", submittedPhoneNumber);
+      if (typeof window.dataLayer !== 'undefined') {
+        const eventData = {
+          event: 'InitiateCheckout',
+          value: numericPrice,
+          currency: 'BRL',
+          payment_type: 'pix',
+          ecommerce: {
+            currency: 'BRL',
+            value: numericPrice,
+            items: [{
+              item_name: title,
+              item_category: 'Plano de Assinatura',
+              price: numericPrice,
+              quantity: 1
+            }]
+          },
+        };
+        console.log("[PricingCard - PIX useEffect] Pushing to dataLayer:", eventData);
+        window.dataLayer.push(eventData);
+      } else {
+        console.error("[PricingCard - PIX useEffect] window.dataLayer is undefined.");
+      }
     }
-  }, [showPixDetailsDirectly, submittedPhoneNumber]);
+  }, [showPixDetailsDirectly, submittedPhoneNumber, price, title]);
 
   const handleStripeCheckout = () => {
+    console.log("[PricingCard] handleStripeCheckout called for plan:", title);
+    const numericPrice = extractNumericPrice(price);
+    if (typeof window.dataLayer !== 'undefined') {
+      const eventData = {
+        event: 'InitiateCheckout',
+        value: numericPrice,
+        currency: 'BRL',
+        payment_type: 'cartao',
+        ecommerce: {
+          currency: 'BRL',
+          value: numericPrice,
+          items: [{
+            item_name: title, 
+            item_category: 'Plano de Assinatura',
+            price: numericPrice,
+            quantity: 1
+          }]
+        },
+      };
+      console.log("[PricingCard - Stripe] Pushing to dataLayer:", eventData);
+      window.dataLayer.push(eventData);
+    } else {
+      console.error("[PricingCard - Stripe] window.dataLayer is undefined.");
+    }
     window.open(stripeLink, "_blank");
   };
 
