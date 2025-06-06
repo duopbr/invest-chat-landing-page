@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,6 +10,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import Testimonials from "@/components/checkout/Testimonials";
 import SecurityBadges from "@/components/checkout/SecurityBadges";
+import PixPaymentSection from "@/components/checkout/PixPaymentSection";
 import { Check, ArrowLeft } from "lucide-react";
 
 declare global {
@@ -31,6 +33,7 @@ const Checkout = () => {
   const [name, setName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [showPixPayment, setShowPixPayment] = useState(false);
 
   useEffect(() => {
     const state = location.state;
@@ -43,6 +46,7 @@ const Checkout = () => {
 
   const handlePaymentMethodChange = (value: string) => {
     setPaymentMethod(value as "card" | "pix");
+    setShowPixPayment(false); // Reset PIX display when changing payment method
   };
 
   const saveCheckoutData = async () => {
@@ -147,14 +151,14 @@ const Checkout = () => {
     }
 
     try {
-      // Simula um tempo de processamento
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setShowSuccess(true);
+      // Simula um tempo de processamento para mostrar o PIX
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      setShowPixPayment(true);
       
-      // Evento de compra concluída
+      // Evento de início de checkout PIX
       if (typeof window.dataLayer !== 'undefined') {
         window.dataLayer.push({
-          event: 'Purchase',
+          event: 'InitiateCheckout',
           value: planData.price,
           currency: 'BRL',
           payment_type: 'pix',
@@ -181,6 +185,30 @@ const Checkout = () => {
     }
   };
 
+  const handlePixPaymentConfirm = () => {
+    setShowSuccess(true);
+    
+    // Evento de compra concluída
+    if (typeof window.dataLayer !== 'undefined') {
+      window.dataLayer.push({
+        event: 'Purchase',
+        value: planData.price,
+        currency: 'BRL',
+        payment_type: 'pix',
+        ecommerce: {
+          currency: 'BRL',
+          value: planData.price,
+          items: [{
+            item_name: planData.title,
+            item_category: 'Plano de Assinatura',
+            price: planData.price,
+            quantity: 1
+          }]
+        }
+      });
+    }
+  };
+
   if (!planData) return null;
 
   if (showSuccess) {
@@ -201,6 +229,30 @@ const Checkout = () => {
               </Button>
             </CardContent>
           </Card>
+        </div>
+      </div>
+    );
+  }
+
+  // Se está mostrando a tela de PIX
+  if (showPixPayment && paymentMethod === "pix") {
+    return (
+      <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-2xl mx-auto">
+          <Button
+            variant="ghost"
+            className="mb-6"
+            onClick={() => setShowPixPayment(false)}
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Voltar
+          </Button>
+
+          <PixPaymentSection
+            onPaymentConfirm={handlePixPaymentConfirm}
+            pixCode={planData.pixCode || "00020126580014BR.GOV.BCB.PIX013636297118000121"}
+            pixQrCodeImage={planData.pixQrCodeImage || "/placeholder.svg"}
+          />
         </div>
       </div>
     );
@@ -282,55 +334,13 @@ const Checkout = () => {
                 </RadioGroup>
               </div>
 
-              {paymentMethod === "card" ? (
-                <Button
-                  onClick={handleStripeRedirect}
-                  className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-3 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
-                  disabled={isLoading}
-                >
-                  {isLoading ? "Processando..." : "Finalizar compra"}
-                </Button>
-              ) : (
-                <div className="space-y-4">
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <img
-                      src={planData.pixQrCodeImage}
-                      alt="QR Code PIX"
-                      className="mx-auto w-48 h-48"
-                    />
-                    <p className="text-center text-sm text-gray-600 mt-2">
-                      Escaneie o QR Code ou copie a chave PIX
-                    </p>
-                    <div className="mt-4">
-                      <Input
-                        value={planData.pixCode}
-                        readOnly
-                        className="text-center"
-                      />
-                      <Button
-                        onClick={() => {
-                          navigator.clipboard.writeText(planData.pixCode);
-                          toast({
-                            title: "Chave PIX copiada!",
-                            description: "A chave foi copiada para a área de transferência.",
-                          });
-                        }}
-                        variant="outline"
-                        className="w-full mt-2"
-                      >
-                        Copiar chave PIX
-                      </Button>
-                    </div>
-                  </div>
-                  <Button
-                    onClick={handlePixPayment}
-                    className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-3 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
-                    disabled={isLoading}
-                  >
-                    {isLoading ? "Processando..." : "Já realizei o pagamento"}
-                  </Button>
-                </div>
-              )}
+              <Button
+                onClick={paymentMethod === "card" ? handleStripeRedirect : handlePixPayment}
+                className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-3 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                disabled={isLoading}
+              >
+                {isLoading ? "Processando..." : "Finalizar Pagamento"}
+              </Button>
             </div>
           </div>
 
