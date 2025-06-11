@@ -96,15 +96,15 @@ const TrialSignupForm = ({ onClose }: TrialSignupFormProps) => {
         });
       }
 
-      // Save to database
+      // Save to database - usando os nomes corretos das colunas
       const { error } = await supabase
         .from('pix_phone_submissions')
         .insert({
           Email: email,
           phone_number: phone,
           plan_title: 'Teste Gratuito 7 dias',
-          patrimonio_investido: patrimonio,
-          valor_mensal_disponivel: valorMensal
+          Patrimonio: patrimonio,
+          'Investir Mês': valorMensal
         });
 
       if (error) {
@@ -120,10 +120,8 @@ const TrialSignupForm = ({ onClose }: TrialSignupFormProps) => {
         valorMensal 
       });
 
-      // Close modal first
+      // Close modal and clear form first
       onClose();
-      
-      // Clear form
       setEmail("");
       setPhone("");
       setPatrimonio("");
