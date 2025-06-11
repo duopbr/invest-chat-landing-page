@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,7 +9,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, Shield } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 interface TrialSignupModalProps {
@@ -19,7 +20,14 @@ interface TrialSignupModalProps {
 const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [errors, setErrors] = useState<{ email?: string; phone?: string }>({});
+  const [patrimonio, setPatrimonio] = useState("");
+  const [valorMensal, setValorMensal] = useState("");
+  const [errors, setErrors] = useState<{ 
+    email?: string; 
+    phone?: string; 
+    patrimonio?: string; 
+    valorMensal?: string; 
+  }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const formatPhoneNumber = (value: string) => {
@@ -39,13 +47,44 @@ const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
     return `+55 (${cleanNumbers.slice(0, 2)}) ${cleanNumbers.slice(2, 7)}-${cleanNumbers.slice(7, 11)}`;
   };
 
+  const formatCurrency = (value: string) => {
+    // Remove tudo que não for número
+    const numbers = value.replace(/\D/g, '');
+    
+    if (!numbers) return '';
+    
+    // Converte para centavos e formata como moeda
+    const cents = parseInt(numbers);
+    const reais = cents / 100;
+    
+    return reais.toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    });
+  };
+
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatted = formatPhoneNumber(e.target.value);
     setPhone(formatted);
   };
 
+  const handlePatrimonioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatCurrency(e.target.value);
+    setPatrimonio(formatted);
+  };
+
+  const handleValorMensalChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatCurrency(e.target.value);
+    setValorMensal(formatted);
+  };
+
   const validateForm = () => {
-    const newErrors: { email?: string; phone?: string } = {};
+    const newErrors: { 
+      email?: string; 
+      phone?: string; 
+      patrimonio?: string; 
+      valorMensal?: string; 
+    } = {};
 
     if (!email || !email.includes("@")) {
       newErrors.email = "Email válido é obrigatório";
@@ -55,6 +94,14 @@ const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
     const phoneRegex = /^\+55 \(\d{2}\) \d{5}-\d{4}$/;
     if (!phone || !phoneRegex.test(phone)) {
       newErrors.phone = "Telefone deve estar no formato +55 (XX) XXXXX-XXXX";
+    }
+
+    if (!patrimonio) {
+      newErrors.patrimonio = "Patrimônio investido é obrigatório";
+    }
+
+    if (!valorMensal) {
+      newErrors.valorMensal = "Valor disponível para investir é obrigatório";
     }
 
     setErrors(newErrors);
@@ -82,7 +129,9 @@ const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
         .insert({
           Email: email,
           phone_number: phone,
-          plan_title: 'Teste Gratuito 7 dias'
+          plan_title: 'Teste Gratuito 7 dias',
+          patrimonio_investido: patrimonio,
+          valor_mensal_disponivel: valorMensal
         });
 
       if (error) {
@@ -91,7 +140,12 @@ const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
         return;
       }
 
-      console.log("Cadastro realizado e salvo no Supabase:", { email, phone });
+      console.log("Cadastro realizado e salvo no Supabase:", { 
+        email, 
+        phone, 
+        patrimonio, 
+        valorMensal 
+      });
       
       // Redirecionar para WhatsApp
       const whatsappMessage = encodeURIComponent(
@@ -105,6 +159,8 @@ const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
       // Reset form
       setEmail("");
       setPhone("");
+      setPatrimonio("");
+      setValorMensal("");
       setErrors({});
     } catch (error) {
       console.error('Erro inesperado:', error);
@@ -116,7 +172,7 @@ const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-center text-xl font-bold text-gray-800">
             Cadastre-se para o Teste Gratuito
@@ -153,6 +209,49 @@ const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
             {errors.phone && (
               <p className="text-sm text-red-500">{errors.phone}</p>
             )}
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="patrimonio">Patrimônio já investido *</Label>
+            <Input
+              id="patrimonio"
+              type="text"
+              placeholder="R$ 0,00"
+              value={patrimonio}
+              onChange={handlePatrimonioChange}
+              className={errors.patrimonio ? "border-red-500" : ""}
+            />
+            {errors.patrimonio && (
+              <p className="text-sm text-red-500">{errors.patrimonio}</p>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="valorMensal">Valor disponível para investir por mês *</Label>
+            <Input
+              id="valorMensal"
+              type="text"
+              placeholder="R$ 0,00"
+              value={valorMensal}
+              onChange={handleValorMensalChange}
+              className={errors.valorMensal ? "border-red-500" : ""}
+            />
+            {errors.valorMensal && (
+              <p className="text-sm text-red-500">{errors.valorMensal}</p>
+            )}
+          </div>
+
+          <div className="bg-blue-50 p-3 rounded-lg border border-blue-200">
+            <div className="flex items-center gap-2 mb-2">
+              <Shield className="h-4 w-4 text-blue-600" />
+              <p className="font-medium text-blue-800 text-sm">Seus dados estão 100% seguros</p>
+            </div>
+            <p className="text-xs text-blue-700">
+              • Utilizamos criptografia avançada<br/>
+              • Não compartilhamos com terceiros<br/>
+              • Conformidade com LGPD<br/>
+              • Dados usados apenas para consultoria personalizada
+            </p>
           </div>
 
           <div className="bg-green-50 p-3 rounded-lg text-sm text-green-700">
