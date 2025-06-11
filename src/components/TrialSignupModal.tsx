@@ -8,6 +8,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { MessageCircle, Shield } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -47,35 +54,9 @@ const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
     return `+55 (${cleanNumbers.slice(0, 2)}) ${cleanNumbers.slice(2, 7)}-${cleanNumbers.slice(7, 11)}`;
   };
 
-  const formatCurrency = (value: string) => {
-    // Remove tudo que não for número
-    const numbers = value.replace(/\D/g, '');
-    
-    if (!numbers) return '';
-    
-    // Converte para centavos e formata como moeda
-    const cents = parseInt(numbers);
-    const reais = cents / 100;
-    
-    return reais.toLocaleString('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    });
-  };
-
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatted = formatPhoneNumber(e.target.value);
     setPhone(formatted);
-  };
-
-  const handlePatrimonioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const formatted = formatCurrency(e.target.value);
-    setPatrimonio(formatted);
-  };
-
-  const handleValorMensalChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const formatted = formatCurrency(e.target.value);
-    setValorMensal(formatted);
   };
 
   const validateForm = () => {
@@ -212,15 +193,20 @@ const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="patrimonio">Patrimônio já investido *</Label>
-            <Input
-              id="patrimonio"
-              type="text"
-              placeholder="R$ 0,00"
-              value={patrimonio}
-              onChange={handlePatrimonioChange}
-              className={errors.patrimonio ? "border-red-500" : ""}
-            />
+            <Label htmlFor="patrimonio">Patrimônio líquido investido *</Label>
+            <Select value={patrimonio} onValueChange={setPatrimonio}>
+              <SelectTrigger className={errors.patrimonio ? "border-red-500" : ""}>
+                <SelectValue placeholder="Selecione..." />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="até-50mil">Até R$ 50 mil</SelectItem>
+                <SelectItem value="50mil-150mil">R$ 50 mil - R$ 150 mil</SelectItem>
+                <SelectItem value="150mil-300mil">R$ 150 mil - R$ 300 mil</SelectItem>
+                <SelectItem value="300mil-500mil">R$ 300 mil - R$ 500 mil</SelectItem>
+                <SelectItem value="500mil-1milhao">R$ 500 mil - R$ 1 milhão</SelectItem>
+                <SelectItem value="acima-1milhao">Acima de R$ 1 milhão</SelectItem>
+              </SelectContent>
+            </Select>
             {errors.patrimonio && (
               <p className="text-sm text-red-500">{errors.patrimonio}</p>
             )}
@@ -228,14 +214,22 @@ const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
 
           <div className="space-y-2">
             <Label htmlFor="valorMensal">Valor disponível para investir por mês *</Label>
-            <Input
-              id="valorMensal"
-              type="text"
-              placeholder="R$ 0,00"
-              value={valorMensal}
-              onChange={handleValorMensalChange}
-              className={errors.valorMensal ? "border-red-500" : ""}
-            />
+            <Select value={valorMensal} onValueChange={setValorMensal}>
+              <SelectTrigger className={errors.valorMensal ? "border-red-500" : ""}>
+                <SelectValue placeholder="Selecione..." />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="até-100">Até R$ 100</SelectItem>
+                <SelectItem value="100-300">R$ 100 - R$ 300</SelectItem>
+                <SelectItem value="300-500">R$ 300 - R$ 500</SelectItem>
+                <SelectItem value="500-800">R$ 500 - R$ 800</SelectItem>
+                <SelectItem value="800-1000">R$ 800 - R$ 1.000</SelectItem>
+                <SelectItem value="1000-3000">R$ 1.000 - R$ 3.000</SelectItem>
+                <SelectItem value="3000-5000">R$ 3.000 - R$ 5.000</SelectItem>
+                <SelectItem value="5000-10000">R$ 5.000 - R$ 10.000</SelectItem>
+                <SelectItem value="acima-10000">Acima de R$ 10.000</SelectItem>
+              </SelectContent>
+            </Select>
             {errors.valorMensal && (
               <p className="text-sm text-red-500">{errors.valorMensal}</p>
             )}
