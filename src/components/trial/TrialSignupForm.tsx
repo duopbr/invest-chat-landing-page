@@ -135,7 +135,7 @@ const TrialSignupForm = ({ onClose }: TrialSignupFormProps) => {
         const whatsappMessage = encodeURIComponent(
           `Olá! Me cadastrei para o teste gratuito de 7 dias da consultoria de investimentos.`
         );
-        const whatsappUrl = `https://wa.me/5521967135336?text=${whatsappMessage}`;
+        const whatsappUrl = `https://wa.me/5521998883771?text=${whatsappMessage}`;
         
         console.log("Redirecionando para WhatsApp:", whatsappUrl);
         window.open(whatsappUrl, "_blank");

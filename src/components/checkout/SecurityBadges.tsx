@@ -1,3 +1,4 @@
+
 import { Shield, Lock, CreditCard } from "lucide-react";
 
 const SecurityBadges = () => {
@@ -31,10 +32,10 @@ const SecurityBadges = () => {
       </div>
 
       <div className="text-xs text-gray-500 text-center mt-4">
-        Precisa de ajuda? <a href="https://wa.me/seu-numero" className="text-green-600 hover:text-green-700">Fale com nosso suporte</a>
+        Precisa de ajuda? <a href="https://wa.me/5521998883771" className="text-green-600 hover:text-green-700">Fale com nosso suporte</a>
       </div>
     </div>
   );
 };
 
-export default SecurityBadges; 
+export default SecurityBadges;
