@@ -57,17 +57,15 @@ const TrialSignupForm = ({ onClose }: TrialSignupFormProps) => {
       newErrors.email = "Email válido é obrigatório";
     }
 
-    // More flexible phone validation - accept both 10 and 11 digit numbers
+    // Validate phone number for 11 digits
     const phoneNumbers = phone.replace(/\D/g, '');
     const cleanPhoneNumbers = phoneNumbers.startsWith('55') ? phoneNumbers.slice(2) : phoneNumbers;
     
     if (!phone) {
       newErrors.phone = "Telefone é obrigatório";
-    } else if (cleanPhoneNumbers.length < 10 || cleanPhoneNumbers.length > 11) {
-      newErrors.phone = "Telefone deve ter 10 ou 11 dígitos (DDD + número)";
-    } else if (cleanPhoneNumbers.length === 10 && !['2', '3', '4', '5'].includes(cleanPhoneNumbers[2])) {
-      newErrors.phone = "Para números fixos, o terceiro dígito deve ser 2, 3, 4 ou 5";
-    } else if (cleanPhoneNumbers.length === 11 && cleanPhoneNumbers[2] !== '9') {
+    } else if (cleanPhoneNumbers.length !== 11) {
+      newErrors.phone = "Telefone deve ter 11 dígitos (DDD + 9 dígitos do celular)";
+    } else if (cleanPhoneNumbers[2] !== '9') {
       newErrors.phone = "Para celulares, o terceiro dígito deve ser 9";
     }
 
@@ -89,6 +87,7 @@ const TrialSignupForm = ({ onClose }: TrialSignupFormProps) => {
     setIsSubmitting(true);
     
     try {
+      // Track conversion
       if (typeof window !== 'undefined' && window.dataLayer) {
         window.dataLayer.push({
           event: 'lead',
@@ -97,6 +96,7 @@ const TrialSignupForm = ({ onClose }: TrialSignupFormProps) => {
         });
       }
 
+      // Save to database
       const { error } = await supabase
         .from('pix_phone_submissions')
         .insert({
@@ -113,26 +113,34 @@ const TrialSignupForm = ({ onClose }: TrialSignupFormProps) => {
         return;
       }
 
-      console.log("Cadastro realizado e salvo no Supabase:", { 
+      console.log("Cadastro realizado com sucesso:", { 
         email, 
         phone, 
         patrimonio, 
         valorMensal 
       });
-      
-      const whatsappMessage = encodeURIComponent(
-        `Olá! Me cadastrei para o teste gratuito de 7 dias da consultoria de investimentos.`
-      );
-      const whatsappUrl = `https://wa.me/5521967135336?text=${whatsappMessage}`;
-      
-      window.open(whatsappUrl, "_blank");
+
+      // Close modal first
       onClose();
       
+      // Clear form
       setEmail("");
       setPhone("");
       setPatrimonio("");
       setValorMensal("");
       setErrors({});
+      
+      // Redirect to WhatsApp with a small delay to ensure modal closes
+      setTimeout(() => {
+        const whatsappMessage = encodeURIComponent(
+          `Olá! Me cadastrei para o teste gratuito de 7 dias da consultoria de investimentos.`
+        );
+        const whatsappUrl = `https://wa.me/5521967135336?text=${whatsappMessage}`;
+        
+        console.log("Redirecionando para WhatsApp:", whatsappUrl);
+        window.open(whatsappUrl, "_blank");
+      }, 500);
+      
     } catch (error) {
       console.error('Erro inesperado:', error);
       alert('Erro inesperado. Tente novamente.');
