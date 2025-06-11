@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -219,11 +218,9 @@ const TrialSignupModal = ({ isOpen, onClose }: TrialSignupModalProps) => {
                 <SelectValue placeholder="Selecione..." />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="até-100">Até R$ 100</SelectItem>
-                <SelectItem value="100-300">R$ 100 - R$ 300</SelectItem>
+                <SelectItem value="até-300">Até R$ 300</SelectItem>
                 <SelectItem value="300-500">R$ 300 - R$ 500</SelectItem>
-                <SelectItem value="500-800">R$ 500 - R$ 800</SelectItem>
-                <SelectItem value="800-1000">R$ 800 - R$ 1.000</SelectItem>
+                <SelectItem value="500-1000">R$ 500 - R$ 1.000</SelectItem>
                 <SelectItem value="1000-3000">R$ 1.000 - R$ 3.000</SelectItem>
                 <SelectItem value="3000-5000">R$ 3.000 - R$ 5.000</SelectItem>
                 <SelectItem value="5000-10000">R$ 5.000 - R$ 10.000</SelectItem>
