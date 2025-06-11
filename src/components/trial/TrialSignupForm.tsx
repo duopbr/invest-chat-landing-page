@@ -25,7 +25,10 @@ const TrialSignupForm = ({ onClose }: TrialSignupFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const formatPhoneNumber = (value: string) => {
+    // Remove all non-digits
     const numbers = value.replace(/\D/g, '');
+    
+    // Remove country code if it starts with 55
     const cleanNumbers = numbers.startsWith('55') ? numbers.slice(2) : numbers;
     
     if (cleanNumbers.length === 0) return '';
@@ -33,6 +36,7 @@ const TrialSignupForm = ({ onClose }: TrialSignupFormProps) => {
     if (cleanNumbers.length <= 7) return `+55 (${cleanNumbers.slice(0, 2)}) ${cleanNumbers.slice(2)}`;
     if (cleanNumbers.length <= 11) return `+55 (${cleanNumbers.slice(0, 2)}) ${cleanNumbers.slice(2, 7)}-${cleanNumbers.slice(7)}`;
     
+    // Limit to 11 digits (DDD + 9 digits)
     return `+55 (${cleanNumbers.slice(0, 2)}) ${cleanNumbers.slice(2, 7)}-${cleanNumbers.slice(7, 11)}`;
   };
 
@@ -53,9 +57,18 @@ const TrialSignupForm = ({ onClose }: TrialSignupFormProps) => {
       newErrors.email = "Email válido é obrigatório";
     }
 
-    const phoneRegex = /^\+55 \(\d{2}\) \d{5}-\d{4}$/;
-    if (!phone || !phoneRegex.test(phone)) {
-      newErrors.phone = "Telefone deve estar no formato +55 (XX) XXXXX-XXXX";
+    // More flexible phone validation - accept both 10 and 11 digit numbers
+    const phoneNumbers = phone.replace(/\D/g, '');
+    const cleanPhoneNumbers = phoneNumbers.startsWith('55') ? phoneNumbers.slice(2) : phoneNumbers;
+    
+    if (!phone) {
+      newErrors.phone = "Telefone é obrigatório";
+    } else if (cleanPhoneNumbers.length < 10 || cleanPhoneNumbers.length > 11) {
+      newErrors.phone = "Telefone deve ter 10 ou 11 dígitos (DDD + número)";
+    } else if (cleanPhoneNumbers.length === 10 && !['2', '3', '4', '5'].includes(cleanPhoneNumbers[2])) {
+      newErrors.phone = "Para números fixos, o terceiro dígito deve ser 2, 3, 4 ou 5";
+    } else if (cleanPhoneNumbers.length === 11 && cleanPhoneNumbers[2] !== '9') {
+      newErrors.phone = "Para celulares, o terceiro dígito deve ser 9";
     }
 
     if (!patrimonio) {
