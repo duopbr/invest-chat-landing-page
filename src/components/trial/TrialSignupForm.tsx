@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { MessageCircle } from "lucide-react";
@@ -92,7 +91,11 @@ const TrialSignupForm = ({ onClose }: TrialSignupFormProps) => {
         window.dataLayer.push({
           event: 'lead',
           lead_type: 'trial',
-          form_location: 'modal'
+          form_location: 'modal',
+          user_data: {
+            em: email,
+            ph: phone
+          }
         });
       }
 

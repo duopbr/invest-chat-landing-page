@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -31,6 +30,7 @@ const Checkout = () => {
   const [paymentMethod, setPaymentMethod] = useState<"card" | "pix">("card");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showPixPayment, setShowPixPayment] = useState(false);
 
@@ -56,6 +56,7 @@ const Checkout = () => {
           {
             name,
             email,
+            phone,
             plan_title: planData.title,
             plan_price: planData.price,
             payment_method: paymentMethod
@@ -86,10 +87,10 @@ const Checkout = () => {
   };
 
   const handleStripeRedirect = async () => {
-    if (!email || !name) {
+    if (!email || !name || !phone) {
       toast({
         title: "Campos obrigatórios",
-        description: "Por favor, preencha seu nome e e-mail.",
+        description: "Por favor, preencha seu nome, e-mail e telefone.",
         variant: "destructive",
       });
       return;
@@ -112,6 +113,10 @@ const Checkout = () => {
         value: planData.price,
         currency: 'BRL',
         payment_type: 'card',
+        user_data: {
+            em: email,
+            ph: phone
+        },
         ecommerce: {
           currency: 'BRL',
           value: planData.price,
@@ -130,10 +135,10 @@ const Checkout = () => {
   };
 
   const handlePixPayment = async () => {
-    if (!email || !name) {
+    if (!email || !name || !phone) {
       toast({
         title: "Campos obrigatórios",
-        description: "Por favor, preencha seu nome e e-mail.",
+        description: "Por favor, preencha seu nome, e-mail e telefone.",
         variant: "destructive",
       });
       return;
@@ -161,6 +166,10 @@ const Checkout = () => {
           value: planData.price,
           currency: 'BRL',
           payment_type: 'pix',
+          user_data: {
+              em: email,
+              ph: phone
+          },
           ecommerce: {
             currency: 'BRL',
             value: planData.price,
@@ -307,28 +316,43 @@ const Checkout = () => {
             </Card>
 
             <div className="space-y-6">
-              <div>
-                <Label htmlFor="name">Nome completo</Label>
-                <Input
-                  id="name"
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Digite seu nome completo"
-                  className="mt-1"
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="email">E-mail</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Digite seu e-mail"
-                  className="mt-1"
-                />
+              <div className="grid grid-cols-1 gap-4">
+                <div>
+                  <Label htmlFor="name">Nome Completo *</Label>
+                  <Input
+                    id="name"
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Digite seu nome completo"
+                    className="mt-1"
+                    required
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="email">E-mail *</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Digite seu e-mail"
+                    className="mt-1"
+                    required
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="phone">Telefone *</Label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="(XX) XXXXX-XXXX"
+                    className="mt-1"
+                    required
+                  />
+                </div>
               </div>
 
               <div>
