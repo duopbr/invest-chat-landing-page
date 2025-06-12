@@ -233,11 +233,38 @@ const Checkout = () => {
             Voltar
           </Button>
 
-          <PixPaymentSection
-            onPaymentConfirm={handlePixPaymentConfirm}
-            pixCode={planData.pixCode || "00020126580014BR.GOV.BCB.PIX013636297118000121"}
-            pixQrCodeImage={planData.pixQrCodeImage || "/placeholder.svg"}
-          />
+          <div className="bg-gray-50 p-4 rounded-lg">
+            {planData.pixQrCodeImage && (
+              <img
+                src={planData.pixQrCodeImage}
+                alt={`QR Code PIX para ${planData.title}`}
+                className="mx-auto w-48 h-48 object-contain"
+              />
+            )}
+            <p className="text-center text-sm text-gray-600 mt-2">
+              Escaneie o QR Code ou copie a chave PIX
+            </p>
+            <div className="mt-4">
+              <Input
+                value={planData.pixCode}
+                readOnly
+                className="text-center text-sm font-mono bg-white"
+              />
+              <Button
+                onClick={() => {
+                  navigator.clipboard.writeText(planData.pixCode);
+                  toast({
+                    title: "Chave PIX copiada!",
+                    description: "A chave foi copiada para a área de transferência.",
+                  });
+                }}
+                variant="outline"
+                className="w-full mt-2"
+              >
+                Copiar chave PIX
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     );

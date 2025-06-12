@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { slugify, extractNumericPrice } from "@/utils/priceUtils";
@@ -32,23 +31,25 @@ const PricingCard = ({
   stripeLink,
   isPopular = false,
   benefits,
-  pixCode = "",
 }: PricingCardProps) => {
   const navigate = useNavigate();
 
-  // Define QR code images based on plan title
-  const getPixQrCodeImage = (planTitle: string) => {
-    if (planTitle.includes("Mensal")) {
-      return "/lovable-uploads/c58bd464-e5d1-4f65-8a08-c169aabbfa4f.png";
-    } else if (planTitle.includes("Trimestral")) {
-      return "/lovable-uploads/b7f66c6c-b903-475a-9cf5-7ff7f9ad7d66.png";
-    } else if (planTitle.includes("Semestral")) {
-      return "/lovable-uploads/f5db6e97-3064-4793-8b93-60acf3e1fa2a.png";
-    }
-    return "/placeholder.svg";
-  };
-
   const handlePlanSelect = () => {
+    // Determina qual imagem e código PIX usar baseado no título do plano
+    let qrCodeImage = '';
+    let pixCodeValue = '';
+
+    if (title.toLowerCase().includes('mensal')) {
+      qrCodeImage = '/imagens/Plano Mensal.png';
+      pixCodeValue = '00020126650014br.gov.bcb.pix0114547777530001370225WHATSAPPESPECIALISTASDUOP520400005303986540534.995802BR5916GPR ANALISE LTDA6008BRASILIA62070503***63048CF0';
+    } else if (title.toLowerCase().includes('trimestral')) {
+      qrCodeImage = '/imagens/Plano Trimestral.png';
+      pixCodeValue = '00020126680014br.gov.bcb.pix0114547777530001370228WHATSAPP ESPECIALISTAS DUOP 520400005303986540594.995802BR5916GPR ANALISE LTDA6008BRASILIA62070503***6304C79D';
+    } else if (title.toLowerCase().includes('semestral')) {
+      qrCodeImage = '/imagens/Plano Semestral.png';
+      pixCodeValue = '00020126680014br.gov.bcb.pix0114547777530001370228WHATSAPP ESPECIALISTAS DUOP 5204000053039865406167.995802BR5916GPR ANALISE LTDA6008BRASILIA62070503***6304C3F2';
+    }
+
     const planData = {
       title,
       price,
@@ -58,8 +59,8 @@ const PricingCard = ({
       discountType,
       stripeLink,
       benefits,
-      pixCode,
-      pixQrCodeImage: getPixQrCodeImage(title)
+      pixCode: pixCodeValue,
+      pixQrCodeImage: qrCodeImage
     };
 
     // Evento de seleção do plano
