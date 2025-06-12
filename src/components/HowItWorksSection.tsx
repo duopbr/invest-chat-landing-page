@@ -1,4 +1,3 @@
-
 import { Check, MessageCircle, DollarSign, BadgeCheck, Gift } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
@@ -97,9 +96,9 @@ const HowItWorksSection = ({ onTrialClick }: HowItWorksSectionProps) => {
             {
               step: "1",
               title: "Assine o serviço",
-              description: "Apenas R$69,90 por mês, sem fidelidade. Cancele quando quiser pelo WhatsApp.",
+              description: "Apenas R$54,99 por mês, sem fidelidade. Cancele quando quiser pelo WhatsApp.",
               icon: <DollarSign className="h-4 w-4 mr-1" />,
-              detail: "R$69,90/mês - Sem taxas",
+              detail: "R$54,99/mês - Sem taxas",
               color: "emerald"
             },
             {

@@ -104,10 +104,10 @@ const HeroSection = () => {
                 </div>
                 <div className="flex items-baseline gap-3 mb-4">
                   <span className="text-gray-500 text-lg">
-                    de <span className="line-through">R$139,80</span>
+                    de <span className="line-through">R$109,99</span>
                   </span>
                   <span className="text-green-600 font-bold text-2xl animate-pulse">
-                    por R$69,90
+                    por R$54,99
                   </span>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3">
@@ -122,7 +122,7 @@ const HeroSection = () => {
             </div>
             
             <p className="text-sm text-gray-600 bg-white/60 p-3 rounded-lg border border-green-100 animate-fade-in delay-800 hover:bg-white/80 transition-all duration-300">
-              <span className="font-semibold text-green-700">🔥 Oferta por tempo limitado:</span> garante seu acesso agora! Acesso completo por R$69,90/mês.
+              <span className="font-semibold text-green-700">🔥 Oferta por tempo limitado:</span> garante seu acesso agora! Acesso completo por R$54,99/mês.
             </p>
           </div>
           

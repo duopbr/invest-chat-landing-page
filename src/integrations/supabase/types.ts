@@ -44,6 +44,7 @@ export type Database = {
           Email: string | null
           id: number
           "Investir Mês": string | null
+          "Ja foi contatado?": string | null
           Patrimonio: string | null
           phone_number: string | null
           plan_title: string | null
@@ -53,6 +54,7 @@ export type Database = {
           Email?: string | null
           id?: number
           "Investir Mês"?: string | null
+          "Ja foi contatado?"?: string | null
           Patrimonio?: string | null
           phone_number?: string | null
           plan_title?: string | null
@@ -62,6 +64,7 @@ export type Database = {
           Email?: string | null
           id?: number
           "Investir Mês"?: string | null
+          "Ja foi contatado?"?: string | null
           Patrimonio?: string | null
           phone_number?: string | null
           plan_title?: string | null

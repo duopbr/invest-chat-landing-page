@@ -21,11 +21,11 @@ const Obrigado = () => {
   }, [sessionId]);
 
   const handleWhatsAppClick = () => {
-    window.open("https://wa.me/5521967135336?text=Boa%20tarde%2C%20comprei%20o%20produto%20me%20explique%20o%20que%20voc%C3%AAs%20fazem", "_blank");
+    window.open("https://wa.me/5521998883771?text=Boa%20tarde%2C%20comprei%20o%20produto%20me%20explique%20o%20que%20voc%C3%AAs%20fazem", "_blank");
   };
 
   const handleSupportClick = () => {
-    window.open("https://wa.me/5521967135336?text=Preciso%20de%20ajuda%20com%20meu%20pagamento", "_blank");
+    window.open("https://wa.me/5521998883771?text=Preciso%20de%20ajuda%20com%20meu%20pagamento", "_blank");
   };
 
   return (
