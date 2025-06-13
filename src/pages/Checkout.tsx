@@ -56,7 +56,7 @@ const Checkout = () => {
           {
             name,
             email,
-            phone,
+            phone, // Corrigido: usando 'phone' ao invés de 'phone_number'
             plan_title: planData.title,
             plan_price: planData.price,
             payment_method: paymentMethod
