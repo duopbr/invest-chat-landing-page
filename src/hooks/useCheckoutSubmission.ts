@@ -21,7 +21,6 @@ export const useCheckoutSubmission = () => {
           {
             name,
             email,
-            phone,
             plan_title: planTitle,
             plan_price: planPrice,
             payment_method: paymentMethod
