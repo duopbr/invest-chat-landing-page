@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -63,7 +62,8 @@ const Checkout = () => {
     }
 
     trackCheckoutInitiation(planData, email, phone, 'card');
-    window.location.href = planData.stripeLink;
+    window.open(planData.stripeLink, '_blank');
+    setIsLoading(false);
   };
 
   const handlePixPayment = async () => {
