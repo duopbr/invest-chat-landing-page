@@ -37,6 +37,11 @@ const CheckoutForm = ({
   // Remove R$ duplicado se existir
   const cleanPrice = planData.price?.replace(/^R\$\s*R\$\s*/, 'R$ ') || planData.price;
 
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSubmit();
+  };
+
   return (
     <div>
       <Card className="mb-6">
@@ -58,12 +63,13 @@ const CheckoutForm = ({
         </CardContent>
       </Card>
 
-      <div className="space-y-6">
+      <form onSubmit={handleFormSubmit} className="space-y-6">
         <div className="grid grid-cols-1 gap-4">
           <div>
             <Label htmlFor="name">Nome Completo *</Label>
             <Input
               id="name"
+              name="name"
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -76,6 +82,7 @@ const CheckoutForm = ({
             <Label htmlFor="email">E-mail *</Label>
             <Input
               id="email"
+              name="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -88,6 +95,7 @@ const CheckoutForm = ({
             <Label htmlFor="phone">Telefone *</Label>
             <Input
               id="phone"
+              name="phone"
               type="tel"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
@@ -117,13 +125,13 @@ const CheckoutForm = ({
         </div>
 
         <Button
-          onClick={onSubmit}
+          type="submit"
           className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-3 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
           disabled={isLoading}
         >
           {isLoading ? "Processando..." : "Finalizar Pagamento"}
         </Button>
-      </div>
+      </form>
     </div>
   );
 };
