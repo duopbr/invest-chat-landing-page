@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Check, Timer, Sparkles, Brain, TrendingUp, HelpCircle, Shield } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -110,8 +109,8 @@ const HeroSection = () => {
                   50% OFF - Oferta Limitada
                 </div>
                 <div className="flex items-baseline gap-4 mb-4">
-                  <span className="text-gray-500 text-xl font-semibold">
-                    de <span className="line-through text-2xl font-bold">R$109,99</span>
+                  <span className="text-gray-600 text-xl font-semibold">
+                    de <span className="line-through text-2xl font-bold text-gray-700 bg-red-100 px-2 py-1 rounded">R$109,99</span>
                   </span>
                   <span className="text-green-600 font-bold text-3xl animate-pulse">
                     por R$54,99
@@ -139,10 +138,6 @@ const HeroSection = () => {
                 <span className="flex items-center gap-1">
                   <div className="w-3 h-3 bg-blue-500 rounded"></div>
                   Stripe
-                </span>
-                <span className="flex items-center gap-1">
-                  <div className="w-3 h-3 bg-green-500 rounded"></div>
-                  SSL 256-bit
                 </span>
                 <span className="flex items-center gap-1">
                   <div className="w-3 h-3 bg-orange-500 rounded"></div>
