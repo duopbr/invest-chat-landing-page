@@ -70,7 +70,7 @@ const Navbar: React.FC<NavbarProps> = ({ onTrialClick }) => {
                   <div className="ml-4">
                   <Button 
                     onClick={handleButtonClick} 
-                    className="bg-[#00B894] text-white hover:bg-[#00A080]"
+                    className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold px-6 py-2.5 text-base shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                   >
                     {buttonText}
                   </Button>
@@ -146,7 +146,7 @@ const Navbar: React.FC<NavbarProps> = ({ onTrialClick }) => {
               <div className="block px-3 py-2">
                <Button 
                 onClick={handleButtonClick} 
-                className="w-full bg-[#00B894] text-white hover:bg-[#00A080]"
+                className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold px-6 py-2.5 shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 {buttonText}
               </Button>

@@ -1,5 +1,6 @@
+
 import { Button } from "@/components/ui/button";
-import { MessageCircle, Check, Timer, Sparkles } from "lucide-react";
+import { MessageCircle, Check, Timer, Sparkles, Brain, TrendingUp, HelpCircle, Shield } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -72,48 +73,54 @@ const HeroSection = () => {
               Invista com confiança: tenha acesso a uma segunda opinião, insights validados e orientação sempre que precisar.
             </p>
             
-            <div className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl mb-8 border border-green-100 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 animate-fade-in delay-400">
-              <ul className="space-y-4">
-                <li className="flex items-start gap-3 transform hover:translate-x-2 transition-transform duration-300">
-                  <div className="bg-green-100 p-1 rounded-full animate-bounce">
-                    <Check className="text-green-600 h-4 w-4" />
+            {/* Proposta de valor otimizada com ícones visuais */}
+            <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl mb-8 border border-green-100 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 animate-fade-in delay-400">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="flex flex-col items-center text-center group hover:scale-105 transition-transform duration-300">
+                  <div className="bg-gradient-to-br from-blue-100 to-blue-200 p-4 rounded-full mb-4 group-hover:from-blue-200 group-hover:to-blue-300 transition-all duration-300">
+                    <Brain className="text-blue-600 h-8 w-8" />
                   </div>
-                  <span className="text-gray-700 font-medium">Segunda opinião de especialistas consolidados</span>
-                </li>
-                <li className="flex items-start gap-3 transform hover:translate-x-2 transition-transform duration-300 delay-100">
-                  <div className="bg-green-100 p-1 rounded-full animate-bounce delay-200">
-                    <Check className="text-green-600 h-4 w-4" />
+                  <h3 className="font-semibold text-gray-800 mb-2">Segunda Opinião</h3>
+                  <p className="text-sm text-gray-600">De especialistas consolidados no mercado</p>
+                </div>
+                
+                <div className="flex flex-col items-center text-center group hover:scale-105 transition-transform duration-300">
+                  <div className="bg-gradient-to-br from-green-100 to-green-200 p-4 rounded-full mb-4 group-hover:from-green-200 group-hover:to-green-300 transition-all duration-300">
+                    <TrendingUp className="text-green-600 h-8 w-8" />
                   </div>
-                  <span className="text-gray-700 font-medium">Análises e insights sobre seus investimentos</span>
-                </li>
-                <li className="flex items-start gap-3 transform hover:translate-x-2 transition-transform duration-300 delay-200">
-                  <div className="bg-green-100 p-1 rounded-full animate-bounce delay-400">
-                    <Check className="text-green-600 h-4 w-4" />
+                  <h3 className="font-semibold text-gray-800 mb-2">Análises & Insights</h3>
+                  <p className="text-sm text-gray-600">Sobre seus investimentos e o mercado</p>
+                </div>
+                
+                <div className="flex flex-col items-center text-center group hover:scale-105 transition-transform duration-300">
+                  <div className="bg-gradient-to-br from-purple-100 to-purple-200 p-4 rounded-full mb-4 group-hover:from-purple-200 group-hover:to-purple-300 transition-all duration-300">
+                    <HelpCircle className="text-purple-600 h-8 w-8" />
                   </div>
-                  <span className="text-gray-700 font-medium">Esclarecimento de dúvidas financeiras</span>
-                </li>
-              </ul>
+                  <h3 className="font-semibold text-gray-800 mb-2">Tire Dúvidas</h3>
+                  <p className="text-sm text-gray-600">Esclarecimento de questões financeiras</p>
+                </div>
+              </div>
             </div>
             
             <div className="flex flex-col sm:flex-row items-start gap-6 mb-6 animate-fade-in delay-600">
               <div className="w-full sm:w-auto">
-                <div className="mb-3 bg-gradient-to-r from-red-500 via-orange-500 to-red-600 text-white px-4 py-2 rounded-full text-sm font-bold inline-flex items-center shadow-lg hover:scale-110 transition-transform duration-300 relative overflow-hidden">
+                <div className="mb-4 bg-gradient-to-r from-red-500 via-orange-500 to-red-600 text-white px-6 py-3 rounded-full text-sm font-bold inline-flex items-center shadow-lg hover:scale-110 transition-transform duration-300 relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 animate-[slide_8s_ease-in-out_infinite]"></div>
                   <Timer className="h-4 w-4 mr-2" />
                   50% OFF - Oferta Limitada
                 </div>
-                <div className="flex items-baseline gap-3 mb-4">
-                  <span className="text-gray-500 text-lg">
-                    de <span className="line-through">R$109,99</span>
+                <div className="flex items-baseline gap-4 mb-4">
+                  <span className="text-gray-500 text-xl font-semibold">
+                    de <span className="line-through text-2xl font-bold">R$109,99</span>
                   </span>
-                  <span className="text-green-600 font-bold text-2xl animate-pulse">
+                  <span className="text-green-600 font-bold text-3xl animate-pulse">
                     por R$54,99
                   </span>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Button
                     onClick={handleClick}
-                    className="w-full sm:w-auto bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-3 px-8 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="w-full sm:w-auto bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-4 px-10 text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                   >
                     Assinar Agora
                   </Button>
@@ -121,9 +128,31 @@ const HeroSection = () => {
               </div>
             </div>
             
-            <p className="text-sm text-gray-600 bg-white/60 p-3 rounded-lg border border-green-100 animate-fade-in delay-800 hover:bg-white/80 transition-all duration-300">
-              <span className="font-semibold text-green-700">🔥 Oferta por tempo limitado:</span> garante seu acesso agora! Acesso completo por R$54,99/mês.
-            </p>
+            {/* Seção de confiança no pagamento */}
+            <div className="bg-white/80 p-4 rounded-lg border border-green-100 animate-fade-in delay-800 hover:bg-white/90 transition-all duration-300">
+              <div className="flex items-center justify-center gap-3 mb-2">
+                <Shield className="h-5 w-5 text-green-600" />
+                <span className="font-semibold text-green-700">🔐 Pagamento 100% Seguro</span>
+                <Shield className="h-5 w-5 text-green-600" />
+              </div>
+              <div className="flex items-center justify-center gap-4 text-xs text-gray-600">
+                <span className="flex items-center gap-1">
+                  <div className="w-3 h-3 bg-blue-500 rounded"></div>
+                  Stripe
+                </span>
+                <span className="flex items-center gap-1">
+                  <div className="w-3 h-3 bg-green-500 rounded"></div>
+                  SSL 256-bit
+                </span>
+                <span className="flex items-center gap-1">
+                  <div className="w-3 h-3 bg-orange-500 rounded"></div>
+                  PIX Seguro
+                </span>
+              </div>
+              <p className="text-sm text-gray-600 text-center mt-2">
+                <span className="font-semibold text-green-700">🔥 Oferta por tempo limitado:</span> garante seu acesso agora! Acesso completo por R$54,99/mês.
+              </p>
+            </div>
           </div>
           
           <div className={`w-full lg:w-1/2 relative transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`}>
