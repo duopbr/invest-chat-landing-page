@@ -10,9 +10,9 @@ const CountdownTimer = () => {
   });
 
   useEffect(() => {
-    // Define o fim da oferta para 24 horas a partir de agora
+    // Define o fim da oferta para 2 horas a partir de agora
     const endTime = new Date();
-    endTime.setHours(endTime.getHours() + 24);
+    endTime.setHours(endTime.getHours() + 2);
     
     const timer = setInterval(() => {
       const now = new Date().getTime();
