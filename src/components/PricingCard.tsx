@@ -1,12 +1,10 @@
-
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { ModernButton } from "@/components/ui/modern-button";
+import { Button } from "@/components/ui/button";
 import { slugify, extractNumericPrice } from "@/utils/priceUtils";
 import PricingDisplay from "./pricing/PricingDisplay";
 import BenefitsList from "./pricing/BenefitsList";
 import PopularBadge from "./pricing/PopularBadge";
 import { useNavigate } from "react-router-dom";
-import { cn } from "@/lib/utils";
 
 interface PricingCardProps {
   title: string;
@@ -88,20 +86,11 @@ const PricingCard = ({
   };
 
   return (
-    <Card className={cn(
-      "group relative w-full h-full overflow-hidden transition-all duration-500 hover:-translate-y-2 max-w-[350px] mx-auto",
-      isPopular 
-        ? "border-2 border-green-500 shadow-strong ring-4 ring-green-500/20 scale-105" 
-        : "border border-gray-200 shadow-soft hover:shadow-medium hover:border-green-200"
-    )}>
-      {/* Background gradient effect */}
-      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-green-50/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      
+    <Card className={`w-full h-full overflow-hidden border ${isPopular ? "border-invest-green" : "border-gray-200"} max-w-[350px] mx-auto`}>
       {isPopular && <PopularBadge />}
-      
-      <div className="relative flex flex-col h-full">
-        <CardHeader className="px-6 py-6 text-center relative">
-          <CardTitle className="text-xl font-bold text-gray-900 mb-2">{title}</CardTitle>
+      <div className={`flex flex-col ${isPopular ? "border-t-0" : ""}`}>
+        <CardHeader className="px-6 py-6 text-center">
+          <CardTitle className="text-xl font-bold">{title}</CardTitle>
           <PricingDisplay
             price={price}
             period={period}
@@ -112,21 +101,20 @@ const PricingCard = ({
         </CardHeader>
 
         <CardContent className="px-6 py-0 flex-grow">
-          <p className="text-gray-600 mb-6 text-center leading-relaxed">{description}</p>
+          <p className="text-gray-600 mb-4 text-center">{description}</p>
           <BenefitsList benefits={benefits} />
         </CardContent>
 
-        <CardFooter className="flex flex-col space-y-4 px-6 py-6 mt-4">
-          <ModernButton
+        <CardFooter className="flex flex-col space-y-3 px-6 py-6 mt-4">
+          <Button
             id={`btn-select-${slugify(title)}`}
             data-plan-price={extractNumericPrice(price)}
             onClick={handlePlanSelect}
-            className="w-full"
-            size="lg"
+            className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-3 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
           >
             Assinar agora
-          </ModernButton>
-          <p className="text-xs text-gray-500 text-center leading-relaxed">
+          </Button>
+          <p className="text-xs text-gray-500 text-center">
             Pagamento seguro via cartão ou PIX
           </p>
         </CardFooter>
