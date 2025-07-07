@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { MessageCircle, Check, Timer, Sparkles, Brain, TrendingUp, HelpCircle, Shield } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import CountdownTimer from "./CountdownTimer";
 
 const HeroSection = () => {
   const navigate = useNavigate();
@@ -103,11 +104,15 @@ const HeroSection = () => {
             
             <div className="flex flex-col sm:flex-row items-start gap-6 mb-6 animate-fade-in delay-600">
               <div className="w-full sm:w-auto">
-                <div className="mb-4 bg-gradient-to-r from-red-500 via-orange-500 to-red-600 text-white px-6 py-3 rounded-full text-sm font-bold inline-flex items-center shadow-lg hover:scale-110 transition-transform duration-300 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 animate-[slide_8s_ease-in-out_infinite]"></div>
-                  <Timer className="h-4 w-4 mr-2" />
-                  50% OFF - Oferta Limitada
+                <div className="mb-4 flex flex-col gap-3">
+                  <CountdownTimer />
+                  <div className="bg-gradient-to-r from-red-500 via-orange-500 to-red-600 text-white px-6 py-3 rounded-full text-sm font-bold inline-flex items-center shadow-lg hover:scale-110 transition-transform duration-300 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 animate-[slide_8s_ease-in-out_infinite]"></div>
+                    <Timer className="h-4 w-4 mr-2" />
+                    50% OFF - Últimas Vagas
+                  </div>
                 </div>
+                
                 <div className="flex items-baseline gap-4 mb-4">
                   <span className="text-gray-600 text-xl font-semibold">
                     de <span className="line-through text-2xl font-bold text-gray-700 bg-red-100 px-2 py-1 rounded">R$109,99</span>
@@ -116,18 +121,18 @@ const HeroSection = () => {
                     por R$54,99
                   </span>
                 </div>
+                
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Button
                     onClick={handleClick}
                     className="w-full sm:w-auto bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-4 px-10 text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                   >
-                    Assinar Agora
+                    Garantir Vaga com Desconto
                   </Button>
                 </div>
               </div>
             </div>
             
-            {/* Seção de confiança no pagamento */}
             <div className="bg-white/80 p-4 rounded-lg border border-green-100 animate-fade-in delay-800 hover:bg-white/90 transition-all duration-300">
               <div className="flex items-center justify-center gap-3 mb-2">
                 <Shield className="h-5 w-5 text-green-600" />
@@ -145,7 +150,7 @@ const HeroSection = () => {
                 </span>
               </div>
               <p className="text-sm text-gray-600 text-center mt-2">
-                <span className="font-semibold text-green-700">🔥 Oferta por tempo limitado:</span> garante seu acesso agora! Acesso completo por R$54,99/mês.
+                <span className="font-semibold text-red-600">🔥 Restam apenas 47 vagas</span> com desconto de 50%. Garante seu acesso agora!
               </p>
             </div>
           </div>
