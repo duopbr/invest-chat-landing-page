@@ -1,6 +1,7 @@
 
 import { Star, Quote } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 const testimonials = [
   {
@@ -8,7 +9,7 @@ const testimonials = [
     role: "Investidora Iniciante",
     content: "Com a Duop Invest, finalmente entendi o mercado! As análises são tão claras que me sinto confiante para tomar minhas próprias decisões. Em apenas 3 meses, minha carteira rendeu 15% a mais do que o esperado. É um divisor de águas!",
     rating: 5,
-    image: "/lovable-uploads/0eeff8c3-537a-43c8-89a8-e68696b477af.png",
+    initials: "MS",
     highlight: "15% a mais de rendimento"
   },
   {
@@ -16,7 +17,7 @@ const testimonials = [
     role: "Empresário",
     content: "Eu estava perdendo dinheiro com investimentos ruins. A Duop me deu a segunda opinião que eu precisava e me ajudou a reorganizar tudo. O suporte 24/7 no WhatsApp é um diferencial absurdo. Recomendo de olhos fechados!",
     rating: 5,
-    image: "/lovable-uploads/54442f75-591b-4301-beb4-3793cae2203e.png",
+    initials: "FL",
     highlight: "Suporte 24/7 diferencial"
   },
   {
@@ -24,7 +25,7 @@ const testimonials = [
     role: "Profissional Liberal",
     content: "A precisão das análises da IA é impressionante. Recebo alertas de oportunidades que realmente fazem a diferença. Minha rentabilidade aumentou significativamente e agora invisto com muito mais segurança.",
     rating: 5,
-    image: "/lovable-uploads/0d74bf51-d9d2-40ea-934d-2baf983cf549.png",
+    initials: "PC",
     highlight: "Rentabilidade aumentou significativamente"
   }
 ];
@@ -66,11 +67,11 @@ const NewTestimonialsSection = () => {
                 </p>
                 
                 <div className="flex items-center gap-3">
-                  <img 
-                    src={testimonial.image} 
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full object-cover border-2 border-green-100"
-                  />
+                  <Avatar className="w-12 h-12 border-2 border-green-100">
+                    <AvatarFallback className="bg-green-100 text-green-700 font-semibold">
+                      {testimonial.initials}
+                    </AvatarFallback>
+                  </Avatar>
                   <div>
                     <span className="font-semibold text-gray-800 block">{testimonial.name}</span>
                     <span className="text-gray-600 text-sm">{testimonial.role}</span>
@@ -85,12 +86,11 @@ const NewTestimonialsSection = () => {
           <div className="inline-flex items-center gap-4 bg-white/80 px-8 py-4 rounded-full shadow-lg">
             <div className="flex -space-x-2">
               {testimonials.map((testimonial, index) => (
-                <img 
-                  key={index}
-                  src={testimonial.image} 
-                  alt=""
-                  className="w-10 h-10 rounded-full border-2 border-white object-cover"
-                />
+                <Avatar key={index} className="w-10 h-10 border-2 border-white">
+                  <AvatarFallback className="bg-green-100 text-green-700 font-semibold text-xs">
+                    {testimonial.initials}
+                  </AvatarFallback>
+                </Avatar>
               ))}
             </div>
             <div className="text-left">
