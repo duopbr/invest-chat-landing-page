@@ -1,8 +1,7 @@
-
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
+import { ModernButton } from "@/components/ui/modern-button";
 import { useNavigate } from "react-router-dom";
-import { ArrowRight, X } from "lucide-react";
+import { ArrowRight, X, Sparkles } from "lucide-react";
 
 const StickyCtaButton = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -38,28 +37,38 @@ const StickyCtaButton = () => {
 
   return (
     <div className="fixed bottom-6 right-6 z-50 animate-fade-in">
-      <div className="bg-white rounded-2xl shadow-2xl border border-green-100 p-4 max-w-sm">
+      <div className="group relative bg-white/95 backdrop-blur-md rounded-3xl shadow-strong border border-green-100/50 p-5 max-w-sm hover:shadow-xl transition-all duration-500 hover:scale-105">
+        {/* Gradient border effect */}
+        <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 via-emerald-500/20 to-green-500/20 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        
         <button
           onClick={() => setIsDismissed(true)}
-          className="absolute -top-2 -right-2 w-6 h-6 bg-gray-400 hover:bg-gray-500 text-white rounded-full flex items-center justify-center transition-colors"
+          className="absolute -top-3 -right-3 w-8 h-8 bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-800 rounded-full flex items-center justify-center transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-110"
         >
-          <X className="h-3 w-3" />
+          <X className="h-4 w-4" />
         </button>
         
-        <div className="mb-3">
-          <div className="text-xs text-red-600 font-bold mb-1">⏰ OFERTA LIMITADA</div>
-          <div className="text-sm font-semibold text-gray-800">
-            50% OFF por apenas <span className="text-green-600 text-lg">R$54,99/mês</span>
+        <div className="relative mb-4">
+          <div className="flex items-center gap-2 text-red-600 font-bold mb-2">
+            <Sparkles className="h-4 w-4 animate-pulse" />
+            <span className="text-sm">OFERTA LIMITADA</span>
+          </div>
+          <div className="text-sm font-semibold text-gray-800 leading-relaxed">
+            50% OFF por apenas{" "}
+            <span className="text-green-600 text-lg font-bold bg-green-50 px-2 py-1 rounded-lg">
+              R$54,99/mês
+            </span>
           </div>
         </div>
         
-        <Button
+        <ModernButton
           onClick={handleClick}
-          className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-3 text-sm shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+          className="w-full group/btn"
+          size="default"
         >
-          Garantir Desconto
-          <ArrowRight className="ml-2 h-4 w-4" />
-        </Button>
+          <span>Garantir Desconto</span>
+          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
+        </ModernButton>
       </div>
     </div>
   );
